@@ -1,0 +1,1 @@
+#define DEFAULT_GAME_SPEED 60.0f

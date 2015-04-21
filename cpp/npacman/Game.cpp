@@ -3,11 +3,12 @@
 #include "MazeScene.h"
 
 namespace my {
-
+		
 	Game::Game()
 	{
 		m_canvas = new sf::RenderWindow(sf::VideoMode(200, 200), "NPACMAN");
 		m_player = new Puckman();
+		m_player->setPosition(sf::Vector2f(50, 50));
 		m_current_scene = new MazeScene(this);
 	}
 

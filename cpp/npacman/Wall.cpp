@@ -9,11 +9,9 @@ namespace my {
 		m_el->setFillColor(sf::Color::Cyan);
 		m_el->setPosition(x, y);
 	}
-
-
+	
 	Wall::~Wall()
 	{
 		delete m_el;
 	}
-
 }

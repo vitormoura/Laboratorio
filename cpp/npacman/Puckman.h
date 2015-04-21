@@ -11,8 +11,9 @@ namespace my {
 	{
 	
 	private:
-		sf::Vector2f m_facing_dir;
-
+		sf::Vector2f	m_facing_dir;
+		const float		m_velocity = 60;
+		
 	public:
 		Puckman();
 		~Puckman();
@@ -21,6 +22,10 @@ namespace my {
 		virtual void init();
 		virtual void update(sf::Time t);
 
+		bool isInHorizontal();
+		bool isInVertical();
+
+		void stop();
 		void faceLeft();
 		void faceUp();
 		void faceDown();

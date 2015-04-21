@@ -1,4 +1,5 @@
 #pragma once
+#include "Constants.h"
 #include <SFML\Graphics.hpp>
 #include "GameScene.h"
 #include "Puckman.h"
@@ -10,7 +11,7 @@ namespace my {
 	{
 
 	private:
-		const float			DEFAULT_SPEED = 60.0;
+		const float			DEFAULT_SPEED = DEFAULT_GAME_SPEED;
 		sf::RenderWindow*	m_canvas;
 		GameScenePtr		m_current_scene;
 		PuckmanPtr			m_player;

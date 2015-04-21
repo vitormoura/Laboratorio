@@ -19,7 +19,7 @@ namespace my {
 		}
 
 		//Recupera posição atual do elemento
-		virtual const sf::Vector2f& getPosition() const {
+		virtual sf::Vector2f getPosition() const {
 			return m_el->getPosition();
 		}
 
@@ -38,6 +38,11 @@ namespace my {
 			return m_el->getGlobalBounds();
 		}
 
+		//Verifica se o elemento atual toca os limites do outro
+		bool hit(const sf::FloatRect& other) const {
+			getLocalBounds().contains(other);
+		}
+				
 		virtual void render(sf::RenderTarget* t) {
 			GameScene::render(t);
 			t->draw(*m_el);

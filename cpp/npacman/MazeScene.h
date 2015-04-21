@@ -15,7 +15,7 @@ namespace my {
 		MazeScene(GamePtr g);
 		~MazeScene();
 
-		void update(sf::Time t);
+		virtual void update(sf::Time t);
 
 	private:
 		void createMaze();
