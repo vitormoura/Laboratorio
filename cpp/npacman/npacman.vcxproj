@@ -77,6 +77,7 @@
     <ClCompile Include="MazeScene.cpp" />
     <ClCompile Include="MazeSection.cpp" />
     <ClCompile Include="Puckman.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -88,11 +89,14 @@
     <ClInclude Include="MazeScene.h" />
     <ClInclude Include="MazeSection.h" />
     <ClInclude Include="Puckman.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="maze_blueprint.txt" />
+    <Text Include="maze_blueprint.txt">
+      <DeploymentContent>true</DeploymentContent>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Image Include="pacman_maze_example.png" />

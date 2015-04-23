@@ -2,14 +2,20 @@
 #include "Puckman.h"
 #include "MazeScene.h"
 
+
 namespace my {
 		
 	Game::Game()
 	{
-		m_canvas = new sf::RenderWindow(sf::VideoMode(200, 200), "NPACMAN");
+		m_canvas = new sf::RenderWindow(sf::VideoMode(460, 460), "NPACMAN");
 		m_player = new Puckman();
 		m_player->setPosition(sf::Vector2f(50, 50));
-		m_current_scene = new MazeScene(this);
+				
+		auto maze = new MazeScene(this);
+		maze->prepare(*m_rm.getFileContents("maze_blueprint.txt"));
+
+		m_current_scene = maze;
+		
 	}
 
 	Game::~Game()

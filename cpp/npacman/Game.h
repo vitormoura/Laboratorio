@@ -2,6 +2,7 @@
 #include "Constants.h"
 #include <SFML\Graphics.hpp>
 #include "GameScene.h"
+#include "ResourceManager.h"
 #include "Puckman.h"
 
 namespace my {
@@ -16,6 +17,8 @@ namespace my {
 		GameScenePtr		m_current_scene;
 		PuckmanPtr			m_player;
 		sf::FloatRect		m_bounds;
+
+		my::ResourceManager	m_rm;
 
 	private:
 		void handleRender();

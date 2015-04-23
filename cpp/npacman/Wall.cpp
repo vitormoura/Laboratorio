@@ -14,4 +14,8 @@ namespace my {
 	{
 		delete m_el;
 	}
+
+	void Wall::setFillColor(sf::Color c) {
+		m_el->setFillColor(c);
+	}
 }

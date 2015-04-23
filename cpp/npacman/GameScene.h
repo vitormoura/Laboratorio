@@ -16,9 +16,9 @@ namespace my {
 	{
 
 	protected:
-		GamePtr					m_game;
-		GameScenePtr			m_parent;
-		std::list<GameScenePtr> m_children;
+		GamePtr						m_game;
+		GameScenePtr				m_parent;
+		std::vector<GameScenePtr>	m_children;
 		
 	public:
 		GameScene();

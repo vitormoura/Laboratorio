@@ -9,7 +9,6 @@ namespace my {
 	{
 		m_maze = new Maze(10, 10);
 		m_children.push_back(m_game->getPlayer());
-		createMaze();
 	}
 	
 	MazeScene::~MazeScene()
@@ -68,17 +67,30 @@ namespace my {
 		//*/
 	}
 
-	void MazeScene::createMaze() {
-		auto size = m_game->getSize();
-		auto defaultHeight = 5;
-				
-		m_children.push_back(new Wall(0, 0, size.x, defaultHeight));
-		m_children.push_back(new Wall(0, 150, size.x, defaultHeight));
-		m_children.push_back(new Wall(150, 50, defaultHeight, 50));
-		m_children.push_back(new Wall(50, 50, defaultHeight, 50));
+	void MazeScene::prepare(const std::string& map) {
 		
-	}
+		int line = 0, col = 0;
+		int defaultSize = 15;
 
+		for (const auto& c : map) {
+			
+			if (c == '\n') {
+				line++;
+				col = 0;
+				continue;
+			}
+						
+			if (c == 'x') {
+				auto w = new Wall((col * defaultSize), (line * defaultSize), defaultSize, defaultSize);
+				w->setFillColor(sf::Color(0xCC,0xCC,0xCC, 0xFF));
+				
+				m_children.push_back(w);
+			}
+			
+			col++;
+		}
+	}
+		
 	void MazeScene::destroyMaze() {
 
 	}

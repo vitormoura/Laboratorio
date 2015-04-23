@@ -10,9 +10,9 @@ x------xx----xx----xx------x
 xxxxxx-xxxxx-xx-xxxxx-xxxxxx
 xxxxxx-xxxxx-xx-xxxxx-xxxxxx
 xxxxxx-xx----------xx-xxxxxx
-xxxxxx-xx-xxxxxxxx-xx-xxxxxx
-xxxxxx-xx-xxxxxxxx-xx-xxxxxx
-----------xxxxxxxx----------
+xxxxxx-xx-xxx--xxx-xx-xxxxxx
+xxxxxx-xx-xx----xx-xx-xxxxxx
+----------xx----xx----------
 xxxxxx-xx-xxxxxxxx-xx-xxxxxx
 xxxxxx-xx----------xx-xxxxxx
 xxxxxx-xx-xxxxxxxx-xx-xxxxxx

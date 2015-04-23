@@ -7,7 +7,7 @@ namespace my {
 	{
 		auto b = new sf::CircleShape();
 		b->setFillColor(sf::Color::Yellow);
-		b->setRadius(10);
+		b->setRadius(5);
 		
 		m_el = b;
 	}
