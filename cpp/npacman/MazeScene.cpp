@@ -7,6 +7,7 @@ namespace my {
 
 	MazeScene::MazeScene(GamePtr g) : m_game(g)
 	{
+		m_maze = new Maze(10, 10);
 		m_children.push_back(m_game->getPlayer());
 		createMaze();
 	}

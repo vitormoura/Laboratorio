@@ -1,5 +1,6 @@
 #pragma once
 #include "GameScene.h"
+#include "Maze.h"
 #include "Puckman.h"
 
 namespace my {
@@ -9,7 +10,8 @@ namespace my {
 	{
 	
 	private:
-		GamePtr m_game;
+		GamePtr		m_game;
+		MazePtr		m_maze;
 
 	public:
 		MazeScene(GamePtr g);

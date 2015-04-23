@@ -73,7 +73,9 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Maze.cpp" />
     <ClCompile Include="MazeScene.cpp" />
+    <ClCompile Include="MazeSection.cpp" />
     <ClCompile Include="Puckman.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
@@ -82,7 +84,9 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameElement.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="Maze.h" />
     <ClInclude Include="MazeScene.h" />
+    <ClInclude Include="MazeSection.h" />
     <ClInclude Include="Puckman.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Wall.h" />
