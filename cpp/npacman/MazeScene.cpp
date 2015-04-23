@@ -80,7 +80,7 @@ namespace my {
 				continue;
 			}
 						
-			if (c == 'x') {
+			if (c == MAZE_BP_FILLED_BLOCK) {
 				auto w = new Wall((col * defaultSize), (line * defaultSize), defaultSize, defaultSize);
 				w->setFillColor(sf::Color(0xCC,0xCC,0xCC, 0xFF));
 				

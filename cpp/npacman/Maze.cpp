@@ -4,6 +4,10 @@
 
 namespace my {
 
+	Maze::Maze(const std::string& referenceMap) {
+		//TODO		
+	}
+
 	Maze::Maze(int width, int height) :
 		m_width(width), m_height(height)
 	{

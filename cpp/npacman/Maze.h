@@ -1,5 +1,6 @@
 #pragma once
 #include "MazeSection.h"
+#include <string>
 
 namespace my {
 
@@ -17,6 +18,7 @@ namespace my {
 		
 	public:
 		Maze(int width, int height);
+		Maze(const std::string& referenceMap);
 		~Maze();
 
 		MazeSectionPtr get(int line, int col);
