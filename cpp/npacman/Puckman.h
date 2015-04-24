@@ -18,9 +18,10 @@ namespace my {
 		const float				m_velocity = DEFAULT_GAME_SPEED;
 		std::function<void()>	m_next_move;
 		MazeSectionPtr			m_current_section;
-
-
+		MazeSectionPtr			m_last_section;
 		
+		void					goTo(MazeSectionPtr s);
+
 	public:
 		Puckman();
 		virtual ~Puckman();

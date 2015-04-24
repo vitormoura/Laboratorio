@@ -26,6 +26,7 @@ void test_Maze() {
 	my::MazeSectionMatrix sections = my::buildMazeSections(*rm.getDefaultMazeBlueprints(), width, height);
 	my::Maze maze(sections, width, height);
 
+	testCase("QUANTIDADE TOTAL DE SEÇÕES");
 	assertTrue(maze.getSectionsCount() == 840, "Qtde secoes 840");
 
 	///*
@@ -53,11 +54,12 @@ void test_Maze() {
 
 	assertTrue(!s->N->allowed && !s->S->allowed, "S e N !allowed");
 	assertTrue(s->E->allowed && s->W->allowed, "S e N allowed");
-
+	
 	//assertTrue(s->W->allowed && s->E->allowed, "W e E livres");
 	//*/
 }
 
 void testAll() {
 	test_Maze();
+	std::cin.get();
 }

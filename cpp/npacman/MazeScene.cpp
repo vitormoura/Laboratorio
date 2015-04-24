@@ -81,6 +81,7 @@ namespace my {
 		auto size = m_maze->getSectionsCount();
 		auto defaultSize = MAZE_SECTION_WIDTH;
 
+		
 		for (int i = 0; i < size; i++) {
 
 			if (!sections[i]->allowed) {

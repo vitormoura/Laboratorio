@@ -10,6 +10,8 @@ int main()
 		
 	delete g;
 	//*/
+
+	//testAll();
 		
 	//std::cin.get();
 }

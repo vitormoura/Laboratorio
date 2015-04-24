@@ -7,10 +7,11 @@ namespace my {
 	{
 		auto b = new sf::CircleShape();
 		b->setFillColor(sf::Color::Yellow);
-		b->setRadius(5);
+		b->setRadius(MAZE_SECTION_WIDTH / 2);
 		
 		m_el = b;
 		m_current_section = nullptr;
+		m_last_section = nullptr;
 	}
 
 	Puckman::~Puckman()
@@ -23,10 +24,10 @@ namespace my {
 	}
 		
 	void Puckman::update(sf::Time t) {
-				
+		
 		auto id = m_current_section->getID();
-		auto newPos = sf::Vector2f( (id.first * MAZE_SECTION_WIDTH), id.second * MAZE_SECTION_WIDTH);
-
+		auto newPos = sf::Vector2f(id.second * MAZE_SECTION_WIDTH, id.first * MAZE_SECTION_WIDTH);
+				
 		m_el->setPosition(newPos);
 	}
 
@@ -52,47 +53,27 @@ namespace my {
 		m_facing_dir.y = 0;
 	}
 
+	void Puckman::goTo(MazeSectionPtr s) {
+
+		if (s != nullptr && s->allowed) {
+			m_last_section = m_current_section;
+			m_current_section = s;
+		}
+	}
+
 	void Puckman::goLeft() {
-		if (m_current_section->E != nullptr) {
-			m_current_section = m_current_section->E;
-			m_facing_dir = sf::Vector2f(-1, 0);
-			m_next_move = std::bind(&Puckman::goLeft,this);
-		}
-		else {
-			m_next_move = nullptr;
-		}
+		goTo(m_current_section->E);
 	}
 
 	void Puckman::goUp() {
-		if (m_current_section->N != nullptr) {
-			m_current_section = m_current_section->N;
-			m_facing_dir = sf::Vector2f(0, -1);
-			m_next_move = std::bind(&Puckman::goUp,this);
-		}
-		else {
-			m_next_move = nullptr;
-		}
+		goTo(m_current_section->N);
 	}
 
 	void Puckman::goDown() {
-		if (m_current_section->S != nullptr) {
-			m_current_section = m_current_section->S;
-			m_facing_dir = sf::Vector2f(0, 1);
-			m_next_move = std::bind(&Puckman::goDown,this);
-		}
-		else {
-			m_next_move = nullptr;
-		}
+		goTo(m_current_section->S);
 	}
 
 	void Puckman::goRight() {
-		if (m_current_section->W != nullptr) {
-			m_current_section = m_current_section->W;
-			m_facing_dir = sf::Vector2f(1, 0);
-			m_next_move = std::bind(&Puckman::goRight,this);
-		}
-		else {
-			m_next_move = nullptr;
-		}
+		goTo(m_current_section->W);
 	}
 }

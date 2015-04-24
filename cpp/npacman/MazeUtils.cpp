@@ -41,8 +41,7 @@ namespace my {
 			for (int col = 0; col < width; col++) {
 				
 				strReferenceMap >> c;
-				//std::cout << c;
-								
+												
 				MazeSectionPtr s = new MazeSection(std::make_pair(line, col));
 				s->E = lastE;
 				s->allowed = (c == MAZE_BP_PATH_BLOCK);
@@ -63,11 +62,8 @@ namespace my {
 				qtde++;
 
 			}
-
-			//strReferenceMap.get();
-
+						
 			//O último elemento N será o primeiro da linha que acaba de ser processada
-			//lastN = sections[firstCol];
 			lastE = nullptr;
 		}
 
