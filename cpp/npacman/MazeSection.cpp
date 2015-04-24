@@ -4,7 +4,7 @@
 namespace my {
 
 	MazeSection::MazeSection(std::pair<int, int> id) : 
-		id(id), W(nullptr), S(nullptr), N(nullptr), E(nullptr)
+		m_id(id), W(nullptr), S(nullptr), N(nullptr), E(nullptr)
 	{
 	}
 	
@@ -13,6 +13,10 @@ namespace my {
 		#if _DEBUG
 		std::cout << "MazeSection::~MazeSection" << std::endl;
 		#endif
+	}
+
+	std::pair<int, int> MazeSection::getID() {
+		return m_id;
 	}
 
 }

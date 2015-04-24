@@ -10,6 +10,8 @@ namespace my {
 	{
 		m_maze = buildDefaultMaze(g);
 		m_children.push_back(m_game->getPlayer());
+
+		prepare();
 	}
 	
 	MazeScene::~MazeScene()
@@ -69,27 +71,21 @@ namespace my {
 		//*/
 	}
 
-	void MazeScene::prepare(const std::string& map) {
+	void MazeScene::prepare() {
 		
-		int line = 0, col = 0;
-		int defaultSize = 15;
+		auto sections = m_maze->getSections();
+		auto size = m_maze->getSectionsCount();
+		auto defaultSize = 15;
 
-		for (const auto& c : map) {
-			
-			if (c == '\n') {
-				line++;
-				col = 0;
-				continue;
-			}
-						
-			if (c == MAZE_BP_FILLED_BLOCK) {
-				auto w = new Wall((col * defaultSize), (line * defaultSize), defaultSize, defaultSize);
-				w->setFillColor(sf::Color(0xCC,0xCC,0xCC, 0xFF));
-				
+		for (int i = 0; i < size; i++) {
+
+			if (!sections[i]->allowed) {
+
+				auto id = sections[i]->getID();
+				auto w = new Wall(id.second * defaultSize, id.first * defaultSize, defaultSize, defaultSize);
+
 				m_children.push_back(w);
 			}
-			
-			col++;
 		}
 	}
 		

@@ -20,6 +20,10 @@ namespace my {
 		delete m_sections;
 	}
 
+	int Maze::getSectionsCount() {
+		return m_size;
+	}
+
 	const MazeSectionMatrix Maze::getSections() {
 		return (m_sections);
 	}

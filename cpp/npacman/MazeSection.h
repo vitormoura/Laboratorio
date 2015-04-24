@@ -12,7 +12,7 @@ namespace my {
 	{
 	
 	private:
-		std::pair<int, int> id;
+		std::pair<int, int> m_id;
 	
 	public:
 		MazeSectionPtr	N;
@@ -21,10 +21,12 @@ namespace my {
 		MazeSectionPtr	E;
 
 		bool			allowed;
-
+				
 	public:
 		MazeSection(std::pair<int, int> id);
 		virtual ~MazeSection();
+
+		std::pair<int, int> getID();
 	};
 
 }

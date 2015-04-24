@@ -22,6 +22,7 @@ namespace my {
 		Maze(MazeSectionMatrix sections, int width, int height);
 		virtual ~Maze();
 
+		int getSectionsCount();
 		const MazeSectionMatrix getSections();
 		MazeSectionPtr getSection(int line, int col);
 	};
