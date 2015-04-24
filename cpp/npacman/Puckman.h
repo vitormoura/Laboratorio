@@ -16,7 +16,7 @@ namespace my {
 		
 	public:
 		Puckman();
-		~Puckman();
+		virtual ~Puckman();
 
 	public:
 		virtual void init();

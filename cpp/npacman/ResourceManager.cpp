@@ -13,6 +13,10 @@ namespace my {
 	{
 	}
 
+	std::unique_ptr<std::string> ResourceManager::getDefaultMazeBlueprints() {
+		return getFileContents("maze_blueprint.txt");
+	}
+
 	std::unique_ptr<std::string> ResourceManager::getFileContents(const char* filePath) {
 		
 		std::ifstream t(filePath);

@@ -7,6 +7,9 @@
 
 namespace my {
 
+	class Game;
+	typedef Game* GamePtr;
+
 	//Representa o jogo propriamente dito e seu conjunto de cenas
 	class Game
 	{
@@ -27,11 +30,12 @@ namespace my {
 
 	public:
 		Game();
-		~Game();
+		virtual ~Game();
 		
-		PuckmanPtr			getPlayer() const;
-		const sf::Vector2u&	getSize() const;
-		void				run();
+		PuckmanPtr				getPlayer() const;
+		const sf::Vector2u&		getSize() const;
+		void					run();
+		const ResourceManager&	getResourceManager();
 
 	};
 }

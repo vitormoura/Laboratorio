@@ -22,7 +22,7 @@ namespace my {
 		
 	public:
 		GameScene();
-		~GameScene();
+		virtual ~GameScene();
 
 	public:
 		virtual void init();

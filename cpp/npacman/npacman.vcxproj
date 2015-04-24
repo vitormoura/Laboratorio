@@ -78,6 +78,7 @@
     <ClCompile Include="MazeSection.cpp" />
     <ClCompile Include="Puckman.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="MazeUtils.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +92,7 @@
     <ClInclude Include="Puckman.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Types.h" />
+    <ClInclude Include="MazeUtils.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
   <ItemGroup>

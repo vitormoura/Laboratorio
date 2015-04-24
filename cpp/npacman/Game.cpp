@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Game.h"
 #include "Puckman.h"
 #include "MazeScene.h"
@@ -10,18 +11,23 @@ namespace my {
 		m_canvas = new sf::RenderWindow(sf::VideoMode(460, 460), "NPACMAN");
 		m_player = new Puckman();
 		m_player->setPosition(sf::Vector2f(50, 50));
-				
-		auto maze = new MazeScene(this);
-		maze->prepare(*m_rm.getFileContents("maze_blueprint.txt"));
-
-		m_current_scene = maze;
 		
+		m_current_scene = new MazeScene(this);
 	}
 
 	Game::~Game()
 	{
+		#if _DEBUG
+		std::cout << "Game::~Game" << std::endl;
+		#endif
+
 		delete m_canvas;
 		delete m_player;
+		delete m_current_scene;
+	}
+
+	const ResourceManager& Game::getResourceManager() {
+		return m_rm;
 	}
 
 	const sf::Vector2u&	Game::getSize() const {

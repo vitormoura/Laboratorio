@@ -1,10 +1,12 @@
 #pragma once
 #include <utility>
+#include <memory>
 
 namespace my {
 
 	class MazeSection;
-	typedef MazeSection* MazeSectionPtr;
+	typedef MazeSection*	MazeSectionPtr;
+	typedef MazeSectionPtr*	MazeSectionMatrix;
 
 	class MazeSection
 	{
@@ -18,9 +20,11 @@ namespace my {
 		MazeSectionPtr	W;
 		MazeSectionPtr	E;
 
+		bool			allowed;
+
 	public:
 		MazeSection(std::pair<int, int> id);
-		~MazeSection();
+		virtual ~MazeSection();
 	};
 
 }

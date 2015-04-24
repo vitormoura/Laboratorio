@@ -1,6 +1,7 @@
 #pragma once
 #include "MazeSection.h"
 #include <string>
+#include <memory>
 
 namespace my {
 
@@ -12,19 +13,17 @@ namespace my {
 	{
 
 	private:
-		MazeSectionPtr	*m_sections;
-		int				m_width;
-		int				m_height;
-		
+		MazeSectionMatrix	m_sections;
+		int					m_width;
+		int					m_height;
+		int					m_size;
+						
 	public:
-		Maze(int width, int height);
-		Maze(const std::string& referenceMap);
-		~Maze();
+		Maze(MazeSectionMatrix sections, int width, int height);
+		virtual ~Maze();
 
-		MazeSectionPtr get(int line, int col);
-
-	private:
-		void init();
+		const MazeSectionMatrix getSections();
+		MazeSectionPtr getSection(int line, int col);
 	};
 
 }

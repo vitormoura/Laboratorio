@@ -1,18 +1,20 @@
 #include "MazeScene.h"
 #include "Wall.h"
 #include "Game.h"
+#include "MazeUtils.h"
 #include <iostream>
 
 namespace my {
 
 	MazeScene::MazeScene(GamePtr g) : m_game(g)
 	{
-		m_maze = new Maze(10, 10);
+		m_maze = buildDefaultMaze(g);
 		m_children.push_back(m_game->getPlayer());
 	}
 	
 	MazeScene::~MazeScene()
 	{
+		delete m_maze;
 	}
 
 	void MazeScene::update(sf::Time t) {

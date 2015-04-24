@@ -15,7 +15,7 @@ namespace my {
 
 	public:
 		MazeScene(GamePtr g);
-		~MazeScene();
+		virtual ~MazeScene();
 
 		virtual void update(sf::Time t);
 		void prepare(const std::string& map);
