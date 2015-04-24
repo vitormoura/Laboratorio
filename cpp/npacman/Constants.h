@@ -2,3 +2,5 @@
 
 #define MAZE_BP_FILLED_BLOCK	'x'
 #define MAZE_BP_PATH_BLOCK		'-'
+
+#define MAZE_SECTION_WIDTH 15

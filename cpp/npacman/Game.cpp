@@ -10,8 +10,7 @@ namespace my {
 	{
 		m_canvas = new sf::RenderWindow(sf::VideoMode(460, 460), "NPACMAN");
 		m_player = new Puckman();
-		m_player->setPosition(sf::Vector2f(50, 50));
-		
+				
 		m_current_scene = new MazeScene(this);
 	}
 
@@ -79,16 +78,16 @@ namespace my {
 
 			
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-				m_player->faceLeft();
+				m_player->goLeft();
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-				m_player->faceRight();
+				m_player->goRight();
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-				m_player->faceUp();
+				m_player->goUp();
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-				m_player->faceDown();
+				m_player->goDown();
 			}
 		}
 	}

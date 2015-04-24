@@ -4,7 +4,7 @@
 
 namespace my {
 
-	Maze::Maze(MazeSectionMatrix sections, int width, int height) : 
+	Maze::Maze(MazeSectionMatrix sections, int width, int height) :
 		m_sections(sections), m_width(width), m_height(height), m_size(width * height) {
 	}
 			
@@ -20,6 +20,10 @@ namespace my {
 		delete m_sections;
 	}
 
+	MazeSectionPtr Maze::getStartSection() const {
+		return getSection(28, 14);
+	}
+
 	int Maze::getSectionsCount() {
 		return m_size;
 	}
@@ -28,7 +32,7 @@ namespace my {
 		return (m_sections);
 	}
 
-	MazeSectionPtr Maze::getSection(int line, int col) {
-		return m_sections[line * col];
+	MazeSectionPtr Maze::getSection(int line, int col) const {
+		return m_sections[(line * m_width) + col];
 	}
 }

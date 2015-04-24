@@ -87,6 +87,7 @@
     <ClInclude Include="GameElement.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Maze.h" />
+    <ClInclude Include="Maze.tests.h" />
     <ClInclude Include="MazeScene.h" />
     <ClInclude Include="MazeSection.h" />
     <ClInclude Include="Puckman.h" />

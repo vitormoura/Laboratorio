@@ -27,10 +27,10 @@ namespace my {
 		//Os primeiros dados dizem respeito a largura e altura do mapa
 		strReferenceMap >> width;
 		strReferenceMap >> height;
-		strReferenceMap.get();
-
+		
 		MazeSectionPtr* sections = new MazeSectionPtr[width * height];
 		MazeSectionPtr lastE = nullptr, lastN = nullptr;
+		char c;
 		int qtde = 0;
 
 		for (int line = 0; line < height; line++) {
@@ -40,11 +40,11 @@ namespace my {
 
 			for (int col = 0; col < width; col++) {
 				
-				char c = strReferenceMap.get();
-
+				strReferenceMap >> c;
+				//std::cout << c;
+								
 				MazeSectionPtr s = new MazeSection(std::make_pair(line, col));
 				s->E = lastE;
-				s->N = lastN;
 				s->allowed = (c == MAZE_BP_PATH_BLOCK);
 
 				//Redefinindo o 'oeste' o último leste
@@ -52,23 +52,22 @@ namespace my {
 					lastE->W = s;
 				}
 
-
 				//Redefinindo o 'sul' do último norte e avançando o norte para o elemento ao lado
-				if (lastN != nullptr) {
-					lastN->S = s;
-					lastN = sections[(line - 1) * col];
+				if (line > 0) {
+					s->N = sections[((line - 1) * width) + col];
+					s->N->S = s;
 				}
-
-				//lastE = s;
+				
+				lastE = s;
 				sections[firstCol + col] = s;
 				qtde++;
 
 			}
 
-			strReferenceMap.get();
+			//strReferenceMap.get();
 
 			//O último elemento N será o primeiro da linha que acaba de ser processada
-			lastN = sections[firstCol];
+			//lastN = sections[firstCol];
 			lastE = nullptr;
 		}
 

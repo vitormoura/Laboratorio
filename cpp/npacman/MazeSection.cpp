@@ -11,7 +11,7 @@ namespace my {
 	MazeSection::~MazeSection()
 	{
 		#if _DEBUG
-		std::cout << "MazeSection::~MazeSection" << std::endl;
+		//std::cout << "MazeSection::~MazeSection" << std::endl;
 		#endif
 	}
 

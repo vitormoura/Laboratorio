@@ -9,7 +9,11 @@ namespace my {
 	MazeScene::MazeScene(GamePtr g) : m_game(g)
 	{
 		m_maze = buildDefaultMaze(g);
-		m_children.push_back(m_game->getPlayer());
+
+		auto player = m_game->getPlayer();
+		player->setLocation(m_maze->getStartSection());
+
+		m_children.push_back(player);
 
 		prepare();
 	}
@@ -27,7 +31,7 @@ namespace my {
 
 		auto playerBounds = player->getGlobalBounds();
 
-		///*
+		/*
 		//Varrendo todos os elementos a partir do segundo, justamente as paredes do labirinto
 		for (auto p = ++m_children.begin(); p != m_children.end(); p++) {
 			auto wall = dynamic_cast<Wall*>(*p);
@@ -75,7 +79,7 @@ namespace my {
 		
 		auto sections = m_maze->getSections();
 		auto size = m_maze->getSectionsCount();
-		auto defaultSize = 15;
+		auto defaultSize = MAZE_SECTION_WIDTH;
 
 		for (int i = 0; i < size; i++) {
 

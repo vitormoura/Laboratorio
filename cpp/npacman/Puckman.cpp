@@ -10,6 +10,7 @@ namespace my {
 		b->setRadius(5);
 		
 		m_el = b;
+		m_current_section = nullptr;
 	}
 
 	Puckman::~Puckman()
@@ -22,8 +23,21 @@ namespace my {
 	}
 		
 	void Puckman::update(sf::Time t) {
-		m_el->move(m_facing_dir * t.asSeconds() * DEFAULT_GAME_SPEED);
+				
+		auto id = m_current_section->getID();
+		auto newPos = sf::Vector2f( (id.first * MAZE_SECTION_WIDTH), id.second * MAZE_SECTION_WIDTH);
+
+		m_el->setPosition(newPos);
 	}
+
+	const MazeSectionPtr Puckman::getLocation() const {
+		return m_current_section;
+	}
+
+	void Puckman::setLocation(MazeSectionPtr s) {
+		m_current_section = s;
+	}
+
 
 	bool Puckman::isInHorizontal() {
 		return !isInVertical();
@@ -38,19 +52,47 @@ namespace my {
 		m_facing_dir.y = 0;
 	}
 
-	void Puckman::faceLeft() {
-		m_facing_dir = sf::Vector2f( -1, 0);
+	void Puckman::goLeft() {
+		if (m_current_section->E != nullptr) {
+			m_current_section = m_current_section->E;
+			m_facing_dir = sf::Vector2f(-1, 0);
+			m_next_move = std::bind(&Puckman::goLeft,this);
+		}
+		else {
+			m_next_move = nullptr;
+		}
 	}
 
-	void Puckman::faceUp() {
-		m_facing_dir = sf::Vector2f(0, -1);
+	void Puckman::goUp() {
+		if (m_current_section->N != nullptr) {
+			m_current_section = m_current_section->N;
+			m_facing_dir = sf::Vector2f(0, -1);
+			m_next_move = std::bind(&Puckman::goUp,this);
+		}
+		else {
+			m_next_move = nullptr;
+		}
 	}
 
-	void Puckman::faceDown() {
-		m_facing_dir = sf::Vector2f(0, 1);
+	void Puckman::goDown() {
+		if (m_current_section->S != nullptr) {
+			m_current_section = m_current_section->S;
+			m_facing_dir = sf::Vector2f(0, 1);
+			m_next_move = std::bind(&Puckman::goDown,this);
+		}
+		else {
+			m_next_move = nullptr;
+		}
 	}
 
-	void Puckman::faceRight() {
-		m_facing_dir = sf::Vector2f(1, 0);
+	void Puckman::goRight() {
+		if (m_current_section->W != nullptr) {
+			m_current_section = m_current_section->W;
+			m_facing_dir = sf::Vector2f(1, 0);
+			m_next_move = std::bind(&Puckman::goRight,this);
+		}
+		else {
+			m_next_move = nullptr;
+		}
 	}
 }
