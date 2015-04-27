@@ -103,6 +103,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Ghost.cpp" />
+    <ClCompile Include="InputPlayerController.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="MazeScene.cpp" />
@@ -116,17 +117,20 @@
   <ItemGroup>
     <ClInclude Include="All.tests.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="Controllable.h" />
     <ClInclude Include="Funcoes.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameElement.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Ghost.h" />
+    <ClInclude Include="InputPlayerController.h" />
     <ClInclude Include="Maze.h" />
     <ClInclude Include="Maze.tests.h" />
     <ClInclude Include="MazeScene.h" />
     <ClInclude Include="MazeSection.h" />
     <ClInclude Include="MazeSection.tests.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerController.h" />
     <ClInclude Include="Puckman.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Types.h" />

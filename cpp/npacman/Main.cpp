@@ -4,7 +4,7 @@
 
 int main()
 {
-	#ifdef TESTING
+	#ifndef TESTING
 	
 	my::Game* g = new my::Game();
 	g->run();

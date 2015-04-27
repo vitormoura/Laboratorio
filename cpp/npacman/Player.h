@@ -2,11 +2,12 @@
 #include "Constants.h"
 #include "GameElement.h"
 #include "MazeSection.h"
+#include "Controllable.h"
 
 namespace my {
 
 	template<typename T>
-	class Player : public GameElement<T>
+	class Player : public GameElement<T>, public Controllable
 	{
 	
 	protected:

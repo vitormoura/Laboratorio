@@ -10,6 +10,7 @@ namespace my {
 	{
 		m_canvas = new sf::RenderWindow(sf::VideoMode(460, 460), "NPACMAN");
 		m_player = new Puckman();
+		m_player_ctrl = new InputPlayerController(m_canvas, m_player);
 				
 		m_current_scene = new MazeScene(this);
 	}
@@ -21,6 +22,7 @@ namespace my {
 		#endif
 
 		delete m_canvas;
+		delete m_player_ctrl;
 		delete m_player;
 		delete m_current_scene;
 	}
@@ -45,14 +47,14 @@ namespace my {
 
 		while (m_canvas->isOpen())
 		{
-			handleEvents();
+			m_player_ctrl->update(timePerFrame);
 
 			timeSinceLastUpdate += clock.restart();
 
 			while (timeSinceLastUpdate > timePerFrame) {
 				timeSinceLastUpdate -= timePerFrame;
 
-				handleEvents();
+				m_player_ctrl->update(timePerFrame);
 				handleUpdates(timePerFrame);
 			}
 
@@ -66,32 +68,7 @@ namespace my {
 		m_current_scene->render(m_canvas);
 		m_canvas->display();
 	}
-
-	void Game::handleEvents() {
-
-		sf::Event event;
-
-		while (m_canvas->pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				m_canvas->close();
-
-			
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-				m_player->goLeft();
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-				m_player->goRight();
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-				m_player->goUp();
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-				m_player->goDown();
-			}
-		}
-	}
-
+		
 	void Game::handleUpdates(sf::Time t) {
 		m_current_scene->update(t);
 	}
