@@ -18,19 +18,25 @@ namespace my {
 		///*
 		if (m_wait > 1) {
 
-			if (m_current_section->N->allowed && m_current_section != m_last_section) {
+			if (m_current_section->N->allowed && m_last_section != m_current_section->N) {
 				goUp();
 			}
-			else if (m_current_section->W->allowed && m_current_section != m_last_section) {
+			else if (m_current_section->W->allowed && m_last_section != m_current_section->W) {
 				goRight();
 			}
-			else if (m_current_section->S->allowed && m_current_section != m_last_section) {
+			else if (m_current_section->S->allowed && m_last_section != m_current_section->S) {
 				goDown();
 			}
 			else {
 				goLeft();
-
 			}
+
+			//Path finding
+			//
+			// 
+			// E1-2
+			//
+			//
 
 			m_wait = 0.0f;
 		}
