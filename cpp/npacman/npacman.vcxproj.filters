@@ -90,6 +90,9 @@
     <ClInclude Include="Maze.tests.h">
       <Filter>Header Files\Tests</Filter>
     </ClInclude>
+    <ClInclude Include="All.tests.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="maze_blueprint.txt">

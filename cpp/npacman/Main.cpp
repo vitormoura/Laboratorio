@@ -1,18 +1,18 @@
 #include "Game.h"
 #include <iostream>
-#include "Maze.tests.h"
+#include "All.tests.h"
 
 int main()
 {
-	///*
+	#if TESTING == 0
+	
 	my::Game* g = new my::Game();
 	g->run();
 		
 	delete g;
-	//*/
-
-	//testAll();
-		
-	//std::cin.get();
+	
+	#else
+	runTests();
+	#endif
 }
 

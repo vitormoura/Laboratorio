@@ -27,7 +27,7 @@ namespace my {
 		
 		auto id = m_current_section->getID();
 		auto newPos = sf::Vector2f(id.second * MAZE_SECTION_WIDTH, id.first * MAZE_SECTION_WIDTH);
-				
+		
 		m_el->setPosition(newPos);
 	}
 
