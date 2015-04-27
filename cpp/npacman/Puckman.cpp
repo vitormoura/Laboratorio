@@ -1,5 +1,6 @@
 #include "Puckman.h"
 #include "Constants.h"
+#include <iostream>
 
 namespace my {
 	
@@ -13,6 +14,10 @@ namespace my {
 
 	Puckman::~Puckman()
 	{
+		#if _DEBUG
+		std::cout << "Puckman::~Puckman" << std::endl;
+		#endif
+
 		delete m_el;
 	}
 }

@@ -8,6 +8,7 @@ namespace my {
 	typedef Puckman* PuckmanPtr;
 	typedef Player<sf::CircleShape> PuckmanPlayerType;
 
+	//Jogador principal, nosso amado PACMAN
 	class Puckman : public PuckmanPlayerType
 	{
 

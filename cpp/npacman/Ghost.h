@@ -1,5 +1,6 @@
 #pragma once
 #include "Player.h"
+#include "PlayerController.h"
 
 namespace my {
 	
@@ -11,7 +12,7 @@ namespace my {
 	{
 
 	private:
-		float m_wait;
+		PlayerControllerPtr m_controller;
 
 	public:
 		Ghost();

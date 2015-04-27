@@ -1,4 +1,6 @@
+#include <iostream>
 #include "Ghost.h"
+#include "SimpleGhostController.h"
 
 namespace my {
 
@@ -6,44 +8,22 @@ namespace my {
 	{
 		m_el->setFillColor(sf::Color::Red);
 		m_el->setSize(sf::Vector2f(MAZE_SECTION_WIDTH, MAZE_SECTION_WIDTH));
+		m_controller = new SimpleGhostController(this);
 	}
 
 	Ghost::~Ghost()
 	{
+		#if _DEBUG
+		std::cout << "Ghost::~Ghost" << std::endl;
+		#endif
+
 		delete m_el;
+		delete m_controller;
 	}
 
 	void Ghost::update(sf::Time t) {
-		
-		///*
-		if (m_wait > 1) {
-
-			if (m_current_section->N->allowed && m_last_section != m_current_section->N) {
-				goUp();
-			}
-			else if (m_current_section->W->allowed && m_last_section != m_current_section->W) {
-				goRight();
-			}
-			else if (m_current_section->S->allowed && m_last_section != m_current_section->S) {
-				goDown();
-			}
-			else {
-				goLeft();
-			}
-
-			//Path finding
-			//
-			// 
-			// E1-2
-			//
-			//
-
-			m_wait = 0.0f;
-		}
-		else {
-			m_wait += t.asSeconds();
-		}
-		//*/
+				
+		m_controller->update(t);
 
 		GhostPlayerType::update(t);
 	}

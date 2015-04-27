@@ -41,6 +41,11 @@ namespace my {
 			return m_current_section;
 		}
 
+		//Recupera última zona do labirinto visitada pelo jogador
+		const MazeSectionPtr getPreviousLocation() const {
+			return m_last_section;
+		}
+
 		//Redefine a posição do jogador dentro do labirinto (ATENÇÃO: Refatorar, esse método não deve existir, todo movimento deve ser realizado pelo 'goTo')
 		void setLocation(MazeSectionPtr s) {
 			m_current_section = s;
