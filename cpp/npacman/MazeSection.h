@@ -24,9 +24,18 @@ namespace my {
 				
 	public:
 		MazeSection(std::pair<int, int> id);
+		MazeSection(int id_x, int id_y);
 		virtual ~MazeSection();
 
 		std::pair<int, int> getID();
+
+		bool MazeSection::operator ==(const MazeSection &b) const {
+			return (m_id.first == b.m_id.first) && (m_id.second == b.m_id.second);
+		}
+
+		bool MazeSection::operator !=(const MazeSection &b) const {
+			return !((*this) == b);
+		}
 	};
 
 }

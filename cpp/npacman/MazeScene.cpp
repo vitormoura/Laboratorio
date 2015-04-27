@@ -12,9 +12,9 @@ namespace my {
 
 		auto player = m_game->getPlayer();
 		player->setLocation(m_maze->getStartSection());
-
+				
 		m_children.push_back(player);
-
+				
 		prepare();
 	}
 	
@@ -33,7 +33,11 @@ namespace my {
 		auto size = m_maze->getSectionsCount();
 		auto defaultSize = MAZE_SECTION_WIDTH;
 
-		
+		m_ghosts[0] = new Ghost();
+		m_ghosts[0]->setLocation(m_maze->getSection(13, 14));
+
+		m_children.push_back(m_ghosts[0]);
+
 		for (int i = 0; i < size; i++) {
 
 			if (!sections[i]->allowed) {

@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "Maze.h"
 #include "Puckman.h"
+#include "Ghost.h"
 
 namespace my {
 
@@ -12,6 +13,8 @@ namespace my {
 	private:
 		GamePtr		m_game;
 		MazePtr		m_maze;
+
+		GhostPtr	m_ghosts[1];
 
 	public:
 		MazeScene(GamePtr g);

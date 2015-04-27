@@ -9,7 +9,7 @@ namespace my {
 	class Player : public GameElement<T>
 	{
 	
-	private:
+	protected:
 
 		const float				m_velocity = DEFAULT_GAME_SPEED;
 		
@@ -66,7 +66,7 @@ namespace my {
 		}
 
 
-	private:
+	protected:
 
 		//Move jogador para a zona do labirinto informada
 		void goTo(MazeSectionPtr s) {

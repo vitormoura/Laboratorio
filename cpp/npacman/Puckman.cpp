@@ -3,7 +3,7 @@
 
 namespace my {
 	
-	Puckman::Puckman() : PuckmanPlayerType::Player(new sf::CircleShape())
+	Puckman::Puckman() : PuckmanPlayerType(new sf::CircleShape())
 	{
 		sf::CircleShape* me = dynamic_cast<sf::CircleShape*>(m_el);
 
