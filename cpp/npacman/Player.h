@@ -31,7 +31,7 @@ namespace my {
 					
 		virtual void update(sf::Time t) {
 			auto id = m_current_section->getID();
-			auto newPos = sf::Vector2f(id.second * MAZE_SECTION_WIDTH, id.first * MAZE_SECTION_WIDTH);
+			auto newPos = sf::Vector2f(id.x * MAZE_SECTION_WIDTH, id.y * MAZE_SECTION_WIDTH);
 
 			m_el->setPosition(newPos);
 		}
@@ -53,7 +53,7 @@ namespace my {
 		
 		//Move jogador para a seção da esquerda, caso possível
 		void goLeft() {
-			goTo(m_current_section->E);
+			goTo(m_current_section->W);
 		}
 
 		//Move jogador para a seção acima, caso possível
@@ -68,7 +68,7 @@ namespace my {
 
 		//Move jogador para a seção da direita, caso possível
 		void goRight() {
-			goTo(m_current_section->W);
+			goTo(m_current_section->E);
 		}
 
 

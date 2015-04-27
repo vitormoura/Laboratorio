@@ -1,6 +1,7 @@
 #pragma once
 #include <utility>
 #include <memory>
+#include <SFML\Graphics.hpp>
 
 namespace my {
 
@@ -12,7 +13,7 @@ namespace my {
 	{
 	
 	private:
-		std::pair<int, int> m_id;
+		sf::Vector2i	m_id;
 	
 	public:
 		MazeSectionPtr	N;
@@ -23,14 +24,14 @@ namespace my {
 		bool			allowed;
 				
 	public:
-		MazeSection(std::pair<int, int> id);
+		MazeSection(sf::Vector2i id);
 		MazeSection(int id_x, int id_y);
 		virtual ~MazeSection();
 
-		std::pair<int, int> getID();
+		sf::Vector2i getID();
 
 		bool MazeSection::operator ==(const MazeSection &b) const {
-			return (m_id.first == b.m_id.first) && (m_id.second == b.m_id.second);
+			return (m_id.x == b.m_id.x) && (m_id.y == b.m_id.y);
 		}
 
 		bool MazeSection::operator !=(const MazeSection &b) const {

@@ -51,7 +51,7 @@ namespace my {
 			if (!sections[i]->allowed) {
 
 				auto id = sections[i]->getID();
-				auto w = new Wall(id.second * defaultSize, id.first * defaultSize, defaultSize, defaultSize);
+				auto w = new Wall(id.x * defaultSize, id.y * defaultSize, defaultSize, defaultSize);
 
 				m_children.push_back(w);
 			}

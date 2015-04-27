@@ -4,13 +4,13 @@
 
 namespace my {
 
-	MazeSection::MazeSection(std::pair<int, int> id) : 
+	MazeSection::MazeSection(sf::Vector2i id) : 
 		m_id(id), W(nullptr), S(nullptr), N(nullptr), E(nullptr)
 	{
 	}
 
 	MazeSection::MazeSection(int id_x, int id_y) : 
-		m_id(std::pair<int, int>(id_x, id_y)), W(nullptr), S(nullptr), N(nullptr), E(nullptr) 
+		m_id(sf::Vector2i(id_x, id_y)), W(nullptr), S(nullptr), N(nullptr), E(nullptr) 
 	{
 	}
 	
@@ -21,7 +21,7 @@ namespace my {
 		#endif
 	}
 
-	std::pair<int, int> MazeSection::getID() {
+	sf::Vector2i MazeSection::getID() {
 		return m_id;
 	}
 

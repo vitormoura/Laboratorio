@@ -29,7 +29,7 @@ namespace my {
 		strReferenceMap >> height;
 		
 		MazeSectionPtr* sections = new MazeSectionPtr[width * height];
-		MazeSectionPtr lastE = nullptr, lastN = nullptr;
+		MazeSectionPtr lastW = nullptr, lastN = nullptr;
 		char c;
 		int qtde = 0;
 
@@ -42,13 +42,13 @@ namespace my {
 				
 				strReferenceMap >> c;
 												
-				MazeSectionPtr s = new MazeSection(std::make_pair(line, col));
-				s->E = lastE;
+				MazeSectionPtr s = new MazeSection(col, line);
+				s->W = lastW;
 				s->allowed = (c == MAZE_BP_PATH_BLOCK);
 
 				//Redefinindo o 'oeste' o último leste
-				if (lastE != nullptr) {
-					lastE->W = s;
+				if (lastW != nullptr) {
+					lastW->E = s;
 				}
 
 				//Redefinindo o 'sul' do último norte e avançando o norte para o elemento ao lado
@@ -57,14 +57,14 @@ namespace my {
 					s->N->S = s;
 				}
 				
-				lastE = s;
+				lastW = s;
 				sections[firstCol + col] = s;
 				qtde++;
 
 			}
 						
 			//O último elemento N será o primeiro da linha que acaba de ser processada
-			lastE = nullptr;
+			lastW = nullptr;
 		}
 
 		return MazeSectionMatrix(sections);
@@ -73,7 +73,7 @@ namespace my {
 	MazeSectionMatrix buildMazeSections(int width, int height) {
 
 		MazeSectionPtr* sections = new MazeSectionPtr[width * height];
-		MazeSectionPtr lastE = nullptr, lastN = nullptr;
+		MazeSectionPtr lastW = nullptr, lastN = nullptr;
 
 		for (int line = 0; line < height; line++) {
 
@@ -82,13 +82,13 @@ namespace my {
 
 			for (int col = 0; col < width; col++) {
 
-				MazeSectionPtr s = new MazeSection(std::make_pair(line, col));
-				s->E = lastE;
+				MazeSectionPtr s = new MazeSection(col,line);
+				s->W = lastW;
 				s->N = lastN;
 
 				//Redefinindo o 'oeste' o último leste
-				if (lastE != nullptr) {
-					lastE->W = s;
+				if (lastW != nullptr) {
+					lastW->E = s;
 				}
 
 				//Redefinindo o 'sul' do último norte e avançando o norte para o elemento ao lado
@@ -97,13 +97,13 @@ namespace my {
 					lastN++;
 				}
 
-				lastE = s;
+				lastW = s;
 				sections[firstCol + col] = s;
 			}
 
 			//O último elemento N será o primeiro da linha que acaba de ser processada
 			lastN = sections[firstCol];
-			lastE = nullptr;
+			lastW = nullptr;
 		}
 
 		return MazeSectionMatrix(sections);

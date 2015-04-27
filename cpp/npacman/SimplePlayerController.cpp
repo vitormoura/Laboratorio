@@ -20,7 +20,7 @@ namespace my {
 			if (current->N->allowed && last != current->N) {
 				m_target->goUp();
 			}
-			else if (current->W->allowed && last != current->W) {
+			else if (current->E->allowed && last != current->E) {
 				m_target->goRight();
 			}
 			else if (current->S->allowed && last != current->S) {
