@@ -106,6 +106,7 @@
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="MazeScene.cpp" />
     <ClCompile Include="MazeSection.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Puckman.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="MazeUtils.cpp" />
@@ -121,6 +122,7 @@
     <ClInclude Include="Maze.tests.h" />
     <ClInclude Include="MazeScene.h" />
     <ClInclude Include="MazeSection.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Puckman.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Types.h" />
