@@ -3,6 +3,7 @@
 #include "Maze.h"
 #include "Puckman.h"
 #include "Ghost.h"
+#include "PlayerController.h"
 
 namespace my {
 
@@ -11,10 +12,19 @@ namespace my {
 	{
 	
 	private:
-		GamePtr		m_game;
-		MazePtr		m_maze;
+		enum ghosts {
+			Blinky,
+			//Inky,
+			//Pinky,
+			//Clyde,
+			size
+		};
 
-		GhostPtr	m_ghosts[1];
+
+		GamePtr				m_game;
+		MazePtr				m_maze;
+		GhostPtr			m_ghosts[ghosts::size];
+		PlayerControllerPtr m_ghost_ctrls[ghosts::size];
 
 	public:
 		MazeScene(GamePtr g);

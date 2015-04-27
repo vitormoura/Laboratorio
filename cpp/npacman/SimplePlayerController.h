@@ -5,16 +5,16 @@
 namespace my {
 
 	//Controlador automático básico de um fantasma
-	class SimpleGhostController : public PlayerController
+	class SimplePlayerController : public PlayerController
 	{
 	
 	private:
-		float		m_wait;
-		GhostPtr	m_ghost;
+		float			m_wait;
+		ControllablePtr	m_target;
 
 	public:
-		SimpleGhostController(GhostPtr ghost);
-		virtual ~SimpleGhostController();
+		SimplePlayerController(ControllablePtr target);
+		virtual ~SimplePlayerController();
 
 		virtual void update(sf::Time t);
 	};

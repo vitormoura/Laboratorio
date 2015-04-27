@@ -19,8 +19,8 @@ namespace my {
 		const float			DEFAULT_SPEED = DEFAULT_GAME_SPEED;
 		sf::RenderWindow*	m_canvas;
 		GameScenePtr		m_current_scene;
-		PuckmanPtr			m_player;
-		PlayerControllerPtr	m_player_ctrl;
+		PuckmanPtr			m_puckman;
+		PlayerControllerPtr	m_puckman_ctrl;
 
 		sf::FloatRect		m_bounds;
 
@@ -35,6 +35,8 @@ namespace my {
 		virtual ~Game();
 		
 		PuckmanPtr				getPlayer() const;
+		PlayerControllerPtr		getPlayerController() const;
+
 		const sf::Vector2u&		getSize() const;
 		void					run();
 		const ResourceManager&	getResourceManager();

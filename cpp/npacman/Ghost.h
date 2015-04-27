@@ -10,13 +10,11 @@ namespace my {
 
 	class Ghost : public GhostPlayerType
 	{
-
-	private:
-		PlayerControllerPtr m_controller;
-
+			
 	public:
 		Ghost();
 		virtual ~Ghost();
+		
 
 		virtual void update(sf::Time t);
 	};

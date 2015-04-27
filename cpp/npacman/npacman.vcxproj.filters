@@ -49,16 +49,16 @@
     <ClCompile Include="MazeUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Ghost.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InputPlayerController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SimpleGhostController.cpp">
+    <ClCompile Include="AutoPlayerController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SimplePlayerController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -126,7 +126,10 @@
     <ClInclude Include="Controllable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SimpleGhostController.h">
+    <ClInclude Include="AutoPlayerController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SimplePlayerController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

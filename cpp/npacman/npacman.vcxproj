@@ -100,6 +100,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AutoPlayerController.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Ghost.cpp" />
@@ -108,15 +109,15 @@
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="MazeScene.cpp" />
     <ClCompile Include="MazeSection.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Puckman.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="MazeUtils.cpp" />
-    <ClCompile Include="SimpleGhostController.cpp" />
+    <ClCompile Include="SimplePlayerController.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="All.tests.h" />
+    <ClInclude Include="AutoPlayerController.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Controllable.h" />
     <ClInclude Include="Funcoes.h" />
@@ -134,7 +135,7 @@
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="Puckman.h" />
     <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="SimpleGhostController.h" />
+    <ClInclude Include="SimplePlayerController.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="MazeUtils.h" />
     <ClInclude Include="Wall.h" />

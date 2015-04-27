@@ -9,8 +9,8 @@ namespace my {
 	Game::Game()
 	{
 		m_canvas = new sf::RenderWindow(sf::VideoMode(460, 460), "NPACMAN");
-		m_player = new Puckman();
-		m_player_ctrl = new InputPlayerController(m_canvas, m_player);
+		m_puckman = new Puckman();
+		m_puckman_ctrl = new InputPlayerController(m_canvas, m_puckman);
 				
 		m_current_scene = new MazeScene(this);
 	}
@@ -22,8 +22,8 @@ namespace my {
 		#endif
 
 		delete m_canvas;
-		delete m_player_ctrl;
-		delete m_player;
+		delete m_puckman_ctrl;
+		delete m_puckman;
 		delete m_current_scene;
 	}
 
@@ -36,7 +36,11 @@ namespace my {
 	}
 
 	PuckmanPtr Game::getPlayer() const {
-		return m_player;
+		return m_puckman;
+	}
+
+	PlayerControllerPtr	Game::getPlayerController() const {
+		return m_puckman_ctrl;
 	}
 
 	void Game::run() {
@@ -47,14 +51,14 @@ namespace my {
 
 		while (m_canvas->isOpen())
 		{
-			m_player_ctrl->update(timePerFrame);
+			m_puckman_ctrl->update(timePerFrame);
 
 			timeSinceLastUpdate += clock.restart();
 
 			while (timeSinceLastUpdate > timePerFrame) {
 				timeSinceLastUpdate -= timePerFrame;
 
-				m_player_ctrl->update(timePerFrame);
+				m_puckman_ctrl->update(timePerFrame);
 				handleUpdates(timePerFrame);
 			}
 
