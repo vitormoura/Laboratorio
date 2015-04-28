@@ -71,6 +71,27 @@ namespace my {
 			goTo(m_current_section->E);
 		}
 
+		//Move o jogador para a direção indicada
+		void go(Controllable::directions d) {
+			
+			switch (d) {
+
+			case directions::N:
+				goUp();
+				break;
+			case directions::E:
+				goRight();
+				break;
+			case directions::S:
+				goDown();
+				break;
+			case directions::W:
+				goLeft();
+				break;
+
+			}
+		}
+
 
 	protected:
 

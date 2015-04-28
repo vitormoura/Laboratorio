@@ -2,7 +2,7 @@
 #include "Wall.h"
 #include "Game.h"
 #include "MazeUtils.h"
-#include "SimplePlayerController.h"
+#include "AutoPlayerController.h"
 #include <iostream>
 
 namespace my {
@@ -39,9 +39,9 @@ namespace my {
 		auto defaultSize = MAZE_SECTION_WIDTH;
 
 		m_ghosts[ghosts::Blinky] = new Ghost();
-		m_ghosts[ghosts::Blinky]->setLocation(m_maze->getSection(13, 14));
+		m_ghosts[ghosts::Blinky]->setLocation(m_maze->getSection(13, 13));
 
-		m_ghost_ctrls[ghosts::Blinky] = new SimplePlayerController(m_ghosts[ghosts::Blinky]);
+		m_ghost_ctrls[ghosts::Blinky] = new AutoPlayerController(m_ghosts[ghosts::Blinky], m_game->getPlayer());
 		
 
 		m_children.push_back(m_ghosts[ghosts::Blinky]);

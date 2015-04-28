@@ -2,6 +2,7 @@
 #include <utility>
 #include <memory>
 #include <SFML\Graphics.hpp>
+#include <array>
 
 namespace my {
 
