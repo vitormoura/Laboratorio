@@ -67,20 +67,20 @@ namespace my {
 									node->location = o;
 									node->parent = currNode;
 									node->h = heuristics(node->location, currEndLocation); //heuristica manhattan
-
+																		
 									///*
 									//Se estiverem na mesma coluna, considerar linha
 									if (currEndLocation->getID().x == o->getID().x) {
-										node->g = std::abs(currEndLocation->getID().y - o->getID().y);
+										node->g = (currEndLocation->getID() - o->getID()).y;
 									}
 									//Se estiverem na mesma linha, considerar coluna
 									else if (currEndLocation->getID().y == o->getID().y) {
-										node->g = std::abs(currEndLocation->getID().x - o->getID().x);
+										node->g = (currEndLocation->getID() - o->getID()).x;
 									}
 									//Nos demais casos, usamos a heuristica de euclides
 									else
 									{
-										node->g = std::round(std::sqrt(std::pow(o->getID().x - currEndLocation->getID().x, 2) + std::pow(o->getID().y - currEndLocation->getID().y, 2)));
+										node->g = std::round(std::sqrt(std::pow((o->getID().x - currEndLocation->getID().x), 2) + std::pow((o->getID().y - currEndLocation->getID().y), 2)));
 									}
 									//*/
 
@@ -154,7 +154,7 @@ namespace my {
 		}
 		else
 		{
-			m_wait += t.asSeconds();
+			m_wait +=  t.asSeconds();
 		}
 	}
 

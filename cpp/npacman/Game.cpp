@@ -9,6 +9,8 @@ namespace my {
 	Game::Game()
 	{
 		m_canvas = new sf::RenderWindow(sf::VideoMode(460, 460), "NPACMAN");
+		m_canvas->setFramerateLimit(DEFAULT_GAME_SPEED);
+
 		m_puckman = new Puckman();
 		m_puckman_ctrl = new InputPlayerController(m_canvas, m_puckman);
 				
@@ -51,17 +53,16 @@ namespace my {
 
 		while (m_canvas->isOpen())
 		{
-			m_puckman_ctrl->update(timePerFrame);
+			handleUpdates(timePerFrame);
 
 			timeSinceLastUpdate += clock.restart();
-
+						
 			while (timeSinceLastUpdate > timePerFrame) {
 				timeSinceLastUpdate -= timePerFrame;
 
-				m_puckman_ctrl->update(timePerFrame);
 				handleUpdates(timePerFrame);
 			}
-
+			
 			handleRender();
 		}
 	}
@@ -74,6 +75,7 @@ namespace my {
 	}
 		
 	void Game::handleUpdates(sf::Time t) {
+		m_puckman_ctrl->update(t);
 		m_current_scene->update(t);
 	}
 

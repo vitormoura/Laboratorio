@@ -21,7 +21,7 @@ namespace my {
 		#endif
 	}
 
-	sf::Vector2i MazeSection::getID() {
+	const sf::Vector2i MazeSection::getID() const {
 		return m_id;
 	}
 

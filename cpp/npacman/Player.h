@@ -16,7 +16,7 @@ namespace my {
 		
 		MazeSectionPtr			m_current_section;
 		MazeSectionPtr			m_last_section;
-				
+								
 	public:
 
 		Player(T* s) {
@@ -31,9 +31,8 @@ namespace my {
 					
 		virtual void update(sf::Time t) {
 			auto id = m_current_section->getID();
-			auto newPos = sf::Vector2f(id.x * MAZE_SECTION_WIDTH, id.y * MAZE_SECTION_WIDTH);
-
-			m_el->setPosition(newPos);
+						
+			m_el->setPosition(sf::Vector2f(id.x * MAZE_SECTION_WIDTH, id.y * MAZE_SECTION_WIDTH));
 		}
 
 		//Recupera zona do labirinto onde o jogador está posicionado

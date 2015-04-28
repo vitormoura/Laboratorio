@@ -29,7 +29,7 @@ namespace my {
 		MazeSection(int id_x, int id_y);
 		virtual ~MazeSection();
 
-		sf::Vector2i getID();
+		const sf::Vector2i getID() const;
 
 		bool MazeSection::operator ==(const MazeSection &b) const {
 			return (m_id.x == b.m_id.x) && (m_id.y == b.m_id.y);
