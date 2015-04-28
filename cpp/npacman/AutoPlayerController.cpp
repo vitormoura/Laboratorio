@@ -7,7 +7,7 @@ namespace my {
 
 	int heuristics(MazeSectionPtr start, MazeSectionPtr end) {
 		if (start != nullptr && end != nullptr) {
-			return (start->getID().x - end->getID().x) + (start->getID().y - end->getID().y) - 1;
+			return std::abs((start->getID().x - end->getID().x) + (start->getID().y - end->getID().y));
 		}
 		else {
 			return 99999;
@@ -68,7 +68,7 @@ namespace my {
 									node->parent = currNode;
 									node->h = heuristics(node->location, currEndLocation); //heuristica manhattan
 																		
-									///*
+									/*
 									//Se estiverem na mesma coluna, considerar linha
 									if (currEndLocation->getID().x == o->getID().x) {
 										node->g = (currEndLocation->getID() - o->getID()).y;
@@ -80,7 +80,7 @@ namespace my {
 									//Nos demais casos, usamos a heuristica de euclides
 									else
 									{
-										node->g = std::round(std::sqrt(std::pow((o->getID().x - currEndLocation->getID().x), 2) + std::pow((o->getID().y - currEndLocation->getID().y), 2)));
+										node->g = std::sqrt(std::pow((o->getID().x - currEndLocation->getID().x), 2) + std::pow((o->getID().y - currEndLocation->getID().y), 2));
 									}
 									//*/
 
@@ -97,13 +97,19 @@ namespace my {
 				}
 
 				//Procuramos o melhor nó localizado (custo)
-				auto nodeWithMinH = std::min_element(openSet.begin(), openSet.end());
-				
-				currNode = *nodeWithMinH;
+				auto minNode = openSet.begin();
+
+				for (auto m = openSet.begin(); m != openSet.end(); m++) {
+					if ((*m)->h < (*minNode)->h) {
+						minNode = m;
+					}
+				}
+								
+				currNode = *minNode;
 				currLocation = currNode->location;
 
 				//Removendo da lista de nós abertos para pesquisa e incluíndo na lista de nós proibidos
-				openSet.erase(nodeWithMinH);
+				openSet.erase(minNode);
 				closedSet.push_back(currNode);
 				
 			} while (currNode->location != currEndLocation);
