@@ -7,15 +7,9 @@
 
 namespace my {
 
-	MazeScene::MazeScene(GamePtr g) : m_game(g)
+	MazeScene::MazeScene(GamePtr g) : m_game(g), m_puckman(nullptr)
 	{
 		m_maze = buildDefaultMaze(g);
-
-		auto player = m_game->getPlayer();
-		player->setLocation(m_maze->getStartSection());
-				
-		m_children.push_back(player);
-				
 		prepare();
 	}
 	
@@ -24,27 +18,38 @@ namespace my {
 		delete m_maze;
 	}
 
-	void MazeScene::update(sf::Time t) {
-						
-		GameScene::update(t);
+	PuckmanPtr MazeScene::getPlayer() const {
+		return m_puckman;
+	}
 		
-		for (size_t i = 0; i < ghosts::size; i++)
-			m_ghost_ctrls[i]->update(t);
+	void MazeScene::update(sf::Time t) {
+		
+		for (size_t i = 0; i < characters::size; i++)
+			m_controllers[i]->update(t);
+
+		GameScene::update(t);
 	}
 
 	void MazeScene::prepare() {
+				
+		m_puckman = new Puckman();
+		m_puckman->setLocation(m_maze->getStartSection());
+
+		m_children.push_back(m_puckman);
+
+
+		auto blinky = new Ghost();
+		blinky->setLocation(m_maze->getSection(13, 13));
 		
+		m_controllers[characters::PuckmanT] = new InputPlayerController(m_game->getCanvas(), m_puckman);
+		m_controllers[characters::Blinky] = new AutoPlayerController(blinky, m_puckman);
+		
+		m_children.push_back(blinky);
+
+
 		auto sections = m_maze->getSections();
 		auto size = m_maze->getSectionsCount();
 		auto defaultSize = MAZE_SECTION_WIDTH;
-
-		m_ghosts[ghosts::Blinky] = new Ghost();
-		m_ghosts[ghosts::Blinky]->setLocation(m_maze->getSection(13, 13));
-
-		m_ghost_ctrls[ghosts::Blinky] = new AutoPlayerController(m_ghosts[ghosts::Blinky], m_game->getPlayer());
-		
-
-		m_children.push_back(m_ghosts[ghosts::Blinky]);
 
 		for (int i = 0; i < size; i++) {
 

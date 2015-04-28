@@ -42,8 +42,10 @@ namespace my {
 
 			std::vector<PathFindingNode*> closedSet;
 			std::vector<PathFindingNode*> openSet;
+			std::vector<PathFindingNode*> toDelete;
 
 			closedSet.push_back(currNode);
+			toDelete.push_back(currNode);
 
 			do
 			{
@@ -86,6 +88,7 @@ namespace my {
 
 									//Ok, esse nó participará do teste 
 									openSet.push_back(node);
+									toDelete.push_back(node);
 								}
 							}
 						}
@@ -147,11 +150,7 @@ namespace my {
 
 			//Limpando objetos criados durante o processamento
 			///*
-			for (auto p : openSet) {
-				delete p;
-			}
-
-			for (auto p : closedSet) {
+			for (auto& p : toDelete) {
 				delete p;
 			}
 			//*/

@@ -1,9 +1,8 @@
 #pragma once
 #include "GameScene.h"
 #include "Maze.h"
-#include "Puckman.h"
 #include "Ghost.h"
-#include "PlayerController.h"
+
 
 namespace my {
 
@@ -12,7 +11,8 @@ namespace my {
 	{
 	
 	private:
-		enum ghosts {
+		enum characters {
+			PuckmanT,
 			Blinky,
 			//Inky,
 			//Pinky,
@@ -20,19 +20,20 @@ namespace my {
 			size
 		};
 
-
 		GamePtr				m_game;
 		MazePtr				m_maze;
-		GhostPtr			m_ghosts[ghosts::size];
-		PlayerControllerPtr m_ghost_ctrls[ghosts::size];
+
+		PuckmanPtr			m_puckman;
+		PlayerControllerPtr m_controllers[characters::size];
 
 	public:
 		MazeScene(GamePtr g);
 		virtual ~MazeScene();
 
-		virtual void update(sf::Time t);
-		void prepare();
-
+		virtual void			update(sf::Time t);
+		void					prepare();
+		PuckmanPtr				getPlayer() const;
+		
 	private:
 		void destroyMaze();
 	};

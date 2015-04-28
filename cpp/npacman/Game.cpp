@@ -10,10 +10,7 @@ namespace my {
 	{
 		m_canvas = new sf::RenderWindow(sf::VideoMode(460, 460), "NPACMAN");
 		m_canvas->setFramerateLimit(DEFAULT_GAME_SPEED);
-
-		m_puckman = new Puckman();
-		m_puckman_ctrl = new InputPlayerController(m_canvas, m_puckman);
-				
+								
 		m_current_scene = new MazeScene(this);
 	}
 
@@ -24,8 +21,6 @@ namespace my {
 		#endif
 
 		delete m_canvas;
-		delete m_puckman_ctrl;
-		delete m_puckman;
 		delete m_current_scene;
 	}
 
@@ -37,14 +32,10 @@ namespace my {
 		return m_canvas->getSize();
 	}
 
-	PuckmanPtr Game::getPlayer() const {
-		return m_puckman;
+	sf::RenderWindow* Game::getCanvas() const {
+		return m_canvas;
 	}
-
-	PlayerControllerPtr	Game::getPlayerController() const {
-		return m_puckman_ctrl;
-	}
-
+		
 	void Game::run() {
 
 		sf::Clock clock;
@@ -75,9 +66,6 @@ namespace my {
 	}
 		
 	void Game::handleUpdates(sf::Time t) {
-		m_puckman_ctrl->update(t);
 		m_current_scene->update(t);
 	}
-
-	
 }
