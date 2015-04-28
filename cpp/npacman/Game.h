@@ -36,6 +36,7 @@ namespace my {
 		const ResourceManager&	getResourceManager();
 
 		void					run();
+		void					end();
 
 	};
 }

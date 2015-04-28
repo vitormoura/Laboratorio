@@ -24,6 +24,10 @@ namespace my {
 		return getSection(28, 14);
 	}
 
+	MazeSectionPtr Maze::getGhostLairSection() const {
+		return getSection(13, 13);
+	}
+
 	int Maze::getSectionsCount() {
 		return m_size;
 	}

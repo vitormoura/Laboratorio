@@ -14,7 +14,7 @@ namespace my {
 		enum characters {
 			PuckmanT,
 			Blinky,
-			//Inky,
+			Inky,
 			//Pinky,
 			//Clyde,
 			size
@@ -22,8 +22,7 @@ namespace my {
 
 		GamePtr				m_game;
 		MazePtr				m_maze;
-
-		PuckmanPtr			m_puckman;
+				
 		PlayerControllerPtr m_controllers[characters::size];
 
 	public:
@@ -31,11 +30,11 @@ namespace my {
 		virtual ~MazeScene();
 
 		virtual void			update(sf::Time t);
-		void					prepare();
-		PuckmanPtr				getPlayer() const;
-		
+
 	private:
-		void destroyMaze();
+		void					prepareCharacters();
+		void					prepareWalls();
+	
 	};
 }
 

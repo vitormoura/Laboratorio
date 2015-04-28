@@ -23,8 +23,11 @@ namespace my {
 		Maze(MazeSectionMatrix sections, int width, int height);
 		virtual ~Maze();
 
-		MazeSectionPtr getStartSection() const;
 		int getSectionsCount();
+
+		MazeSectionPtr getStartSection() const;
+		MazeSectionPtr getGhostLairSection() const;
+		
 		const MazeSectionMatrix getSections();
 		MazeSectionPtr getSection(int line, int col) const;
 	};

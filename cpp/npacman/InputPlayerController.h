@@ -9,11 +9,12 @@ namespace my {
 
 	private:
 		sf::Window*		m_window;
+		GamePtr			m_game;
 		ControllablePtr m_target;
 
 		
 	public:
-		InputPlayerController(sf::Window* win, ControllablePtr target );
+		InputPlayerController(GamePtr game, ControllablePtr target);
 		~InputPlayerController();
 
 		virtual void update(sf::Time t);

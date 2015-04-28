@@ -1,9 +1,11 @@
 #include "InputPlayerController.h"
+#include "Game.h"
 
 namespace my {
 
-	InputPlayerController::InputPlayerController(sf::Window* win, ControllablePtr target) : m_window(win), m_target(target)
+	InputPlayerController::InputPlayerController(GamePtr game, ControllablePtr target) : m_game(game), m_window(nullptr), m_target(target)
 	{
+		m_window = game->getCanvas();
 	}
 
 	void InputPlayerController::update(sf::Time t) {
@@ -13,7 +15,7 @@ namespace my {
 		while (m_window->pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
-				m_window->close();
+				m_game->end();
 
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {

@@ -3,25 +3,27 @@
 #include "Game.h"
 #include "MazeUtils.h"
 #include "AutoPlayerController.h"
+#include "SimplePlayerController.h"
 #include <iostream>
 
 namespace my {
 
-	MazeScene::MazeScene(GamePtr g) : m_game(g), m_puckman(nullptr)
+	MazeScene::MazeScene(GamePtr g) : m_game(g)
 	{
 		m_maze = buildDefaultMaze(g);
-		prepare();
+		
+		prepareCharacters();
+		prepareWalls();
 	}
 	
 	MazeScene::~MazeScene()
 	{
 		delete m_maze;
-	}
-
-	PuckmanPtr MazeScene::getPlayer() const {
-		return m_puckman;
-	}
 		
+		for (size_t i = 0; i < characters::size; i++)
+			delete m_controllers[i];
+	}
+				
 	void MazeScene::update(sf::Time t) {
 		
 		for (size_t i = 0; i < characters::size; i++)
@@ -30,22 +32,28 @@ namespace my {
 		GameScene::update(t);
 	}
 
-	void MazeScene::prepare() {
+	void MazeScene::prepareCharacters() {
 				
-		m_puckman = new Puckman();
-		m_puckman->setLocation(m_maze->getStartSection());
-
-		m_children.push_back(m_puckman);
-
-
+		auto puckman = new Puckman();
+		puckman->setLocation(m_maze->getStartSection());
+				
 		auto blinky = new Ghost();
-		blinky->setLocation(m_maze->getSection(13, 13));
+		blinky->setLocation(m_maze->getGhostLairSection());
 		
-		m_controllers[characters::PuckmanT] = new InputPlayerController(m_game->getCanvas(), m_puckman);
-		m_controllers[characters::Blinky] = new AutoPlayerController(blinky, m_puckman);
-		
-		m_children.push_back(blinky);
+		auto inky = new Ghost();
+		inky->setLocation(m_maze->getGhostLairSection());
 
+		//Definindo quais os controladores de cada personagem
+		m_controllers[characters::PuckmanT] = new InputPlayerController(m_game, puckman);
+		m_controllers[characters::Blinky] = new AutoPlayerController(blinky, puckman);
+		m_controllers[characters::Inky] = new SimplePlayerController(inky);
+		
+		m_children.push_back(puckman);
+		m_children.push_back(blinky);
+		m_children.push_back(inky);
+	}
+
+	void MazeScene::prepareWalls() {
 
 		auto sections = m_maze->getSections();
 		auto size = m_maze->getSectionsCount();
@@ -61,9 +69,5 @@ namespace my {
 				m_children.push_back(w);
 			}
 		}
-	}
-		
-	void MazeScene::destroyMaze() {
-
-	}
+	}	
 }

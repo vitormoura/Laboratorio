@@ -23,7 +23,7 @@ namespace my {
 		delete m_canvas;
 		delete m_current_scene;
 	}
-
+		
 	const ResourceManager& Game::getResourceManager() {
 		return m_rm;
 	}
@@ -56,6 +56,10 @@ namespace my {
 			
 			handleRender();
 		}
+	}
+
+	void Game::end() {
+		m_canvas->close();
 	}
 
 	void Game::handleRender() {
