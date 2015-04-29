@@ -2,6 +2,7 @@
 #include <utility>
 #include <memory>
 #include <SFML\Graphics.hpp>
+#include "Enums.h"
 #include <array>
 
 namespace my {
@@ -30,6 +31,8 @@ namespace my {
 		virtual ~MazeSection();
 
 		const sf::Vector2i getID() const;
+
+		MazeSectionPtr get(Directions d) const;
 
 		bool MazeSection::operator ==(const MazeSection &b) const {
 			return (m_id.x == b.m_id.x) && (m_id.y == b.m_id.y);

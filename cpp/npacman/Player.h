@@ -18,6 +18,7 @@ namespace my {
 		MazeSectionPtr			m_current_section;
 		MazeSectionPtr			m_last_section;
 		MazeSectionPtr			m_next_section;
+		Directions				m_facing_direction;
 										
 	public:
 
@@ -26,6 +27,7 @@ namespace my {
 			m_current_section	= nullptr;
 			m_last_section		= nullptr;
 			m_next_section		= nullptr;
+			m_facing_direction	= Directions::E;
 		}
 
 		virtual ~Player() {
@@ -50,7 +52,9 @@ namespace my {
 
 		//Redefine a posição do jogador dentro do labirinto (ATENÇÃO: Refatorar, esse método não deve existir, todo movimento deve ser realizado pelo 'goTo')
 		void setLocation(MazeSectionPtr s) {
+			m_last_section = m_current_section;
 			m_current_section = s;
+			m_next_section = nullptr;
 		}
 		
 		//Move jogador para a seção da esquerda, caso possível
