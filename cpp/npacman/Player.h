@@ -19,6 +19,8 @@ namespace my {
 		MazeSectionPtr			m_last_section;
 		MazeSectionPtr			m_next_section;
 		Directions				m_facing_direction;
+
+		float					m_moving_duration;
 										
 	public:
 
@@ -28,6 +30,7 @@ namespace my {
 			m_last_section		= nullptr;
 			m_next_section		= nullptr;
 			m_facing_direction	= Directions::E;
+			m_moving_duration = 0.25;
 		}
 
 		virtual ~Player() {
@@ -36,7 +39,6 @@ namespace my {
 					
 		virtual void update(sf::Time t) {
 			auto id = m_current_section->getID();
-						
 			m_el->setPosition(sf::Vector2f(id.x * MAZE_SECTION_WIDTH, id.y * MAZE_SECTION_HEIGHT));
 		}
 
@@ -52,29 +54,33 @@ namespace my {
 
 		//Redefine a posição do jogador dentro do labirinto (ATENÇÃO: Refatorar, esse método não deve existir, todo movimento deve ser realizado pelo 'goTo')
 		void setLocation(MazeSectionPtr s) {
-			m_last_section = m_current_section;
-			m_current_section = s;
-			m_next_section = nullptr;
+
+			if (s->allowed) {
+				m_last_section = m_current_section;
+				m_current_section = s;
+				m_next_section = nullptr;
+				m_facing_direction = Directions::E;
+			}
 		}
 		
 		//Move jogador para a seção da esquerda, caso possível
 		void goLeft() {
-			goTo(m_current_section->W);
+			goTo(m_current_section->W, Directions::W);
 		}
 
 		//Move jogador para a seção acima, caso possível
 		void goUp() {
-			goTo(m_current_section->N);
+			goTo(m_current_section->N, Directions::N);
 		}
 
 		//Move jogador para a seção abaixo, caso possível
 		void goDown() {
-			goTo(m_current_section->S);
+			goTo(m_current_section->S, Directions::S);
 		}
 
 		//Move jogador para a seção da direita, caso possível
 		void goRight() {
-			goTo(m_current_section->E);
+			goTo(m_current_section->E, Directions::E);
 		}
 
 		//Move o jogador para a direção indicada
@@ -101,11 +107,12 @@ namespace my {
 	protected:
 
 		//Move jogador para a zona do labirinto informada
-		void goTo(MazeSectionPtr s) {
+		void goTo(MazeSectionPtr s, Directions d) {
 
 			if (s != nullptr && s->allowed) {
-				m_last_section = m_current_section;
 				m_current_section = s;
+				m_next_section = s;
+				m_facing_direction = d;
 			}
 		}
 	};
