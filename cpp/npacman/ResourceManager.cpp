@@ -17,6 +17,19 @@ namespace my {
 		return getFileContents("maze_blueprint.txt");
 	}
 
+	sf::Texture* ResourceManager::getDefaultMazeTemplate() {
+
+		if (m_default_maze_bg == nullptr) {
+			m_default_maze_bg = new sf::Texture();
+
+			if (!m_default_maze_bg->loadFromFile("maze_template_1.png")) {
+				throw "Erro ao recuperar arquivo de template do labirinto";
+			}
+		}
+
+		return m_default_maze_bg;
+	}
+
 	std::unique_ptr<std::string> ResourceManager::getFileContents(const char* filePath) {
 		
 		std::ifstream t(filePath);

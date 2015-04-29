@@ -64,6 +64,9 @@
     <ClCompile Include="PathFindingNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -138,6 +141,9 @@
     <ClInclude Include="PathFindingNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="maze_blueprint.txt">
@@ -146,6 +152,12 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="pacman_maze_example.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="maze_template_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="maze_grid.fw.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

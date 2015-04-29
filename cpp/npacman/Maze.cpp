@@ -21,7 +21,7 @@ namespace my {
 	}
 
 	MazeSectionPtr Maze::getStartSection() const {
-		return getSection(28, 14);
+		return getSection(29, 14);
 	}
 
 	MazeSectionPtr Maze::getGhostLairSection() const {

@@ -32,7 +32,7 @@ namespace my {
 		virtual void update(sf::Time t) {
 			auto id = m_current_section->getID();
 						
-			m_el->setPosition(sf::Vector2f(id.x * MAZE_SECTION_WIDTH, id.y * MAZE_SECTION_WIDTH));
+			m_el->setPosition(sf::Vector2f(id.x * MAZE_SECTION_WIDTH, id.y * MAZE_SECTION_HEIGHT));
 		}
 
 		//Recupera zona do labirinto onde o jogador está posicionado

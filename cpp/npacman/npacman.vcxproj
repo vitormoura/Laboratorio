@@ -101,6 +101,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AutoPlayerController.cpp" />
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Ghost.cpp" />
@@ -119,6 +120,7 @@
   <ItemGroup>
     <ClInclude Include="All.tests.h" />
     <ClInclude Include="AutoPlayerController.h" />
+    <ClInclude Include="Background.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Controllable.h" />
     <ClInclude Include="Funcoes.h" />
@@ -148,6 +150,8 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="maze_grid.fw.png" />
+    <Image Include="maze_template_1.png" />
     <Image Include="pacman_maze_example.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

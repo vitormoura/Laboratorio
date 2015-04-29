@@ -8,7 +8,7 @@ namespace my {
 		
 	Game::Game()
 	{
-		m_canvas = new sf::RenderWindow(sf::VideoMode(460, 460), "NPACMAN");
+		m_canvas = new sf::RenderWindow(sf::VideoMode(450, 490), "NPACMAN");
 		m_canvas->setFramerateLimit(DEFAULT_GAME_SPEED);
 								
 		m_current_scene = new MazeScene(this);
@@ -24,7 +24,7 @@ namespace my {
 		delete m_current_scene;
 	}
 		
-	const ResourceManager& Game::getResourceManager() {
+	ResourceManager& Game::getResourceManager() {
 		return m_rm;
 	}
 

@@ -4,6 +4,7 @@
 #include "MazeUtils.h"
 #include "AutoPlayerController.h"
 #include "SimplePlayerController.h"
+#include "Background.h"
 #include <iostream>
 
 namespace my {
@@ -12,8 +13,8 @@ namespace my {
 	{
 		m_maze = buildDefaultMaze(g);
 		
-		prepareCharacters();
 		prepareWalls();
+		prepareCharacters();
 	}
 	
 	MazeScene::~MazeScene()
@@ -55,19 +56,25 @@ namespace my {
 
 	void MazeScene::prepareWalls() {
 
+		auto rm = m_game->getResourceManager();
+		auto bg = new Background(rm.getDefaultMazeTemplate());
+		
+		m_children.push_back(bg);
+		
+		/*
 		auto sections = m_maze->getSections();
 		auto size = m_maze->getSectionsCount();
-		auto defaultSize = MAZE_SECTION_WIDTH;
-
+		
 		for (int i = 0; i < size; i++) {
 
 			if (!sections[i]->allowed) {
 
 				auto id = sections[i]->getID();
-				auto w = new Wall(id.x * defaultSize, id.y * defaultSize, defaultSize, defaultSize);
+				auto w = new Wall(id.x * MAZE_SECTION_WIDTH, id.y * MAZE_SECTION_HEIGHT, MAZE_SECTION_WIDTH, MAZE_SECTION_HEIGHT);
 
 				m_children.push_back(w);
 			}
 		}
+		//*/
 	}	
 }

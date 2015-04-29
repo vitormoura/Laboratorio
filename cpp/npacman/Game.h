@@ -33,7 +33,7 @@ namespace my {
 				
 		sf::RenderWindow*		getCanvas() const;
 		const sf::Vector2u&		getSize() const;
-		const ResourceManager&	getResourceManager();
+		ResourceManager&	getResourceManager();
 
 		void					run();
 		void					end();
