@@ -1,5 +1,6 @@
 #pragma once
 #include "Constants.h"
+#include "Enums.h"
 #include "GameElement.h"
 #include "MazeSection.h"
 #include "Controllable.h"
@@ -16,13 +17,15 @@ namespace my {
 		
 		MazeSectionPtr			m_current_section;
 		MazeSectionPtr			m_last_section;
-								
+		MazeSectionPtr			m_next_section;
+										
 	public:
 
 		Player(T* s) {
 			m_el = s;
-			m_current_section = nullptr;
-			m_last_section = nullptr;
+			m_current_section	= nullptr;
+			m_last_section		= nullptr;
+			m_next_section		= nullptr;
 		}
 
 		virtual ~Player() {
@@ -71,23 +74,22 @@ namespace my {
 		}
 
 		//Move o jogador para a direção indicada
-		void go(Controllable::directions d) {
+		void go(Directions d) {
 			
 			switch (d) {
 
-			case directions::N:
+			case Directions::N:
 				goUp();
 				break;
-			case directions::E:
+			case Directions::E:
 				goRight();
 				break;
-			case directions::S:
+			case Directions::S:
 				goDown();
 				break;
-			case directions::W:
+			case Directions::W:
 				goLeft();
 				break;
-
 			}
 		}
 

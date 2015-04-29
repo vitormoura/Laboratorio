@@ -134,16 +134,16 @@ namespace my {
 				nextSectionToMove = (*(++path.begin()))->location;
 				
 				if (nextSectionToMove == mySection->N) {
-					m_self->go(Controllable::directions::N);
+					m_self->go(Directions::N);
 				}
 				else if (nextSectionToMove == mySection->S) {
-					m_self->go(Controllable::directions::S);
+					m_self->go(Directions::S);
 				}
 				else if (nextSectionToMove == mySection->E) {
-					m_self->go(Controllable::directions::E);
+					m_self->go(Directions::E);
 				}
 				else if (nextSectionToMove == mySection->W) {
-					m_self->go(Controllable::directions::W);
+					m_self->go(Directions::W);
 				}
 				//*/
 			}
