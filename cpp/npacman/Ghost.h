@@ -12,7 +12,7 @@ namespace my {
 	{
 			
 	public:
-		Ghost();
+		Ghost(MazePtr m);
 		virtual ~Ghost();
 		
 

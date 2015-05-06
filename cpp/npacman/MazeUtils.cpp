@@ -67,7 +67,7 @@ namespace my {
 			lastW = nullptr;
 		}
 
-		return MazeSectionMatrix(sections);
+		return static_cast<MazeSectionMatrix>(sections);
 	}
 
 	MazeSectionMatrix buildMazeSections(int width, int height) {

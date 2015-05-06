@@ -35,20 +35,20 @@ namespace my {
 
 	void MazeScene::prepareCharacters() {
 				
-		auto puckman = new Puckman();
+		auto puckman = new Puckman(m_maze);
 		puckman->setLocation(m_maze->getStartSection());
 				
-		auto blinky = new Ghost();
+		auto blinky = new Ghost(m_maze);
 		blinky->setLocation(m_maze->getGhostLairSection());
 		
-		auto inky = new Ghost();
+		auto inky = new Ghost(m_maze);
 		inky->setLocation(m_maze->getGhostLairSection());
 
 		//Definindo quais os controladores de cada personagem
 		m_controllers[characters::PuckmanT] = new InputPlayerController(m_game, puckman);
 		m_controllers[characters::Blinky] = new AutoPlayerController(blinky, puckman);
 		m_controllers[characters::Inky] = new SimplePlayerController(inky);
-		
+				
 		m_children.push_back(puckman);
 		m_children.push_back(blinky);
 		m_children.push_back(inky);

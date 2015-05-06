@@ -50,6 +50,15 @@ namespace my {
 
 				//assertTrue(s->W->allowed && s->E->allowed, "W e E livres");
 				//*/
+
+				//
+				testCase("LOCALIZACAO SEÇÔES COM BASE EM POSICAO X/Y");
+				MazeSectionPtr s208_208 = maze.findSection(208, 208);
+
+				assertTrue(s208_208 != nullptr, "Nenhuma seção localizada em 208x208");
+				assertTrue(s208_208->getID().x == 13, "208x208 X = 13");
+				assertTrue(s208_208->getID().y == 13, "208x208 Y = 13");
+
 			}
 		}
 	}

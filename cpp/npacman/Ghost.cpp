@@ -4,7 +4,7 @@
 
 namespace my {
 
-	Ghost::Ghost() : GhostPlayerType(new sf::RectangleShape())
+	Ghost::Ghost(MazePtr m) : GhostPlayerType(new sf::RectangleShape(), m)
 	{
 		m_el->setFillColor(sf::Color::Red);
 		m_el->setSize(sf::Vector2f(MAZE_SECTION_WIDTH, MAZE_SECTION_WIDTH));

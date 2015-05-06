@@ -1,5 +1,4 @@
 #pragma once
-#include "Puckman.h"
 #include "MazeSection.h"
 #include <string>
 #include <memory>
@@ -30,6 +29,7 @@ namespace my {
 		
 		const MazeSectionMatrix getSections();
 		MazeSectionPtr getSection(int line, int col) const;
+		MazeSectionPtr findSection(float x, float y);
 	};
 
 }

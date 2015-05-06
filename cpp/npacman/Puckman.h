@@ -1,5 +1,6 @@
 #pragma once
 #include "Player.h"
+#include "Maze.h"
 
 
 namespace my {
@@ -13,7 +14,7 @@ namespace my {
 	{
 
 	public:
-		Puckman();
+		Puckman(MazePtr m);
 		virtual ~Puckman();
 
 	};

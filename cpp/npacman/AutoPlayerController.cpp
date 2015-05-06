@@ -46,7 +46,7 @@ namespace my {
 
 			closedSet.push_back(currNode);
 			toDelete.push_back(currNode);
-
+						
 			do
 			{
 				//Percorrendo as opções de caminho que temos
@@ -69,7 +69,7 @@ namespace my {
 									node->location = o;
 									node->parent = currNode;
 									node->h = heuristics(node->location, currEndLocation); //heuristica manhattan
-																		
+						
 									/*
 									//Se estiverem na mesma coluna, considerar linha
 									if (currEndLocation->getID().x == o->getID().x) {

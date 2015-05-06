@@ -39,4 +39,11 @@ namespace my {
 	MazeSectionPtr Maze::getSection(int line, int col) const {
 		return m_sections[(line * m_width) + col];
 	}
+
+	MazeSectionPtr Maze::findSection(float x, float y) {
+		int posX = x / MAZE_SECTION_WIDTH;
+		int posY = y / MAZE_SECTION_HEIGHT;
+
+		return this->getSection(posY, posX);
+	}
 }
