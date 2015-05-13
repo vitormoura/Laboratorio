@@ -11,6 +11,7 @@ namespace mopacman.Controllers
     {
         private IControllable player;
         private EnumDirections lastDirection;
+        private EnumDirections nextDirection;
         
         public KeyboardController(MyGame g, IControllable player)
             : base(g)
@@ -24,26 +25,41 @@ namespace mopacman.Controllers
             
             if (state.IsKeyDown(Keys.Left))
             {
-                this.lastDirection = EnumDirections.West;
+                this.nextDirection = EnumDirections.West;
             }
             else if (state.IsKeyDown(Keys.Right))
             {
-                this.lastDirection = EnumDirections.East;
+                this.nextDirection = EnumDirections.East;
             }
             else if (state.IsKeyDown(Keys.Up))
             {
-                this.lastDirection = EnumDirections.North;
+                this.nextDirection = EnumDirections.North;
             }
             else if (state.IsKeyDown(Keys.Down))
             {
-                this.lastDirection = EnumDirections.South;
-            }
-            else
-            {
-                return;
+                this.nextDirection = EnumDirections.South;
             }
 
-            this.player.GoTo(this.lastDirection);
+            delay += gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (delay >= (0.15))
+            {
+                var nextSection = this.player.CurrentLocation.Get(this.nextDirection);
+
+                if (nextSection != null && nextSection.Allowed)
+                {
+                    this.lastDirection = nextDirection;
+                    this.player.CurrentLocation = nextSection;
+                }
+                else
+                {
+                    this.player.GoTo(this.lastDirection);
+                }
+
+                delay = 0.0;
+            }
         }
+
+        private double delay;
     }
 }

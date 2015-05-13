@@ -8,7 +8,7 @@ namespace mopacman.Controllers
 {
     interface IControllable
     {
-        MazeSection CurrentLocation { get; }
+        MazeSection CurrentLocation { get; set; }
 
         MazeSection PreviousLocation { get; }
 

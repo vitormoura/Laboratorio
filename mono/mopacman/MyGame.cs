@@ -14,6 +14,7 @@ namespace mopacman
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        MazeScene currentScene;
         
 
         public MyGame()
@@ -34,6 +35,7 @@ namespace mopacman
         {
             // TODO: Add your initialization logic here
             MazeScene scene = new MazeScene(this);
+            this.currentScene = scene;
                         
             this.Components.Add(scene);
             
@@ -50,6 +52,7 @@ namespace mopacman
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            
             //Services
             this.Services.AddService<SpriteBatch>(this.spriteBatch);
         }
@@ -75,13 +78,16 @@ namespace mopacman
 
             elapsed += gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (elapsed >= (0.25))
+            this.currentScene.Keyboard.Update(gameTime);
+
+            if (elapsed >= (0.15))
             {
                 // TODO: Add your update logic here
 
                 base.Update(gameTime);
                 elapsed = 0.0;
             }
+            
         }
 
         /// <summary>

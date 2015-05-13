@@ -35,9 +35,8 @@ namespace mopacman.Components
         public override void Draw(GameTime gameTime)
         {
             SpriteBatch sb = this.Game.Services.GetService<SpriteBatch>();
-            //sb.Begin();
+            
             sb.Draw(this.Texture, destinationRectangle: this.Bounds);
-            //sb.End();
         }
     }
 }

@@ -12,7 +12,9 @@ namespace mopacman.Scenes
     class MazeScene : DrawableGameComponent
     {
         public Maze Maze { get; private set; }
-                        
+
+        public KeyboardController Keyboard { get; private set; }
+
         public MazeScene(MyGame g)
             : base(g)
         {
@@ -42,12 +44,9 @@ namespace mopacman.Scenes
 
             this.Game.Components.Add(p);
 
-            KeyboardController kbCtrl = new KeyboardController(game, p);
-            kbCtrl.Initialize();
-
-            this.Game.Components.Add(kbCtrl);
-
-
+            this.Keyboard = new KeyboardController(game, p);
+            this.Keyboard.Initialize();
+            
 
             Ghost g = new Ghost(this.Game as MyGame);
             g.CurrentLocation = this.Maze.GetGhostLairSection();
