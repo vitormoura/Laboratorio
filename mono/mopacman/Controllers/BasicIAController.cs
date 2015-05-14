@@ -61,23 +61,7 @@ namespace mopacman.Controllers
 									node.location = o;
 									node.parent = currNode;
 									node.h = this.Heuristics(node.location, currEndLocation); //heuristica manhattan
-						
-									/*
-									//Se estiverem na mesma coluna, considerar linha
-									if (currEndLocation->getID().x == o->getID().x) {
-										node->g = (currEndLocation->getID() - o->getID()).y;
-									}
-									//Se estiverem na mesma linha, considerar coluna
-									else if (currEndLocation->getID().y == o->getID().y) {
-										node->g = (currEndLocation->getID() - o->getID()).x;
-									}
-									//Nos demais casos, usamos a heuristica de euclides
-									else
-									{
-										node->g = std::sqrt(std::pow((o->getID().x - currEndLocation->getID().x), 2) + std::pow((o->getID().y - currEndLocation->getID().y), 2));
-									}
-									//*/
-
+															
 									//Ok, esse nó participará do teste 
 									openSet.Add(node);
 								}
@@ -123,7 +107,7 @@ namespace mopacman.Controllers
 					lastPathNode = lastPathNode.parent;
 				}
 								
-				nextSectionToMove = path.First.Next.Value.location;
+				nextSectionToMove = path.Count > 1 ? path.First.Next.Value.location : path.First.Value.location;
 				
 				if (nextSectionToMove.ID == mySection.N.ID) {
 					this.Player.GoTo(EnumDirections.North);

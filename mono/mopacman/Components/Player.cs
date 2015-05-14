@@ -46,8 +46,6 @@ namespace mopacman.Components
                 {
                     this.PreviousLocation = this.CurrentLocation;
                     this.CurrentLocation = next;
-
-
                 }
             }
         }

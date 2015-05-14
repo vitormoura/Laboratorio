@@ -17,6 +17,7 @@ namespace mopacman.Services
             Int32 width, height;
             String blueprint = Path.Combine(Environment.CurrentDirectory, cm.RootDirectory, "maze_blueprint.txt");
             String[] lines = File.ReadAllLines(blueprint);
+            Dictionary<Char, MazeSection> linkedSections = new Dictionary<char, MazeSection>();
 
             if (lines != null && lines.Length > 0)
             {
@@ -24,18 +25,18 @@ namespace mopacman.Services
                 width = lines[0].Length;
 
                 MazeSection[,] sections = new MazeSection[height,width];
-                MazeSection lastW = null;
-
+                
                 for (int y = 0; y < height; y++)
                 {
                     String line = lines[y];
+                    MazeSection lastW = null;
 
                     for (int x = 0; x < line.Length; x++)
                     {
                         Char c = line[x];
                         MazeSection s = new MazeSection(x, y);
                         s.W = lastW;
-                        s.Allowed = (c == '-');
+                        s.Allowed = (c == '-' || char.IsDigit(c));
 
                         //Redefinindo o 'oeste' o último leste
                         if (lastW != null)
@@ -52,6 +53,40 @@ namespace mopacman.Services
 
                         lastW = s;
                         sections[y,x] = s;
+
+                        //Estamos lidando com uma linked section ?
+                        if (char.IsDigit(c))
+                        {
+                            if (linkedSections.ContainsKey(c))
+                            {
+                                MazeSection linkedS = linkedSections[c];
+
+                                if (s.E == null)
+                                {
+                                    s.E = linkedS;
+                                    linkedS.W = s;
+                                }
+                                else if (linkedS.W == null)
+                                {
+                                    s.W = linkedS;
+                                    linkedS.E = s;
+                                }
+                                else if (linkedS.N == null)
+                                {
+                                    s.N = linkedS;
+                                    linkedS.S = s;
+                                }
+                                else if (linkedS.S == null)
+                                {
+                                    s.S = linkedS;
+                                    linkedS.N = s;
+                                }
+                            }
+                            else
+                            {
+                                linkedSections.Add(c,s);
+                            }
+                        }
                     }
                 }
 
