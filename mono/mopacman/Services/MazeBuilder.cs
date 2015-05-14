@@ -36,7 +36,8 @@ namespace mopacman.Services
                         Char c = line[x];
                         MazeSection s = new MazeSection(x, y);
                         s.W = lastW;
-                        s.Allowed = (c == '-' || char.IsDigit(c));
+                        s.Checkpoint = c == 'R';
+                        s.Allowed = (c == '-' || c == 'R' || char.IsDigit(c));
 
                         //Redefinindo o 'oeste' o último leste
                         if (lastW != null)

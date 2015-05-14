@@ -39,10 +39,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Components\Ghost.cs" />
+    <Compile Include="Components\GhostBehavior.cs" />
     <Compile Include="Components\Player.cs" />
     <Compile Include="Components\Puckman.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Controllers\BasicIAController.cs" />
+    <Compile Include="Controllers\GhostAIController.cs" />
     <Compile Include="Controllers\KeyboardController.cs" />
     <Compile Include="Controllers\EnumDirections.cs" />
     <Compile Include="Components\Maze.cs" />

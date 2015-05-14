@@ -12,7 +12,9 @@ namespace mopacman.Components
         public Vector2 ID { get; private set; }
 
         public Boolean Allowed { get; set; }
-        
+
+        public Boolean Checkpoint { get; set; }
+                
         public MazeSection N { get; set; }
 
         public MazeSection S { get; set; }

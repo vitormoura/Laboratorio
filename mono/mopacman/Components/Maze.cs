@@ -19,6 +19,11 @@ namespace mopacman.Components
             } 
         }
 
+        public IList<MazeSection> Checkpoints
+        {
+            get { return this.checkpoints; }
+        }
+
         public MazeSection this [int x, int y] 
         {
             get 
@@ -32,6 +37,8 @@ namespace mopacman.Components
             this.sections = sections;
             this.Width = sections.GetLength(0);
             this.Height = sections.GetLength(1);
+
+            this.checkpoints = this.Where(x => x.Checkpoint).ToList();
         }
 
         public MazeSection GetStartSection()
@@ -44,7 +51,8 @@ namespace mopacman.Components
             return this[13, 13];
         }
                 
-        private MazeSection[,] sections;
+        private MazeSection[,]      sections;
+        private List<MazeSection>   checkpoints;
 
         #region implementação de IEnumerable
 

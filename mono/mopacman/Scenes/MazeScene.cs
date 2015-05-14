@@ -47,19 +47,28 @@ namespace mopacman.Scenes
             this.Keyboard = new KeyboardController(game, p);
             this.Keyboard.Initialize();
             
-
-            Ghost g = new Ghost(this.Game as MyGame);
-            g.CurrentLocation = this.Maze.GetGhostLairSection();
-            g.Initialize();
-                        
-            this.Game.Components.Add(g);
+            //Ghost 1
+            RegisterNewGhost(p, this.Maze[1, 4], this.Maze[5, 4]);
             
-            BasicIAController iaCtrl = new BasicIAController(this.Game as MyGame, g, p);
-            iaCtrl.Initialize();
-
-            this.Game.Components.Add(iaCtrl);
-
+            //Ghost 2
+            RegisterNewGhost(p, this.Maze[23, 20], this.Maze[29, 20]);
+                        
             base.Initialize();
+        }
+
+        private void RegisterNewGhost(Puckman p, MazeSection r1, MazeSection r2)
+        {
+            Ghost g1 = new Ghost(this.Game as MyGame);
+            g1.Region = Tuple.Create(r1, r2);
+            g1.CurrentLocation = this.Maze.GetGhostLairSection();
+            g1.Initialize();
+
+            this.Game.Components.Add(g1);
+
+            GhostAIController iaCtrl1 = new GhostAIController(this.Game as MyGame, g1, p);
+            iaCtrl1.Initialize();
+
+            this.Game.Components.Add(iaCtrl1);
         }
 
         protected override void LoadContent()
