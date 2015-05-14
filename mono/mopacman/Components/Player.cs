@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using mopacman.Controllers;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,8 @@ namespace mopacman.Components
 {
     class Player : Sprite, IControllable
     {
+        public EnumDirections FacingDirection { get; set; }
+
         public MazeSection CurrentLocation
         {
             get { return this.currentLocation; }
@@ -46,8 +49,18 @@ namespace mopacman.Components
                 {
                     this.PreviousLocation = this.CurrentLocation;
                     this.CurrentLocation = next;
+
+                    if( d == EnumDirections.West || d == EnumDirections.East)
+                        this.FacingDirection = d;
                 }
             }
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            SpriteBatch sb = this.Game.Services.GetService<SpriteBatch>();
+
+            sb.Draw(this.Texture, destinationRectangle: this.Bounds, effects: this.FacingDirection == EnumDirections.West ? SpriteEffects.FlipHorizontally : SpriteEffects.None  );
         }
         
 

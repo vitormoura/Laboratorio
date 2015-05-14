@@ -20,7 +20,13 @@ namespace mopacman
         public MyGame()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 453;
+            graphics.PreferredBackBufferHeight = 508;
+            graphics.ApplyChanges();
+
             Content.RootDirectory = "Content";
+            
+            
 
             
         }

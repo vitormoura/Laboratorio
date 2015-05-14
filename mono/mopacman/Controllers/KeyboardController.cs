@@ -49,7 +49,7 @@ namespace mopacman.Controllers
                 if (nextSection != null && nextSection.Allowed)
                 {
                     this.lastDirection = nextDirection;
-                    this.player.CurrentLocation = nextSection;
+                    this.player.GoTo(nextDirection);
                 }
                 else
                 {

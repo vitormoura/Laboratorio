@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using mopacman.Components;
 using mopacman.Controllers;
 using mopacman.Services;
@@ -15,6 +16,8 @@ namespace mopacman.Scenes
 
         public KeyboardController Keyboard { get; private set; }
 
+        public Texture2D Background { get; private set; }
+        
         public MazeScene(MyGame g)
             : base(g)
         {
@@ -26,17 +29,7 @@ namespace mopacman.Scenes
 
             this.Maze = MazeBuilder.GetDefaultFor(game.Content);
 
-            foreach (var s in this.Maze)
-            {
-                if (!s.Allowed)
-                {
-                    Block b = new Block(this.Game as MyGame);
-                    b.SetPosition(new Point((int)(s.ID.X * b.Bounds.Width), (int)(s.ID.Y * b.Bounds.Height)));
-                    b.Initialize();
-
-                    this.Game.Components.Add(b);
-                }
-            }
+            this.PrepareMazeUI();
 
             Puckman p = new Puckman(game);
             p.CurrentLocation = this.Maze.GetStartSection();
@@ -48,17 +41,42 @@ namespace mopacman.Scenes
             this.Keyboard.Initialize();
             
             //Ghost 1
-            RegisterNewGhost(p, this.Maze[1, 4], this.Maze[5, 4]);
+            RegisterNewGhost("blinky.png", p, this.Maze[1, 4], this.Maze[5, 4]);
             
             //Ghost 2
-            RegisterNewGhost(p, this.Maze[23, 20], this.Maze[29, 20]);
+            RegisterNewGhost("pinky.png", p, this.Maze[26, 22], this.Maze[29, 22]);
+
+            //Ghost 3
+            RegisterNewGhost("inky.png", p, this.Maze[26, 6], this.Maze[29, 6]);
+
+            //Ghost 2
+            RegisterNewGhost("clyde.png", p, this.Maze[1, 24], this.Maze[5, 24]);
                         
             base.Initialize();
         }
 
-        private void RegisterNewGhost(Puckman p, MazeSection r1, MazeSection r2)
+        private void PrepareMazeUI()
         {
-            Ghost g1 = new Ghost(this.Game as MyGame);
+            this.Background = this.Game.Content.Load<Texture2D>("maze_template_1.png");
+
+            /* Renderizando paredes como blocos
+            foreach (var s in this.Maze)
+            {
+                if (!s.Allowed)
+                {
+                    Block b = new Block(this.Game as MyGame);
+                    b.SetPosition(new Point((int)(s.ID.X * b.Bounds.Width), (int)(s.ID.Y * b.Bounds.Height)));
+                    b.Initialize();
+
+                    this.Game.Components.Add(b);
+                }
+            }
+            //*/
+        }
+
+        private void RegisterNewGhost(String ghostType, Puckman p, MazeSection r1, MazeSection r2)
+        {
+            Ghost g1 = new Ghost(this.Game as MyGame, ghostType);
             g1.Region = Tuple.Create(r1, r2);
             g1.CurrentLocation = this.Maze.GetGhostLairSection();
             g1.Initialize();
@@ -78,6 +96,9 @@ namespace mopacman.Scenes
 
         public override void Draw(GameTime gameTime)
         {
+            var sb = this.Game.Services.GetService<SpriteBatch>();
+            sb.Draw(this.Background, position: Vector2.Zero);
+
             base.Draw(gameTime);
         }
 

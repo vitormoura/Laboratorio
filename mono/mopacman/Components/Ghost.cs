@@ -24,8 +24,8 @@ namespace mopacman.Components
 
         public Tuple<MazeSection,MazeSection> Region { get; set; }
                
-        public Ghost(MyGame g)
-            : base(g, "ghost.png", new Rectangle(0, 0, Constants.DEFAULT_BLOCK_WIDTH, Constants.DEFAULT_BLOCK_WIDTH))
+        public Ghost(MyGame g, String ghostType)
+            : base(g, ghostType, new Rectangle(0, 0, Constants.DEFAULT_BLOCK_WIDTH, Constants.DEFAULT_BLOCK_WIDTH))
         {
             this.behavior = new GhostBehavior();
         }

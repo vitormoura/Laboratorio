@@ -13,7 +13,5 @@ namespace mopacman.Components
             : base(g, "block.png", new Rectangle(0, 0, Constants.DEFAULT_BLOCK_WIDTH, Constants.DEFAULT_BLOCK_WIDTH))
         {
         }
-                                
-        
     }
 }

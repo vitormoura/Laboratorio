@@ -36,7 +36,7 @@ namespace mopacman.Components
         {
             SpriteBatch sb = this.Game.Services.GetService<SpriteBatch>();
             
-            sb.Draw(this.Texture, destinationRectangle: this.Bounds);
+            sb.Draw(this.Texture, destinationRectangle: this.Bounds );
         }
     }
 }
