@@ -37,7 +37,7 @@ namespace mopacman.Components
         {
         }
 
-        public void GoTo(EnumDirections d)
+        public virtual void GoTo(EnumDirections d)
         {
             MazeSection next = null;
 
@@ -49,7 +49,7 @@ namespace mopacman.Components
                 {
                     this.PreviousLocation = this.CurrentLocation;
                     this.CurrentLocation = next;
-
+                                        
                     if( d == EnumDirections.West || d == EnumDirections.East)
                         this.FacingDirection = d;
                 }

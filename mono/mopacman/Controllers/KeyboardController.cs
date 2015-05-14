@@ -42,7 +42,7 @@ namespace mopacman.Controllers
 
             delay += gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (delay >= (0.15))
+            if (delay >= (0.10))
             {
                 var nextSection = this.player.CurrentLocation.Get(this.nextDirection);
 

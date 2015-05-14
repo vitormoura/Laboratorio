@@ -37,7 +37,8 @@ namespace mopacman.Services
                         MazeSection s = new MazeSection(x, y);
                         s.W = lastW;
                         s.Checkpoint = c == 'R';
-                        s.Allowed = (c == '-' || c == 'R' || char.IsDigit(c));
+                        s.HasCookie = c == '-';
+                        s.Allowed = (c == '-' || c == '_' || char.IsDigit(c));
 
                         //Redefinindo o 'oeste' o último leste
                         if (lastW != null)

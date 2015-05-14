@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using mopacman.Components;
 using mopacman.Controllers;
 using mopacman.Services;
@@ -17,12 +18,15 @@ namespace mopacman.Scenes
         public KeyboardController Keyboard { get; private set; }
 
         public Texture2D Background { get; private set; }
+
+        public Song Music { get; private set; }
+
         
         public MazeScene(MyGame g)
             : base(g)
         {
         }
-
+                
         public override void Initialize()
         {
             MyGame game = this.Game as MyGame;
@@ -57,14 +61,12 @@ namespace mopacman.Scenes
 
         private void PrepareMazeUI()
         {
-            this.Background = this.Game.Content.Load<Texture2D>("maze_template_1.png");
-
-            /* Renderizando paredes como blocos
+            ///* Renderizando paredes como blocos
             foreach (var s in this.Maze)
             {
-                if (!s.Allowed)
+                if (s.Allowed)
                 {
-                    Block b = new Block(this.Game as MyGame);
+                    Block b = new Block(this.Game as MyGame, s);
                     b.SetPosition(new Point((int)(s.ID.X * b.Bounds.Width), (int)(s.ID.Y * b.Bounds.Height)));
                     b.Initialize();
 
@@ -91,6 +93,8 @@ namespace mopacman.Scenes
 
         protected override void LoadContent()
         {
+            this.Background = this.Game.Content.Load<Texture2D>("maze_template_1.png");
+                        
             base.LoadContent();
         }
 

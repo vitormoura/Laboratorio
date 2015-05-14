@@ -10,10 +10,10 @@ x------xx----xx----xx------x
 xxxxxx-xxxxx-xx-xxxxx-xxxxxx
 xxxxxx-xxxxx-xx-xxxxx-xxxxxx
 xxxxxx-xx----------xx-xxxxxx
-xxxxxx-xx-xxx--xxx-xx-xxxxxx
-xxxxxx-xx-xx----xx-xx-xxxxxx
-1---------xx----xx---------1
-xxxxxx-xx-xx----xx-xx-xxxxxx
+xxxxxx-xx-xxx__xxx-xx-xxxxxx
+xxxxxx-xx-xx____xx-xx-xxxxxx
+1---------xx____xx---------1
+xxxxxx-xx-xx____xx-xx-xxxxxx
 xxxxxx-xx-xxxxxxxx-xx-xxxxxx
 xxxxxx-xx----------xx-xxxxxx
 xxxxxx-xx-xxxxxxxx-xx-xxxxxx

@@ -11,6 +11,8 @@ namespace mopacman.Components
     {
         public Vector2 ID { get; private set; }
 
+        public Boolean HasCookie { get; set; }
+        
         public Boolean Allowed { get; set; }
 
         public Boolean Checkpoint { get; set; }
