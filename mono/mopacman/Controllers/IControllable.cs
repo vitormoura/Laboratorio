@@ -8,6 +8,8 @@ namespace mopacman.Controllers
 {
     interface IControllable
     {
+        event EventHandler ReadyToMove;
+
         MazeSection CurrentLocation { get; set; }
 
         MazeSection PreviousLocation { get; }

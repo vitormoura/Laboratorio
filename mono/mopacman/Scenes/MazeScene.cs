@@ -14,9 +14,7 @@ namespace mopacman.Scenes
     class MazeScene : DrawableGameComponent
     {
         public Maze Maze { get; private set; }
-
-        public KeyboardController Keyboard { get; private set; }
-
+                
         public Texture2D Background { get; private set; }
 
         public Song Music { get; private set; }
@@ -38,12 +36,14 @@ namespace mopacman.Scenes
             Puckman p = new Puckman(game);
             p.CurrentLocation = this.Maze.GetStartSection();
             p.Initialize();
+                        
+            KeyboardController keyboard = new KeyboardController(game, p);
+            keyboard.Initialize();
 
             this.Game.Components.Add(p);
-
-            this.Keyboard = new KeyboardController(game, p);
-            this.Keyboard.Initialize();
+            this.Game.Components.Add(keyboard);
             
+            ///*
             //Ghost 1
             RegisterNewGhost("blinky.png", p, this.Maze[1, 4], this.Maze[5, 4]);
             
@@ -55,7 +55,8 @@ namespace mopacman.Scenes
 
             //Ghost 2
             RegisterNewGhost("clyde.png", p, this.Maze[1, 24], this.Maze[5, 24]);
-                        
+            //*/
+          
             base.Initialize();
         }
 

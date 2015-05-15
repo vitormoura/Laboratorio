@@ -8,6 +8,8 @@ namespace mopacman.Components
 {
     class GhostBehavior
     {
+        public event EventHandler StateChanged;
+
         public Ghost.States State
         {
             get { return this.state; }
@@ -22,25 +24,25 @@ namespace mopacman.Components
         public void Wait()
         {
             this.nextState  = Ghost.States.Waiting;
-            this.duration = 1.5;
+            this.duration = 5.0;
         }
 
         public void Fright()
         {
             this.nextState  = Ghost.States.Frightened;
-            this.duration = 2.5;
+            this.duration = 10.0;
         }
 
         public void Walk()
         {
             this.nextState = Ghost.States.Scatter;
-            this.duration = 3.5;
+            this.duration = 10.0;
         }
 
         public void Chase()
         {
             this.nextState = Ghost.States.Chase;
-            this.duration = 2.0;
+            this.duration = 20.0;
         }
 
         public void Update(GameTime gameTime)
@@ -61,9 +63,17 @@ namespace mopacman.Components
                 
                 this.transition = this.duration;
                 this.state = this.nextState;
+
+                this.OnStateChanged();
             }
             else
                 transition -= elapsed;
+        }
+
+        private void OnStateChanged()
+        {
+            if (this.StateChanged != null)
+                this.StateChanged.Invoke(this, null);
         }
 
         private Ghost.States state;

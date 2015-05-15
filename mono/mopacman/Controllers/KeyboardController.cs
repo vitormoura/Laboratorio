@@ -17,8 +17,9 @@ namespace mopacman.Controllers
             : base(g)
         {
             this.player = player;
+            this.player.ReadyToMove += player_ReadyToMove;
         }
-
+                
         public override void Update(GameTime gameTime)
         {
             KeyboardState state = Keyboard.GetState();
@@ -39,27 +40,21 @@ namespace mopacman.Controllers
             {
                 this.nextDirection = EnumDirections.South;
             }
-
-            delay += gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (delay >= (0.10))
-            {
-                var nextSection = this.player.CurrentLocation.Get(this.nextDirection);
-
-                if (nextSection != null && nextSection.Allowed)
-                {
-                    this.lastDirection = nextDirection;
-                    this.player.GoTo(nextDirection);
-                }
-                else
-                {
-                    this.player.GoTo(this.lastDirection);
-                }
-
-                delay = 0.0;
-            }
         }
 
-        private double delay;
+        private void player_ReadyToMove(object sender, EventArgs e)
+        {
+            var nextSection = this.player.CurrentLocation.Get(this.nextDirection);
+
+            if (nextSection != null && nextSection.Allowed)
+            {
+                this.lastDirection = nextDirection;
+                this.player.GoTo(nextDirection);
+            }
+            else
+            {
+                this.player.GoTo(this.lastDirection);
+            }
+        }
     }
 }

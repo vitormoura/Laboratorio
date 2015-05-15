@@ -22,6 +22,11 @@ namespace mopacman.Components
             get { return this.behavior.State; }
         }
 
+        public GhostBehavior Behavior
+        {
+            get { return this.behavior; }
+        }
+
         public Tuple<MazeSection,MazeSection> Region { get; set; }
                
         public Ghost(MyGame g, String ghostType)
@@ -29,10 +34,21 @@ namespace mopacman.Components
         {
             this.behavior = new GhostBehavior();
         }
-
+                
+        public void Start()
+        {
+            //this.Animation.Start(this.FacingDirection, Constants.DEFAULT_BLOCK_WIDTH);
+        }
+                
         public override void Update(GameTime gameTime)
         {
             this.behavior.Update(gameTime);
+            base.Update(gameTime);
+        }
+
+        private void Ghost_ReadyToMove(object sender, EventArgs e)
+        {
+
         }
 
         private GhostBehavior behavior;

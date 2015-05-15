@@ -9,9 +9,19 @@ namespace mopacman.Components
 {
     abstract class Sprite : DrawableGameComponent
     {
+        public Vector2 Position { get; set; }
+
+        public Vector2 Size { get; set; }
+        
+
         public String Name { get; private set; }
 
-        public Rectangle Bounds { get; private set; }
+        public Rectangle Bounds {
+            get
+            {
+                return new Rectangle((int)this.Position.X, (int)this.Position.Y, (int)this.Size.X, (int)this.Size.Y);
+            }
+        }
 
         protected Texture2D Texture { get; private set; }
           
@@ -19,12 +29,20 @@ namespace mopacman.Components
             : base(g)
         {
             this.Name = assetName;
-            this.Bounds = size;
+            this.Position = size.Location.ToVector2();
+            this.Size = new Vector2(size.Width, size.Height);
         }
 
         public void SetPosition(Point pos)
         {
-            this.Bounds = new Rectangle(pos.X, pos.Y, this.Bounds.Width, this.Bounds.Height);
+            this.Position = pos.ToVector2();
+            //this.SetPosition(pos.X, pos.Y);
+        }
+
+        public void SetPosition(float x, float y)
+        {
+            this.Position = new Vector2(x, y);
+            //this.Bounds = new Rectangle( x, y, this.Bounds.Width, this.Bounds.Height);
         }
 
         protected override void LoadContent()

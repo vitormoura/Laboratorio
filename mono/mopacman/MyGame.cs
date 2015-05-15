@@ -83,19 +83,9 @@ namespace mopacman
                 MyGame.Graphics.IsFullScreen = !MyGame.Graphics.IsFullScreen;
                 MyGame.Graphics.ApplyChanges();
             }
-
-            elapsed += gameTime.ElapsedGameTime.TotalSeconds;
-
-            this.currentScene.Keyboard.Update(gameTime);
-
-            if (elapsed >= (0.15))
-            {
-                // TODO: Add your update logic here
-
-                base.Update(gameTime);
-                elapsed = 0.0;
-            }
-            
+                        
+            // TODO: Add your update logic here
+            base.Update(gameTime);
         }
 
         /// <summary>

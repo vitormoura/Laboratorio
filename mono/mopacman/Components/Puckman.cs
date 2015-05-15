@@ -21,6 +21,16 @@ namespace mopacman.Components
         {
             this.frameIndex = 0;
             this.elapsedTime = 0.0;
+            this.ReadyToMove += Puckman_ReadyToMove;
+        }
+
+        void Puckman_ReadyToMove(object sender, EventArgs e)
+        {
+            if (this.CurrentLocation.HasCookie)
+            {
+                this.CurrentLocation.HasCookie = false;
+                //this.chompSound.Play();
+            }
         }
 
         protected override void LoadContent()
@@ -63,11 +73,7 @@ namespace mopacman.Components
         {
             base.GoTo(d);
 
-            if (this.CurrentLocation.HasCookie)
-            {
-                this.CurrentLocation.HasCookie = false;
-                //this.chompSound.Play();
-            }
+           
         }
     }
 }

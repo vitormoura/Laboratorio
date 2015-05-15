@@ -16,34 +16,26 @@ namespace mopacman.Controllers
         public GhostAIController(MyGame g, Ghost player, IControllable target)
             : base(g)
         {
-            this.Ghost = player;
             this.Target = target;
+            this.Ghost = player;
+            this.Ghost.ReadyToMove += Ghost_ReadyToMove;
+            this.Ghost.Behavior.StateChanged += GhostBehavior_StateChanged;
         }
 
+        private void Ghost_ReadyToMove(object sender, EventArgs e)
+        {
+            FindNextDestination();
+        }
+                
+        private void GhostBehavior_StateChanged(object sender, EventArgs e)
+        {
+            //this.FindNextDestination();
+        }
+                
         public override void Update(GameTime gameTime)
         {
-            //Modo perseguição sempre avança em busca do alvo
-            if (this.Ghost.State == Ghost.States.Chase)
-            {
-                this.scatterNextDestination = null;
-
-                ChaseSection(this.Target.CurrentLocation);
-            }
-            else if (this.Ghost.State == Components.Ghost.States.Scatter)
-            {
-                if (this.scatterNextDestination == null)
-                {
-                    this.scatterNextDestination = this.Ghost.Region.Item1;
-                }
-                else if (this.scatterNextDestination.ID == this.Ghost.CurrentLocation.ID)
-                {
-                    this.scatterNextDestination = (this.scatterNextDestination.ID == this.Ghost.Region.Item1.ID) ? this.Ghost.Region.Item2 : this.Ghost.Region.Item1;
-                }
-
-                this.ChaseSection(this.scatterNextDestination);
-            }
         }
-
+                
         protected void ChaseSection(MazeSection destination)
         {
             //Localizações dos elementos 
@@ -142,21 +134,46 @@ namespace mopacman.Controllers
 
                 if (nextSectionToMove.ID == mySection.N.ID)
                 {
-                    this.Ghost.GoTo(EnumDirections.North);
+                    this.nextDirection = EnumDirections.North;
                 }
                 else if (nextSectionToMove == mySection.S)
                 {
-                    this.Ghost.GoTo(EnumDirections.South);
+                    this.nextDirection = EnumDirections.South;
                 }
                 else if (nextSectionToMove == mySection.E)
                 {
-                    this.Ghost.GoTo(EnumDirections.East);
+                    this.nextDirection = EnumDirections.East;
                 }
                 else if (nextSectionToMove == mySection.W)
                 {
-                    this.Ghost.GoTo(EnumDirections.West);
+                    this.nextDirection = EnumDirections.West;
                 }
+
+                this.Ghost.GoTo(this.nextDirection);
                 //*/
+            }
+        }
+        private void FindNextDestination()
+        {
+            //Modo perseguição sempre avança em busca do alvo
+            if (this.Ghost.State == Ghost.States.Chase)
+            {
+                this.scatterNextDestination = null;
+
+                ChaseSection(this.Target.CurrentLocation);
+            }
+            else if (this.Ghost.State == Components.Ghost.States.Scatter)
+            {
+                if (this.scatterNextDestination == null)
+                {
+                    this.scatterNextDestination = this.Ghost.Region.Item1;
+                }
+                else if (this.scatterNextDestination.ID == this.Ghost.CurrentLocation.ID)
+                {
+                    this.scatterNextDestination = (this.scatterNextDestination.ID == this.Ghost.Region.Item1.ID) ? this.Ghost.Region.Item2 : this.Ghost.Region.Item1;
+                }
+
+                this.ChaseSection(this.scatterNextDestination);
             }
         }
 
@@ -179,5 +196,6 @@ namespace mopacman.Controllers
         }
 
         private MazeSection scatterNextDestination;
+        private EnumDirections nextDirection;
     }
 }
