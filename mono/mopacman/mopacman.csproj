@@ -38,6 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components\Camera.cs" />
     <Compile Include="Components\Ghost.cs" />
     <Compile Include="Components\GhostBehavior.cs" />
     <Compile Include="Components\Player.cs" />

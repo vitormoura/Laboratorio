@@ -19,10 +19,9 @@ namespace mopacman.Components
 
         public override void Draw(GameTime gameTime)
         {
-            SpriteBatch sb = this.Game.Services.GetService<SpriteBatch>();
             Rectangle rectangleToDraw = new Rectangle(Constants.DEFAULT_BLOCK_WIDTH * (this.Section.HasCookie ? 0 : 1), 0, Constants.DEFAULT_BLOCK_WIDTH, Constants.DEFAULT_BLOCK_WIDTH);
 
-            sb.Draw(this.Texture, destinationRectangle: this.Bounds, sourceRectangle: rectangleToDraw);
+            MyGame.SpriteBatch.Draw(this.Texture, destinationRectangle: MyGame.Camera.TranslateToPixelsRect(this.Bounds), sourceRectangle: rectangleToDraw);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace mopacman.Components
 
                 if (this.currentLocation != null)
                 {
-                    this.SetPosition(new Point(((int)this.currentLocation.ID.X * this.Bounds.Width), ((int)this.currentLocation.ID.Y * this.Bounds.Height)));
+                    this.SetPosition(new Point(((int)(this.currentLocation.ID.X * this.Bounds.Width)), (int)( this.currentLocation.ID.Y * this.Bounds.Height)));
                 }
             }
         }
@@ -58,9 +58,9 @@ namespace mopacman.Components
 
         public override void Draw(GameTime gameTime)
         {
-            SpriteBatch sb = this.Game.Services.GetService<SpriteBatch>();
-
-            sb.Draw(this.Texture, destinationRectangle: this.Bounds, effects: this.FacingDirection == EnumDirections.West ? SpriteEffects.FlipHorizontally : SpriteEffects.None  );
+            MyGame.SpriteBatch.Draw(this.Texture, 
+                destinationRectangle: MyGame.Camera.TranslateToPixelsRect(this.Bounds), 
+                effects: this.FacingDirection == EnumDirections.West ? SpriteEffects.FlipHorizontally : SpriteEffects.None  );
         }
         
 

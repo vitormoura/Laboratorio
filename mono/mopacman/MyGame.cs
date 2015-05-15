@@ -12,23 +12,17 @@ namespace mopacman
     /// </summary>
     public class MyGame : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public static GraphicsDeviceManager Graphics;
+        public static Camera Camera;
+        public static SpriteBatch SpriteBatch;
+
         MazeScene currentScene;
         
 
         public MyGame()
         {
-            graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 453;
-            graphics.PreferredBackBufferHeight = 508;
-            graphics.ApplyChanges();
-
+            Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            
-            
-
-            
         }
 
         /// <summary>
@@ -54,13 +48,15 @@ namespace mopacman
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            MyGame.Graphics.PreferredBackBufferWidth = 465;
+            MyGame.Graphics.PreferredBackBufferHeight = 550;
+            MyGame.Graphics.IsFullScreen = false;
+            MyGame.Graphics.ApplyChanges();
 
-            // TODO: use this.Content to load your game content here
-            
-            //Services
-            this.Services.AddService<SpriteBatch>(this.spriteBatch);
+            MyGame.Camera = new Camera(new Vector2(10, 50), MyGame.Graphics.PreferredBackBufferWidth);
+
+            // Create a new SpriteBatch, which can be used to draw textures.
+            MyGame.SpriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
         /// <summary>
@@ -81,6 +77,12 @@ namespace mopacman
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            if (Keyboard.GetState().IsKeyDown(Keys.LeftAlt) && Keyboard.GetState().IsKeyDown(Keys.Enter))
+            {
+                MyGame.Graphics.IsFullScreen = !MyGame.Graphics.IsFullScreen;
+                MyGame.Graphics.ApplyChanges();
+            }
 
             elapsed += gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -104,9 +106,9 @@ namespace mopacman
         {
             GraphicsDevice.Clear(Color.Black);
 
-            this.spriteBatch.Begin();
+            MyGame.SpriteBatch.Begin();
             base.Draw(gameTime);
-            this.spriteBatch.End();
+            MyGame.SpriteBatch.End();
         }
 
         private double elapsed;

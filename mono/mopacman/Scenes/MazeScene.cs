@@ -67,7 +67,7 @@ namespace mopacman.Scenes
                 if (s.Allowed)
                 {
                     Block b = new Block(this.Game as MyGame, s);
-                    b.SetPosition(new Point((int)(s.ID.X * b.Bounds.Width), (int)(s.ID.Y * b.Bounds.Height)));
+                    b.SetPosition(new Point((int)(s.ID.X * b.Bounds.Width), (int)((s.ID.Y * b.Bounds.Height))));
                     b.Initialize();
 
                     this.Game.Components.Add(b);
@@ -100,8 +100,7 @@ namespace mopacman.Scenes
 
         public override void Draw(GameTime gameTime)
         {
-            var sb = this.Game.Services.GetService<SpriteBatch>();
-            sb.Draw(this.Background, position: Vector2.Zero);
+            MyGame.SpriteBatch.Draw(this.Background, destinationRectangle: MyGame.Camera.TranslateToPixelsRect(this.Background.Bounds) );
 
             base.Draw(gameTime);
         }
