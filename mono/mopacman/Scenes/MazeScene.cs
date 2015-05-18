@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
+using MonoGame.Framework;
 using mopacman.Components;
 using mopacman.Controllers;
 using mopacman.Services;
@@ -17,9 +19,11 @@ namespace mopacman.Scenes
                 
         public Texture2D Background { get; private set; }
 
-        public Song Music { get; private set; }
+        public SoundEffect IntroSong { get; private set; }
 
-        
+        public Boolean Ready { get; set; }
+
+
         public MazeScene(MyGame g)
             : base(g)
         {
@@ -95,6 +99,7 @@ namespace mopacman.Scenes
         protected override void LoadContent()
         {
             this.Background = this.Game.Content.Load<Texture2D>("maze_template_1.png");
+            this.IntroSong = this.Game.Content.Load<SoundEffect>("SoundEffects\\pacman_beginning");
                         
             base.LoadContent();
         }
@@ -108,6 +113,13 @@ namespace mopacman.Scenes
 
         public override void Update(GameTime gameTime)
         {
+            if(!this.Ready )
+            {
+                SoundEffect.MasterVolume = 1.0f;
+                this.IntroSong.Play(1.0f, 0.0f, 1.0f);
+                this.Ready = true;
+            }
+
             base.Update(gameTime);
         }
     }
