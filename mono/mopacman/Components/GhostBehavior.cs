@@ -16,33 +16,44 @@ namespace mopacman.Components
             set { this.state = value; }
         }
 
+        public float Velocity
+        {
+            get { return this.ghostVelocity; }
+        }
+
         public GhostBehavior()
         {
+            this.state = Ghost.States.Waiting;
+            this.ghostVelocity = Constants.DEFAULT_PLAYER_VELOCITY;
+            this.transition = 5.0f;
             this.Wait();
         }
 
         public void Wait()
         {
             this.nextState  = Ghost.States.Waiting;
-            this.duration = 5.0;
+            this.duration = 15.0f;
         }
 
         public void Fright()
         {
             this.nextState  = Ghost.States.Frightened;
+            this.ghostVelocity = Constants.DEFAULT_PLAYER_VELOCITY * 0.8f;
             this.duration = 10.0;
         }
 
         public void Walk()
         {
             this.nextState = Ghost.States.Scatter;
-            this.duration = 10.0;
+            this.ghostVelocity = Constants.DEFAULT_PLAYER_VELOCITY;
+            this.duration = 15.0;
         }
 
         public void Chase()
         {
             this.nextState = Ghost.States.Chase;
-            this.duration = 20.0;
+            this.ghostVelocity = Constants.DEFAULT_PLAYER_VELOCITY * 1.2f;
+            this.duration = 30.0;
         }
 
         public void Update(GameTime gameTime)
@@ -63,7 +74,7 @@ namespace mopacman.Components
                 
                 this.transition = this.duration;
                 this.state = this.nextState;
-
+                
                 this.OnStateChanged();
             }
             else
@@ -80,6 +91,7 @@ namespace mopacman.Components
         private Ghost.States nextState;
         private double duration;
         private double transition;
+        private float ghostVelocity;
 
         
     }

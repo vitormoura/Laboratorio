@@ -54,7 +54,7 @@ namespace mopacman.Components
         public Player(MyGame g, String assetName, Rectangle bounds)
             : base(g, assetName, bounds)
         {
-            this.animation = new DirectionalAnimation<Player>(this, 0.25f);
+            this.animation = new DirectionalAnimation<Player>(this, Constants.DEFAULT_PLAYER_VELOCITY);
             this.animation.Finished += animation_Finished;
         }
 
@@ -74,11 +74,6 @@ namespace mopacman.Components
                         this.FacingDirection = d;
 
                     this.animation.Start(d, Constants.DEFAULT_BLOCK_WIDTH);
-
-                    /*
-                    this.PreviousLocation = this.CurrentLocation;
-                    this.CurrentLocation = next;
-                    */
                 }
             }
         }

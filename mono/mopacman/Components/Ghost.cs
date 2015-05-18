@@ -33,24 +33,20 @@ namespace mopacman.Components
             : base(g, ghostType, new Rectangle(0, 0, Constants.DEFAULT_BLOCK_WIDTH, Constants.DEFAULT_BLOCK_WIDTH))
         {
             this.behavior = new GhostBehavior();
+            this.behavior.StateChanged +=behavior_StateChanged;
         }
-                
-        public void Start()
-        {
-            //this.Animation.Start(this.FacingDirection, Constants.DEFAULT_BLOCK_WIDTH);
-        }
-                
+                                       
         public override void Update(GameTime gameTime)
         {
             this.behavior.Update(gameTime);
             base.Update(gameTime);
         }
 
-        private void Ghost_ReadyToMove(object sender, EventArgs e)
+        private void behavior_StateChanged(object sender, EventArgs e)
         {
-
+            this.Animation.Velocity = this.behavior.Velocity;
         }
-
+                
         private GhostBehavior behavior;
     }
 }
