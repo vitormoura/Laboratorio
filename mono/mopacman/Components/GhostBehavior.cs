@@ -23,9 +23,11 @@ namespace mopacman.Components
 
         public GhostBehavior()
         {
+            Random rnd = new Random();
+
             this.state = Ghost.States.Waiting;
             this.ghostVelocity = Constants.DEFAULT_PLAYER_VELOCITY;
-            this.transition = 5.0f;
+            this.transition = rnd.Next(10);
             this.Wait();
         }
 
@@ -52,7 +54,7 @@ namespace mopacman.Components
         public void Chase()
         {
             this.nextState = Ghost.States.Chase;
-            this.ghostVelocity = Constants.DEFAULT_PLAYER_VELOCITY * 1.2f;
+            this.ghostVelocity = Constants.DEFAULT_PLAYER_VELOCITY;
             this.duration = 30.0;
         }
 

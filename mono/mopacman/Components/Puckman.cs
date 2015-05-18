@@ -35,7 +35,7 @@ namespace mopacman.Components
 
         protected override void LoadContent()
         {
-            //this.chompSound = this.Game.Content.Load<SoundEffect>("pacman_chomp.wav");
+            //this.chompSound = this.Game.Content.Load<SoundEffect>(@"SoundEffects\pacman_chomp");
 
             base.LoadContent();
         }
@@ -67,13 +67,6 @@ namespace mopacman.Components
                 sourceRectangle: rectangleToDraw, 
                 effects: effects, 
                 rotation:rotation );
-        }
-
-        public override void GoTo(EnumDirections d)
-        {
-            base.GoTo(d);
-
-           
         }
     }
 }

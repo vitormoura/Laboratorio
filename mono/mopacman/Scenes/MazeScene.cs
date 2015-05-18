@@ -13,20 +13,22 @@ using System.Text;
 
 namespace mopacman.Scenes
 {
-    class MazeScene : DrawableGameComponent
+    class MazeScene : GameScene
     {
         public Maze Maze { get; private set; }
                 
         public Texture2D Background { get; private set; }
 
         public SoundEffect IntroSong { get; private set; }
-
+               
         public Boolean Ready { get; set; }
 
 
         public MazeScene(MyGame g)
             : base(g)
         {
+            this.Enabled = false;
+            this.Visible = false;
         }
                 
         public override void Initialize()
@@ -44,8 +46,8 @@ namespace mopacman.Scenes
             KeyboardController keyboard = new KeyboardController(game, p);
             keyboard.Initialize();
 
-            this.Game.Components.Add(p);
-            this.Game.Components.Add(keyboard);
+            this.Components.Add(p);
+            this.Components.Add(keyboard);
             
             ///*
             //Ghost 1
@@ -75,7 +77,7 @@ namespace mopacman.Scenes
                     b.SetPosition(new Point((int)(s.ID.X * b.Bounds.Width), (int)((s.ID.Y * b.Bounds.Height))));
                     b.Initialize();
 
-                    this.Game.Components.Add(b);
+                    this.Components.Add(b);
                 }
             }
             //*/
@@ -88,39 +90,38 @@ namespace mopacman.Scenes
             g1.CurrentLocation = this.Maze.GetGhostLairSection();
             g1.Initialize();
 
-            this.Game.Components.Add(g1);
+            this.Components.Add(g1);
 
             GhostAIController iaCtrl1 = new GhostAIController(this.Game as MyGame, g1, p);
             iaCtrl1.Initialize();
 
-            this.Game.Components.Add(iaCtrl1);
+            this.Components.Add(iaCtrl1);
         }
 
         protected override void LoadContent()
         {
-            this.Background = this.Game.Content.Load<Texture2D>("maze_template_1.png");
-            this.IntroSong = this.Game.Content.Load<SoundEffect>("SoundEffects\\pacman_beginning");
-                        
+            this.Background = this.Game.Content.Load<Texture2D>("Backgrounds\\maze_template_1.png");
+            //this.IntroSong = this.Game.Content.Load<SoundEffect>("SoundEffects\\pacman_beginning");
+   
             base.LoadContent();
         }
 
         public override void Draw(GameTime gameTime)
         {
-            MyGame.SpriteBatch.Draw(this.Background, destinationRectangle: MyGame.Camera.TranslateToPixelsRect(this.Background.Bounds) );
+            if (this.Enabled && this.Visible)
+            {
+                MyGame.SpriteBatch.Draw(this.Background, destinationRectangle: MyGame.Camera.TranslateToPixelsRect(this.Background.Bounds));
 
-            base.Draw(gameTime);
+                base.Draw(gameTime);
+            }
         }
 
         public override void Update(GameTime gameTime)
         {
-            if(!this.Ready )
+            if (this.Enabled)
             {
-                SoundEffect.MasterVolume = 1.0f;
-                this.IntroSong.Play(1.0f, 0.0f, 1.0f);
-                this.Ready = true;
+                base.Update(gameTime);
             }
-
-            base.Update(gameTime);
         }
     }
 }

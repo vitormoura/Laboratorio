@@ -19,21 +19,9 @@
 /processorParam:Quality=Best
 /build:SoundEffects/pacman_beginning.wav
 
-#begin SoundEffects/pacman_chomp.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/pacman_chomp.wav
-
-#begin SoundEffects/pacman_death.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/pacman_death.wav
-
-#begin SoundEffects/pacman_eatghost.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/pacman_eatghost.wav
+#begin Fonts\padrao.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Fonts\padrao.spritefont
 

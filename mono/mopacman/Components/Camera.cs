@@ -33,6 +33,11 @@ namespace mopacman.Components
             this.origin = origin;
         }
 
+        public Point TranslateToPixels(Vector2 p)
+        {
+            return TranslateToPixels(p.ToPoint());
+        }
+
         public Point TranslateToPixels(Point p)
         {
             //Sistema de coordenadas XNA tradicional (x:0, y:0 em TOP/LEFT)

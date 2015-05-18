@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Input;
 using mopacman.Components;
 using mopacman.Controllers;
 using mopacman.Scenes;
+using System;
+using System.Collections.Generic;
 
 namespace mopacman
 {
@@ -12,13 +14,19 @@ namespace mopacman
     /// </summary>
     public class MyGame : Game
     {
+        public enum MyGameStates
+        {
+            Welcome = 0,
+            GamePlay = 1
+        }
+
         public static GraphicsDeviceManager Graphics;
         public static Camera Camera;
         public static SpriteBatch SpriteBatch;
-
-        MazeScene currentScene;
         
-
+        Dictionary<MyGameStates,GameScene> scenes;
+        MyGameStates currentGameState;
+                        
         public MyGame()
         {
             Graphics = new GraphicsDeviceManager(this);
@@ -33,12 +41,23 @@ namespace mopacman
         /// </summary>
         protected override void Initialize()
         {
+            this.scenes = new Dictionary<MyGameStates, GameScene>();
+
             // TODO: Add your initialization logic here
-            MazeScene scene = new MazeScene(this);
-            this.currentScene = scene;
+            TitleScreenScene scene1 = new TitleScreenScene(this);
+            MazeScene scene2 = new MazeScene(this);
+                                                
+            this.Components.Add(scene1);
+            this.Components.Add(scene2);
+
+            scene1.Visible = true;
+            scene1.Enabled = true;
                         
-            this.Components.Add(scene);
-            
+            this.scenes.Add(MyGameStates.Welcome, scene1);
+            this.scenes.Add(MyGameStates.GamePlay, scene2);
+
+            this.currentGameState = MyGameStates.Welcome;
+
             base.Initialize();
         }
 
@@ -75,15 +94,32 @@ namespace mopacman
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            KeyboardState state = Keyboard.GetState();
+
+            //Saída
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || state.IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.LeftAlt) && Keyboard.GetState().IsKeyDown(Keys.Enter))
+            //Fullscreen
+            if (state.IsKeyDown(Keys.LeftAlt) && state.IsKeyDown(Keys.Enter))
             {
                 MyGame.Graphics.IsFullScreen = !MyGame.Graphics.IsFullScreen;
                 MyGame.Graphics.ApplyChanges();
             }
                         
+            //Tela de apresentação para gameplay
+            if (this.currentGameState == MyGameStates.Welcome)
+            {
+                if (state.IsKeyDown(Keys.Enter))
+                {
+                    this.scenes[MyGameStates.Welcome].End();
+                    this.scenes[MyGameStates.GamePlay].Begin();
+
+                    this.currentGameState = MyGameStates.GamePlay;
+                }
+            }
+                
+        
             // TODO: Add your update logic here
             base.Update(gameTime);
         }
@@ -100,7 +136,5 @@ namespace mopacman
             base.Draw(gameTime);
             MyGame.SpriteBatch.End();
         }
-
-        private double elapsed;
     }
 }
