@@ -36,7 +36,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Windows\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -56,6 +56,7 @@
     <Compile Include="Animations\BlinkAnimation.cs" />
     <Compile Include="Animations\DirectionalAnimation.cs" />
     <Compile Include="Components\Camera.cs" />
+    <Compile Include="Components\Extensions.cs" />
     <Compile Include="Components\Ghost.cs" />
     <Compile Include="Components\GhostBehavior.cs" />
     <Compile Include="Components\Player.cs" />
@@ -89,13 +90,13 @@
     <Content Include="Content\Backgrounds\title_screen.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\blinky.png">
+    <Content Include="Content\Sprites\blinky.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\clyde.png">
+    <Content Include="Content\Sprites\clyde.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\inky.png">
+    <Content Include="Content\Sprites\inky.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\maze_blueprint.txt">
@@ -104,25 +105,30 @@
     <Content Include="Content\Backgrounds\maze_template_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\block.png">
+    <Content Include="Content\Sprites\block.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\pinky.png">
+    <Content Include="Content\Sprites\pinky.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\puckman.png">
+    <Content Include="Content\Sprites\puckman.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\ghost.png">
+    <Content Include="Content\Sprites\ghost.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\section.png">
+    <Content Include="Content\Sprites\section.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Songs\pacman_beginning.wma">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\SoundEffects\pacman_beginning.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\SoundEffects\pacman_chomp.wav" />
+    <Content Include="Content\SoundEffects\pacman_chomp.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\SoundEffects\pacman_death.wav" />
     <Content Include="Content\SoundEffects\pacman_eatghost.wav" />
     <Content Include="IconPacman.ico" />
@@ -132,7 +138,9 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Songs\" />
+    <Content Include="Content\SoundEffects\pacman_chomp.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -158,6 +166,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Fonts\padrao.spritefont">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Songs\pacman_beginning.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

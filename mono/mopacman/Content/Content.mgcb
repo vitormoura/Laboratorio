@@ -1,7 +1,7 @@
 
 #----------------------------- Global Properties ----------------------------#
 
-/outputDir:bin/Windows
+/outputDir:.
 /intermediateDir:obj/Windows
 /platform:Windows
 /config:
@@ -15,7 +15,7 @@
 
 #begin SoundEffects/pacman_beginning.wav
 /importer:WavImporter
-/processor:SoundEffectProcessor
+/processor:SongProcessor
 /processorParam:Quality=Best
 /build:SoundEffects/pacman_beginning.wav
 
@@ -24,4 +24,16 @@
 /processor:FontDescriptionProcessor
 /processorParam:TextureFormat=Compressed
 /build:Fonts\padrao.spritefont
+
+#begin SoundEffects/pacman_chomp.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/pacman_chomp.wav
+
+#begin Songs/pacman_beginning.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/pacman_beginning.wma
 

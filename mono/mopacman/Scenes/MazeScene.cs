@@ -19,7 +19,7 @@ namespace mopacman.Scenes
                 
         public Texture2D Background { get; private set; }
 
-        public SoundEffect IntroSong { get; private set; }
+        public Song IntroSong { get; private set; }
                
         public Boolean Ready { get; set; }
 
@@ -51,19 +51,27 @@ namespace mopacman.Scenes
             
             ///*
             //Ghost 1
-            RegisterNewGhost("blinky.png", p, this.Maze[1, 4], this.Maze[5, 4]);
+            RegisterNewGhost(@"Sprites\blinky.png", p, this.Maze[1, 4], this.Maze[5, 4]);
             
             //Ghost 2
-            RegisterNewGhost("pinky.png", p, this.Maze[26, 22], this.Maze[29, 22]);
+            RegisterNewGhost(@"Sprites\pinky.png", p, this.Maze[26, 22], this.Maze[29, 22]);
 
             //Ghost 3
-            RegisterNewGhost("inky.png", p, this.Maze[26, 6], this.Maze[29, 6]);
+            RegisterNewGhost(@"Sprites\inky.png", p, this.Maze[26, 6], this.Maze[29, 6]);
 
             //Ghost 2
-            RegisterNewGhost("clyde.png", p, this.Maze[1, 24], this.Maze[5, 24]);
+            RegisterNewGhost(@"Sprites\clyde.png", p, this.Maze[1, 24], this.Maze[5, 24]);
             //*/
           
             base.Initialize();
+        }
+
+        protected override void LoadContent()
+        {
+            this.Background = this.Game.Content.Load<Texture2D>("Backgrounds\\maze_template_1.png");
+            this.IntroSong = this.Game.Content.Load<Song>("Songs\\pacman_beginning");
+
+            base.LoadContent();
         }
 
         private void PrepareMazeUI()
@@ -98,17 +106,19 @@ namespace mopacman.Scenes
             this.Components.Add(iaCtrl1);
         }
 
-        protected override void LoadContent()
+        public override void Begin()
         {
-            this.Background = this.Game.Content.Load<Texture2D>("Backgrounds\\maze_template_1.png");
-            //this.IntroSong = this.Game.Content.Load<SoundEffect>("SoundEffects\\pacman_beginning");
-   
-            base.LoadContent();
+            base.Begin();
+
+            this.ready = false;
+
+            songPlayedWaitTime = 4.5f;
+            MediaPlayer.Play(this.IntroSong);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            if (this.Enabled && this.Visible)
+            if (this.Visible)
             {
                 MyGame.SpriteBatch.Draw(this.Background, destinationRectangle: MyGame.Camera.TranslateToPixelsRect(this.Background.Bounds));
 
@@ -118,10 +128,20 @@ namespace mopacman.Scenes
 
         public override void Update(GameTime gameTime)
         {
-            if (this.Enabled)
+            if ( this.ready && this.Enabled)
             {
                 base.Update(gameTime);
+                return;
             }
+            
+            //Aguardando encerramento do som de introdução para considerar a cena pronta
+            songPlayedWaitTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (songPlayedWaitTime <= 0.0f)
+                this.ready = true;
         }
+
+        private float songPlayedWaitTime;
+        private Boolean ready;
     }
 }

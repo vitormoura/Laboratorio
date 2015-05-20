@@ -80,15 +80,21 @@ namespace mopacman.Components
 
         public override void Update(GameTime gameTime)
         {
-            this.animation.Update(gameTime);
-            base.Update(gameTime);
+            if (this.Enabled)
+            {
+                this.animation.Update(gameTime);
+                base.Update(gameTime);
+            }
         }
 
         public override void Draw(GameTime gameTime)
         {
-            MyGame.SpriteBatch.Draw(this.Texture,
-                destinationRectangle: MyGame.Camera.TranslateToPixelsRect(this.Bounds),
-                effects: this.FacingDirection == EnumDirections.West ? SpriteEffects.FlipHorizontally : SpriteEffects.None);
+            if (this.Visible)
+            {
+                MyGame.SpriteBatch.Draw(this.Texture,
+                    destinationRectangle: MyGame.Camera.TranslateToPixelsRect(this.Bounds),
+                    effects: this.FacingDirection == EnumDirections.West ? SpriteEffects.FlipHorizontally : SpriteEffects.None);
+            }
         }
 
         private void animation_Finished(object sender, EventArgs e)

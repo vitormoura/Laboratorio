@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using mopacman.Components;
@@ -76,6 +77,9 @@ namespace mopacman
 
             // Create a new SpriteBatch, which can be used to draw textures.
             MyGame.SpriteBatch = new SpriteBatch(GraphicsDevice);
+
+            //Carregando arquivos de som independente de onde serão usados
+            //this.Content.Load<SoundEffect>("SoundEffects\\pacman_beginning");
         }
 
         /// <summary>
@@ -85,6 +89,7 @@ namespace mopacman
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            this.Content.Unload();
         }
 
         /// <summary>

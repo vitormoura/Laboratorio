@@ -33,7 +33,7 @@ namespace mopacman.Scenes
 
         public override void Draw(GameTime gameTime)
         {
-            if (this.Enabled && this.Visible)
+            if (this.Visible)
             {
                 foreach (GameComponent c in this.Components)
                 {
@@ -47,13 +47,13 @@ namespace mopacman.Scenes
             }
         }
 
-        public void End()
+        public virtual void End()
         {
             this.Visible = false;
             this.Enabled = false;
         }
 
-        public void Begin()
+        public virtual void Begin()
         {
             this.Visible = true;
             this.Enabled = true;

@@ -12,7 +12,7 @@ namespace mopacman.Components
         public MazeSection Section { get; private set; }
                 
         public Block(MyGame g, MazeSection section)
-            : base(g, "section.png", new Rectangle(0, 0, Constants.DEFAULT_BLOCK_WIDTH, Constants.DEFAULT_BLOCK_WIDTH))
+            : base(g, @"Sprites\section.png", new Rectangle(0, 0, Constants.DEFAULT_BLOCK_WIDTH, Constants.DEFAULT_BLOCK_WIDTH))
         {
             this.Section = section;
         }

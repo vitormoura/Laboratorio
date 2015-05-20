@@ -17,7 +17,7 @@ namespace mopacman.Components
         private SoundEffect chompSound;
                         
         public Puckman(MyGame g)
-            : base(g, "puckman.png", new Rectangle(0, 0, Constants.DEFAULT_BLOCK_WIDTH, Constants.DEFAULT_BLOCK_WIDTH))
+            : base(g, @"Sprites\puckman.png", new Rectangle(0, 0, Constants.DEFAULT_BLOCK_WIDTH, Constants.DEFAULT_BLOCK_WIDTH))
         {
             this.frameIndex = 0;
             this.elapsedTime = 0.0;
@@ -29,13 +29,13 @@ namespace mopacman.Components
             if (this.CurrentLocation.HasCookie)
             {
                 this.CurrentLocation.HasCookie = false;
-                //this.chompSound.Play();
+                this.chompSound.Play();
             }
         }
 
         protected override void LoadContent()
         {
-            //this.chompSound = this.Game.Content.Load<SoundEffect>(@"SoundEffects\pacman_chomp");
+            this.chompSound = this.Game.Content.Load<SoundEffect>(@"SoundEffects\pacman_chomp");
 
             base.LoadContent();
         }
@@ -62,9 +62,9 @@ namespace mopacman.Components
 
             Rectangle rectangleToDraw = new Rectangle(Constants.DEFAULT_BLOCK_WIDTH * frameIndex, 0, Constants.DEFAULT_BLOCK_WIDTH, Constants.DEFAULT_BLOCK_WIDTH);
 
-            MyGame.SpriteBatch.Draw( this.Texture, 
+            MyGame.SpriteBatch.Draw( this.Texture,
                 destinationRectangle: MyGame.Camera.TranslateToPixelsRect(this.Bounds), 
-                sourceRectangle: rectangleToDraw, 
+                sourceRectangle: rectangleToDraw,
                 effects: effects, 
                 rotation:rotation );
         }
