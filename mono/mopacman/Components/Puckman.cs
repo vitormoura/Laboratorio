@@ -28,14 +28,16 @@ namespace mopacman.Components
         {
             if (this.CurrentLocation.HasCookie)
             {
+                
                 this.CurrentLocation.HasCookie = false;
-                this.chompSound.Play();
+
+                //this.chompSound.Play();
             }
         }
 
         protected override void LoadContent()
         {
-            this.chompSound = this.Game.Content.Load<SoundEffect>(@"SoundEffects\pacman_chomp");
+            //this.chompSound = this.Game.Content.Load<SoundEffect>(@"SoundEffects\car_horn_x");
 
             base.LoadContent();
         }

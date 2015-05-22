@@ -27,6 +27,7 @@ namespace mopacman
         
         Dictionary<MyGameStates,GameScene> scenes;
         MyGameStates currentGameState;
+        SoundEffect soundTest;
                         
         public MyGame()
         {
@@ -79,7 +80,7 @@ namespace mopacman
             MyGame.SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             //Carregando arquivos de som independente de onde serão usados
-            //this.Content.Load<SoundEffect>("SoundEffects\\pacman_beginning");
+            //this.soundTest = this.Content.Load<SoundEffect>("SoundEffects\\pacman_chomp");
         }
 
         /// <summary>
@@ -104,6 +105,11 @@ namespace mopacman
             //Saída
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || state.IsKeyDown(Keys.Escape))
                 Exit();
+
+            if(state.IsKeyDown(Keys.A))
+            {
+                this.soundTest.Play();
+            }
 
             //Fullscreen
             if (state.IsKeyDown(Keys.LeftAlt) && state.IsKeyDown(Keys.Enter))
