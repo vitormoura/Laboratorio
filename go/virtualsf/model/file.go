@@ -6,6 +6,12 @@ import (
 	"time"
 )
 
+//FileInfo oferece informações básicas sobre um arquivo já armazenado
+type FileInfo struct {
+	ID   string
+	Name string
+}
+
 //File representa um arquivo que pode ser armazenado
 type File struct {
 	ID          string

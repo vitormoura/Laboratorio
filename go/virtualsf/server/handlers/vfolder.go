@@ -16,18 +16,13 @@ func VFolder(r *mux.Router) {
 	r.HandleFunc("/{app_id}", func(w http.ResponseWriter, req *http.Request) {
 
 		var (
-			app_id string
-			exists bool
+			vars  map[string]string
+			files []model.File
+			err   error
 		)
 
-		vars := mux.Vars(req)
-
-		if app_id, exists = vars["app_id"]; !exists {
-			w.WriteHeader(http.StatusNotFound)
-			return
-		}
-
-		files, err := getFilesFromMultipartRequest(app_id, req)
+		vars = mux.Vars(req)
+		files, err = getFilesFromMultipartRequest(vars["app_id"], req)
 
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
@@ -35,7 +30,7 @@ func VFolder(r *mux.Router) {
 			return
 		}
 
-		fs := storage.NewDirStorage("F:\\Temp\\virtualsf")
+		fs := getDefaultStorage()
 
 		for _, f := range files {
 			fs.Add(&f)
@@ -45,13 +40,19 @@ func VFolder(r *mux.Router) {
 
 	r.HandleFunc("/{app_id}/files/{id}", func(w http.ResponseWriter, req *http.Request) {
 
-		vars := mux.Vars(req)
+		var (
+			vars map[string]string
+			id   string
+			err  error
+			file *model.File
+			fs   model.VFStorage
+		)
 
-		id := vars["id"]
-		fs := storage.NewDirStorage("D:\\Temp\\virtualsf")
-		//app_id := vars["app_id"]
+		vars = mux.Vars(req)
+		id = vars["id"]
+		fs = getDefaultStorage()
 
-		file, err := fs.Find(id)
+		file, err = fs.Find(id)
 
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
@@ -62,9 +63,34 @@ func VFolder(r *mux.Router) {
 		fmt.Fprintln(w, file)
 	})
 
+	r.HandleFunc("/{app_id}/files", func(w http.ResponseWriter, req *http.Request) {
+
+		var (
+			err   error
+			files []model.FileInfo
+			fs    model.VFStorage
+		)
+
+		fs = getDefaultStorage()
+		files, err = fs.List()
+
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			fmt.Fprintln(w, err.Error())
+			return
+		}
+
+		jsonr(files, w)
+	})
+
 }
 
-//extractFileFromMultipartRequest recupera objetos do tipo File lidos a partir da requisição informada
+//getDefaultStorage recupera storage padrão para arquivos
+func getDefaultStorage() model.VFStorage {
+	return storage.NewDirStorage("F:\\Temp\\virtualsf")
+}
+
+//getFilesFromMultipartRequest recupera objetos do tipo File lidos a partir da requisição informada
 func getFilesFromMultipartRequest(appID string, req *http.Request) ([]model.File, error) {
 
 	req.ParseMultipartForm(10240)

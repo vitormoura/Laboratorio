@@ -2,12 +2,14 @@ package storage
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/pborman/uuid"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
 	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 type vfdirStorage struct {
@@ -86,6 +88,35 @@ func (dir *vfdirStorage) Find(id string) (*model.File, error) {
 	}
 
 	return &file, nil
+}
+
+func (dir *vfdirStorage) List() ([]model.FileInfo, error) {
+
+	result := make([]model.FileInfo, 0, 20)
+
+	filepath.Walk(dir.root, func(path string, info os.FileInfo, err error) error {
+
+		fmt.Println(path)
+
+		if info != nil && !info.IsDir() {
+
+			if filepath.Ext(info.Name()) == ".meta" {
+
+				_, fileName := filepath.Split(info.Name())
+
+				result = append(result, model.FileInfo{strings.Replace(fileName, ".file.meta", "", 1), ""})
+			}
+
+		} else if path != dir.root {
+
+			//Diretórios diferentes da raiz não serão processados
+			return filepath.SkipDir
+		}
+
+		return nil
+	})
+
+	return result, nil
 }
 
 func (dir *vfdirStorage) getFileName(id string) string {
