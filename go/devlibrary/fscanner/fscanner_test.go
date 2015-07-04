@@ -31,7 +31,7 @@ func (s *FScannerTestSuite) TestReconheceCorretamenteArquivosDiretorioValido() {
 
 	qtdeLivrosEncontrados := 0
 
-	for b := range ScanBooksFromDir("./test_data/docs") {
+	for b := range ScanBooksFromDir("f:\\Livros") {
 		fmt.Println(b.Name)
 		qtdeLivrosEncontrados++
 	}

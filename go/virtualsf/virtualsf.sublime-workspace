@@ -1,0 +1,482 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"fpr",
+				"Fprintln	n int, err error ƒ"
+			],
+			[
+				"h",
+				"HandleFunc	*mux.Route ƒ"
+			],
+			[
+				"st",
+				"Stream	io.ReadCloser ν"
+			],
+			[
+				"read",
+				"ReadFile	[]byte, error ƒ"
+			],
+			[
+				"get",
+				"getFileName	string ƒ"
+			],
+			[
+				"wr",
+				"WriteString	ret int, err error ƒ"
+			],
+			[
+				"s",
+				"Stream	io.ReadCloser ν"
+			],
+			[
+				"fi",
+				"NewFile	*os.File ƒ"
+			],
+			[
+				"fr",
+				"Fprintf	n int, err error ƒ"
+			],
+			[
+				"spri",
+				"Sprintf	string ƒ"
+			],
+			[
+				"fPr",
+				"Fprintln	n int, err error ƒ"
+			],
+			[
+				"FP",
+				"Fprintf	n int, err error ƒ"
+			],
+			[
+				"f",
+				"Fscanf	n int, err error ƒ"
+			],
+			[
+				"p",
+				"PublishDate	time.Time ν"
+			],
+			[
+				"fp",
+				"Fprintln	n int, err error ƒ"
+			],
+			[
+				"w",
+				"Write	int, error ƒ"
+			],
+			[
+				"no",
+				"Now	time.Time ƒ"
+			],
+			[
+				"files",
+				"files	[]model.File ν"
+			],
+			[
+				"file",
+				"fileStream	multipart.File ν"
+			],
+			[
+				"statusbad",
+				"StatusBadRequest	 Ɩ"
+			],
+			[
+				"statusno",
+				"StatusNotFound	 Ɩ"
+			],
+			[
+				"var",
+				"vars	map[string]string ν"
+			],
+			[
+				"mul",
+				"MultipartForm	*multipart.Form ν"
+			],
+			[
+				"par",
+				"ParseMultipartForm	error ƒ"
+			],
+			[
+				"Fprint",
+				"Fprintln	n int, err error ƒ"
+			],
+			[
+				"Fpri",
+				"Fprintf	n int, err error ƒ"
+			],
+			[
+				"ha",
+				"Handle	*mux.Route ƒ"
+			],
+			[
+				"pr",
+				"Println	 ƒ"
+			],
+			[
+				"Write",
+				"WriteHeader	 ƒ"
+			],
+			[
+				"view",
+				"viewName	string ν"
+			],
+			[
+				"prin",
+				"Printf	 ƒ"
+			],
+			[
+				"template",
+				"templateDir	 Ɩ"
+			],
+			[
+				"templ",
+				"templateCache	map[string]*template.Template ν"
+			],
+			[
+				"templa",
+				"templateDir	 Ɩ"
+			],
+			[
+				"pa",
+				"PathPrefix	*mux.Route ƒ"
+			],
+			[
+				"han",
+				"HandleFunc	*mux.Route ƒ"
+			],
+			[
+				"rou",
+				"Router	struct ʈ"
+			],
+			[
+				"main",
+				"func main	func main {...} ʂ"
+			],
+			[
+				"pri",
+				"Println	n int, err error ƒ"
+			],
+			[
+				"fun",
+				"func main	func main {...} ʂ"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "model/vfmanager.go",
+			"settings":
+			{
+				"buffer_size": 114,
+				"line_ending": "Windows",
+				"name": "package model"
+			}
+		},
+		{
+			"file": "model/file.go",
+			"settings":
+			{
+				"buffer_size": 552,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "model/vfstorage.go",
+			"settings":
+			{
+				"buffer_size": 372,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 81.0,
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Install",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Preferences: Browse Packages"
+			],
+			[
+				"packa",
+				"Preferences: Browse Packages"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/Projetos/GO/src/infraero/virtualsf/server/main.go",
+		"/D/Projetos/GO/src/infraero/virtualsf/server/handlers/vfolder.go",
+		"/D/Projetos/GO/src/infraero/virtualsf/storage/vfdirstore.go",
+		"/D/Temp/virtualsf/108fd91b-ecbb-4190-b3b8-327e222a52bd.file.meta",
+		"/D/Projetos/GO/src/infraero/virtualsf/server/handlers/tests.go",
+		"/D/Projetos/GO/src/infraero/virtualsf/server/templates/home/hello.html",
+		"/D/Projetos/GO/src/infraero/virtualsf/model/file.go",
+		"/D/Projetos/GO/src/infraero/virtualsf/server/handlers/results.go",
+		"/D/Projetos/GO/src/labs/weblab/main.go",
+		"/D/Projetos/GO/src/infraero/virtualsf/server/vfolder/handler.go",
+		"/D/Projetos/GO/src/labs/weblab/handlers/home.go",
+		"/D/Projetos/GO/src/infraero/virtualsf/server/handlers.go",
+		"/D/Projetos/Laboratorio/lab_sfml/src/Program.cpp",
+		"/D/Ferramentas/CPP/TDM64_GCC_4_9_2/mingwvars.bat",
+		"/D/Projetos/Laboratorio/lab_sfml/src/cmake_modules/FindSFML.cmake",
+		"/D/Projetos/Laboratorio/lab_sfml/src/CMakeLists.txt",
+		"/D/Projetos/Laboratorio/lab_sfml/src/COPYING",
+		"/D/Projetos/Laboratorio/lab_sfml/src/config.h.in",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_8.sql",
+		"//10.0.19.209/dsv_wsrh/Web_old.config",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_7.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_6.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/03_Procedimentos/PRC_ATUALIZAR_ESTATISTICAS.sql",
+		"/C/Windows/Microsoft.NET/Framework/v2.0.50727/CONFIG/machine.config",
+		"/D/Projetos/GO/src/labs/weblab/handlers/results.go",
+		"/D/Projetos/Laboratorio/lab_aspnet5/bin/output/approot/src/lab_aspnet5/Main.cs",
+		"/D/Projetos/Laboratorio/lab_aspnet5/bin/output/approot/global.json",
+		"/D/Projetos/GO/src/labs/weblab/templates/layout.html",
+		"/D/Ferramentas/Visual Studio/download_aspnet5.cmd",
+		"/D/Ferramentas/Visual Studio/dnvminstall.ps1",
+		"/D/Ferramentas/Visual Studio/download_aspnet5.ps1",
+		"/D/Projetos/GO/src/labs/weblab/teste.txt",
+		"/D/Projetos/GO/src/labs/weblab/static/css/site.css",
+		"/D/Projetos/GO/src/labs/weblab/static/css/layout.css",
+		"/D/Projetos/GO/src/labs/weblab/templates/home/hello.html",
+		"/D/Projetos/GO/src/labs/weblab/handlers/views.go",
+		"/D/Projetos/GO/src/labs/weblab/static/dados.txt",
+		"/D/Projetos/GO/src/github.com/skelterjohn/rerun/rerun.go",
+		"/D/Projetos/GO/src/github.com/gorilla/context/context.go",
+		"/D/Projetos/GO/src/github.com/gorilla/context/doc.go",
+		"/D/Users/i1779101/Downloads/ExtProps.Build.sql",
+		"/D/Users/i1779101/Downloads/ExtProps.Test.sql",
+		"//10.0.17.144/wwwroot/netcenter/Content/Css/site.css",
+		"/D/Projetos/Laboratorio/lab_reportserver/Reports/ProdutosWS.rdl",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Web/Properties/PublishProfiles/DSV_INFRANET.pubxml",
+		"/D/Projetos/Pessoais/WSRH/3-2_Fontes/Infraero.WS.RH/Host/Web.config",
+		"/D/Projetos/GO/src/labs/dmclient/main.go",
+		"/D/Users/i1779101/AppData/Roaming/Sublime Text 2/Packages/GoSublime/CHANGELOG.md",
+		"/D/Users/i1779101/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/D/Shared/DaoEmpregado.cs"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "model/vfmanager.go",
+					"settings":
+					{
+						"buffer_size": 114,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								113,
+								113
+							]
+						],
+						"settings":
+						{
+							"auto_name": "package model",
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "model/file.go",
+					"settings":
+					{
+						"buffer_size": 552,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								310,
+								310
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "model/vfstorage.go",
+					"settings":
+					{
+						"buffer_size": 372,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								371,
+								371
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.510951403149,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.9o://D:\\Projetos\\GO\\src\\labs\\dmclient":
+	{
+		"height": 124.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 219.0,
+	"status_bar_visible": true
+}
