@@ -18,10 +18,8 @@ go build
 
 ```Bash
 nssm install VirtualSF virtualsf.exe 
-nssm set VirtualSF Description "Serviço de publicação e consulta de arquivos compartilhados para 
+nssm set VirtualSF Description "Serviço de publicação e consulta de arquivos compartilhados para aplicações web"
 ```
-
-aplicações web"
 
 
 Uninstall Windows Service

@@ -67,7 +67,19 @@ func VFolder(r *mux.Router, sharedFolder string) {
 			return
 		}
 
-		fmt.Fprintln(w, file)
+		if file == nil {
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
+
+		switch req.Method {
+
+		case "GET":
+			writeFile(file.Stream, file.MimeType, w)
+		default:
+			w.WriteHeader(http.StatusBadRequest)
+		}
+
 	})
 
 	r.HandleFunc("/{app_id}/files", func(w http.ResponseWriter, req *http.Request) {

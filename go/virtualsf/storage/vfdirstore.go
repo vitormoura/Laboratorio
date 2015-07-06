@@ -66,8 +66,14 @@ func (dir *vfdirStorage) Add(f *model.File) error {
 func (dir *vfdirStorage) Find(id string) (*model.File, error) {
 	//uniqID := uuid.Parse(id)
 
+	fileName := dir.getMetaFileName(id)
+
+	if _, err := os.Stat(fileName); os.IsNotExist(err) {
+		return nil, nil
+	}
+
 	//Recuperamos inicialmente a metadata do arquivo
-	mdfileBytes, err := ioutil.ReadFile(dir.getMetaFileName(id))
+	mdfileBytes, err := ioutil.ReadFile(fileName)
 
 	if err != nil {
 		return nil, err

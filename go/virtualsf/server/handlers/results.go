@@ -3,6 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"path/filepath"
@@ -78,6 +79,31 @@ func internalError(w http.ResponseWriter) {
 //notFound retorna um status do tipo 404, indicando que o recurso solicitado não foi encontrado
 func notFound(w http.ResponseWriter) {
 	w.WriteHeader(http.StatusNotFound)
+}
+
+//writeFile escreve conteúdo binário do arquivo na saída http
+func writeFile(reader io.Reader, mimeType string, w http.ResponseWriter) {
+
+	var (
+		buffer        []byte
+		qtdBytesLidos int
+		err           error
+	)
+
+	w.Header().Set("Content-Type", mimeType)
+
+	buffer = make([]byte, 10240)
+
+	for qtdBytesLidos, err = reader.Read(buffer); qtdBytesLidos > 0; qtdBytesLidos, err = reader.Read(buffer) {
+
+		if err != nil && err != io.EOF {
+			internalError(w)
+			break
+		}
+
+		w.Write(buffer[0:qtdBytesLidos])
+	}
+
 }
 
 //jsonr interpreta objeto model e retorna resposta do tipo json
