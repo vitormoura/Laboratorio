@@ -10,7 +10,14 @@ import (
 	"time"
 )
 
-func VFolder(r *mux.Router) {
+var (
+	folderStorageLocation string
+)
+
+func VFolder(r *mux.Router, sharedFolder string) {
+
+	folderStorageLocation = sharedFolder
+
 	r = r.PathPrefix("/vfolder").Subrouter()
 
 	r.HandleFunc("/{app_id}", func(w http.ResponseWriter, req *http.Request) {
@@ -87,7 +94,7 @@ func VFolder(r *mux.Router) {
 
 //getDefaultStorage recupera storage padrão para arquivos
 func getDefaultStorage() model.VFStorage {
-	return storage.NewDirStorage("F:\\Temp\\virtualsf")
+	return storage.NewDirStorage(folderStorageLocation)
 }
 
 //getFilesFromMultipartRequest recupera objetos do tipo File lidos a partir da requisição informada

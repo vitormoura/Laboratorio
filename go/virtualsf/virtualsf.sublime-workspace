@@ -167,31 +167,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "model/vfmanager.go",
-			"settings":
-			{
-				"buffer_size": 114,
-				"line_ending": "Windows",
-				"name": "package model"
-			}
-		},
-		{
-			"file": "model/file.go",
-			"settings":
-			{
-				"buffer_size": 552,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "model/vfstorage.go",
-			"settings":
-			{
-				"buffer_size": 372,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -233,6 +208,11 @@
 	},
 	"file_history":
 	[
+		"/D/Projetos/GO/src/code/google/gcfg/doc.go",
+		"/D/Projetos/GO/src/code/google/gcfg/go1_2.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/model/vfmanager.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/model/file.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/model/vfstorage.go",
 		"/D/Projetos/GO/src/infraero/virtualsf/server/main.go",
 		"/D/Projetos/GO/src/infraero/virtualsf/server/handlers/vfolder.go",
 		"/D/Projetos/GO/src/infraero/virtualsf/storage/vfdirstore.go",
@@ -322,91 +302,8 @@
 			]
 		},
 		{
-			"selected": 1,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "model/vfmanager.go",
-					"settings":
-					{
-						"buffer_size": 114,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								113,
-								113
-							]
-						],
-						"settings":
-						{
-							"auto_name": "package model",
-							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "model/file.go",
-					"settings":
-					{
-						"buffer_size": 552,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								310,
-								310
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "model/vfstorage.go",
-					"settings":
-					{
-						"buffer_size": 372,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								371,
-								371
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
