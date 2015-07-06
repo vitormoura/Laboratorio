@@ -91,7 +91,7 @@ func VFolder(r *mux.Router, sharedFolder string) {
 			fs    model.VFStorage
 		)
 
-		fs = getDefaultStorage()
+		fs, _ = getDefaultStorage()
 		files, err = fs.List()
 
 		if err != nil {
@@ -116,7 +116,7 @@ func VFolder(r *mux.Router, sharedFolder string) {
 
 		vars = mux.Vars(req)
 		id = vars["id"]
-		fs = getDefaultStorage()
+		fs, _ = getDefaultStorage()
 
 		file, err = fs.Find(id)
 
@@ -145,7 +145,12 @@ func VFolder(r *mux.Router, sharedFolder string) {
 //createFiles grava arquivos junto ao sistema de armazenamento e formata resposta para os clientes
 func createFiles(files []model.File, w http.ResponseWriter) {
 
-	fs := getDefaultStorage()
+	fs, err := getDefaultStorage()
+
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
 
 	for _, f := range files {
 
@@ -162,7 +167,7 @@ func createFiles(files []model.File, w http.ResponseWriter) {
 }
 
 //getDefaultStorage recupera storage padrão para arquivos
-func getDefaultStorage() model.VFStorage {
+func getDefaultStorage() (model.VFStorage, error) {
 	return storage.NewDirStorage(folderStorageLocation)
 }
 

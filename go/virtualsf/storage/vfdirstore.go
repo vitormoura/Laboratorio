@@ -34,12 +34,18 @@ func (dir *vfdirStorage) Add(f *model.File) error {
 		return err
 	}
 
-	if bytesGravados, err = io.Copy(file, f.Stream); err != nil || bytesGravados == 0 {
-		return errors.New("Não foi possível concluir a gravação do arquivo")
+	if bytesGravados, err = io.Copy(file, f.Stream); err != nil {
+		return err
 	}
 
 	f.ID = id
 	f.Size = bytesGravados
+
+	if bytesGravados == 0 {
+		f.ID = ""
+		os.Remove(fileName)
+		return errors.New("O arquivo nao possui ")
+	}
 
 	//Agora vamos criar o arquivo de metadados
 	bytes, err := json.Marshal(f)
@@ -140,9 +146,20 @@ func (dir *vfdirStorage) getMetaFileName(id string) string {
 
 //NewDirStorage cria um novo VFStorage que armazena arquivos em diretórios do
 //sistema de arquivos a partir do diretório raiz informado
-func NewDirStorage(root string) model.VFStorage {
+func NewDirStorage(root string) (model.VFStorage, error) {
 
 	dir := vfdirStorage{root: root}
+	fi, err := os.Stat(dir.root)
 
-	return &dir
+	if err != nil && os.IsNotExist(err) {
+
+		if err := os.Mkdir(fi.Name(), os.ModeDir); err != nil {
+			return nil, err
+		}
+
+	} else if !fi.IsDir() {
+		return nil, errors.New("Informe o caminho de um diretório válido")
+	}
+
+	return &dir, nil
 }
