@@ -2,6 +2,7 @@ package storage
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/pborman/uuid"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
@@ -20,6 +21,7 @@ func (dir *vfdirStorage) Add(f *model.File) error {
 
 	id := uuid.New()
 	fileName := dir.getFileName(id)
+	bytesGravados := int64(0)
 
 	//Criando o arquivo principal
 	file, err := os.Create(fileName)
@@ -32,11 +34,12 @@ func (dir *vfdirStorage) Add(f *model.File) error {
 		return err
 	}
 
-	if _, err := io.Copy(file, f.Stream); err != nil {
-		return err
+	if bytesGravados, err = io.Copy(file, f.Stream); err != nil || bytesGravados == 0 {
+		return errors.New("Não foi possível concluir a gravação do arquivo")
 	}
 
 	f.ID = id
+	f.Size = bytesGravados
 
 	//Agora vamos criar o arquivo de metadados
 	bytes, err := json.Marshal(f)
@@ -59,6 +62,8 @@ func (dir *vfdirStorage) Add(f *model.File) error {
 	}
 
 	mdfile.WriteString(string(bytes))
+
+	fmt.Println(f.ID)
 
 	return nil
 }

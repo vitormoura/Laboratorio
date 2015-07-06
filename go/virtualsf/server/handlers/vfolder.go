@@ -7,7 +7,14 @@ import (
 	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/storage"
 	"net/http"
+	_ "strconv"
 	"time"
+)
+
+const (
+
+	//X_FILE_ID_HEADER é o header HTTP enviado contendo o ID de um arquivo recém criado
+	X_FILE_ID_HEADER string = "X-FILE-ID"
 )
 
 var (
@@ -18,9 +25,13 @@ func VFolder(r *mux.Router, sharedFolder string) {
 
 	folderStorageLocation = sharedFolder
 
-	r = r.PathPrefix("/vfolder").Subrouter()
+	r = r.PathPrefix("/vfolder/{app_id}").Subrouter()
 
-	r.HandleFunc("/{app_id}", func(w http.ResponseWriter, req *http.Request) {
+	get := r.Methods("GET").Subrouter()
+	post := r.Methods("POST").Subrouter()
+
+	//Action para publicar um novo arquivo através de um formulário de envio de arquivos tradicional
+	post.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 
 		var (
 			vars  map[string]string
@@ -37,15 +48,63 @@ func VFolder(r *mux.Router, sharedFolder string) {
 			return
 		}
 
-		fs := getDefaultStorage()
+		createFiles(files, w)
+	})
 
-		for _, f := range files {
-			fs.Add(&f)
+	//Action para publicar um novo arquivo com base no corpo da requisição
+	post.HandleFunc("/{file_name}", func(w http.ResponseWriter, req *http.Request) {
+
+		if req.Method != "POST" {
+			w.WriteHeader(http.StatusBadRequest)
+			return
 		}
+
+		var (
+			vars            map[string]string
+			files           []model.File
+			err             error
+			appID, fileName string
+		)
+
+		vars = mux.Vars(req)
+		appID = vars["app_id"]
+		fileName = vars["file_name"]
+
+		files, err = getFilesFromRESTRequest(appID, fileName, req)
+
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			fmt.Fprintln(w, err.Error())
+			return
+		}
+
+		createFiles(files, w)
 
 	})
 
-	r.HandleFunc("/{app_id}/files/{id}", func(w http.ResponseWriter, req *http.Request) {
+	//Action para listar em formato JSON uma lista de dados básicos dos arquivos de uma determinada aplicação
+	get.HandleFunc("/files", func(w http.ResponseWriter, req *http.Request) {
+
+		var (
+			err   error
+			files []model.FileInfo
+			fs    model.VFStorage
+		)
+
+		fs = getDefaultStorage()
+		files, err = fs.List()
+
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			fmt.Fprintln(w, err.Error())
+			return
+		}
+
+		jsonr(files, w)
+	})
+
+	//Action para realizar o download do arquivo identificado pelo ID informado
+	get.HandleFunc("/files/{id}", func(w http.ResponseWriter, req *http.Request) {
 
 		var (
 			vars map[string]string
@@ -79,29 +138,27 @@ func VFolder(r *mux.Router, sharedFolder string) {
 		default:
 			w.WriteHeader(http.StatusBadRequest)
 		}
-
 	})
 
-	r.HandleFunc("/{app_id}/files", func(w http.ResponseWriter, req *http.Request) {
+}
 
-		var (
-			err   error
-			files []model.FileInfo
-			fs    model.VFStorage
-		)
+//createFiles grava arquivos junto ao sistema de armazenamento e formata resposta para os clientes
+func createFiles(files []model.File, w http.ResponseWriter) {
 
-		fs = getDefaultStorage()
-		files, err = fs.List()
+	fs := getDefaultStorage()
 
-		if err != nil {
+	for _, f := range files {
+
+		if err := fs.Add(&f); err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			fmt.Fprintln(w, err.Error())
 			return
 		}
 
-		jsonr(files, w)
-	})
+		w.Header().Add(X_FILE_ID_HEADER, f.ID)
+	}
 
+	w.WriteHeader(http.StatusCreated)
 }
 
 //getDefaultStorage recupera storage padrão para arquivos
@@ -157,6 +214,32 @@ func getFilesFromMultipartRequest(appID string, req *http.Request) ([]model.File
 			}
 		}
 	}
+
+	return files, nil
+}
+
+//getFilesFromMultipartRequest recupera objetos do tipo File lidos a partir do corpo da requisiçao
+func getFilesFromRESTRequest(appID string, fileName string, req *http.Request) ([]model.File, error) {
+
+	files := make([]model.File, 1)
+	pos := 0
+
+	//Preenchendo dados básicos do arquivo
+	files[pos] = model.File{}
+	files[pos].Name = fileName
+	files[pos].PublishDate = time.Now()
+	files[pos].App = appID
+
+	if len(req.Header["Content-Type"]) == 0 {
+		return nil, errors.New("Formato do conteúdo do arquivo não foi informado")
+	}
+
+	if req.ContentLength == 0 {
+		return nil, errors.New("Nenhum dado enviado na requisição")
+	}
+
+	files[pos].MimeType = req.Header["Content-Type"][0]
+	files[pos].Stream = req.Body
 
 	return files, nil
 }
