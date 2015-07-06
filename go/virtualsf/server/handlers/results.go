@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	templateDir    = "./templates"
+	templateDir    = "./server/templates"
 	mainLayoutFile = templateDir + "/layout.html"
 )
 
