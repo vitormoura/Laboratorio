@@ -7,7 +7,7 @@ import (
 	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/storage"
 	"net/http"
-	_ "strconv"
+	"path/filepath"
 	"time"
 )
 
@@ -48,7 +48,7 @@ func VFolder(r *mux.Router, sharedFolder string) {
 			return
 		}
 
-		createFiles(files, w)
+		createFiles(vars["app_id"], files, w)
 	})
 
 	//Action para publicar um novo arquivo com base no corpo da requisição
@@ -78,7 +78,7 @@ func VFolder(r *mux.Router, sharedFolder string) {
 			return
 		}
 
-		createFiles(files, w)
+		createFiles(appID, files, w)
 
 	})
 
@@ -89,9 +89,11 @@ func VFolder(r *mux.Router, sharedFolder string) {
 			err   error
 			files []model.FileInfo
 			fs    model.VFStorage
+			vars  map[string]string
 		)
 
-		fs, _ = getDefaultStorage()
+		vars = mux.Vars(req)
+		fs, _ = getDefaultStorage(vars["app_id"])
 		files, err = fs.List()
 
 		if err != nil {
@@ -116,7 +118,7 @@ func VFolder(r *mux.Router, sharedFolder string) {
 
 		vars = mux.Vars(req)
 		id = vars["id"]
-		fs, _ = getDefaultStorage()
+		fs, _ = getDefaultStorage(vars["app_id"])
 
 		file, err = fs.Find(id)
 
@@ -131,21 +133,15 @@ func VFolder(r *mux.Router, sharedFolder string) {
 			return
 		}
 
-		switch req.Method {
-
-		case "GET":
-			writeFile(file.Stream, file.MimeType, w)
-		default:
-			w.WriteHeader(http.StatusBadRequest)
-		}
+		writeFile(file.Stream, file.MimeType, w)
 	})
 
 }
 
 //createFiles grava arquivos junto ao sistema de armazenamento e formata resposta para os clientes
-func createFiles(files []model.File, w http.ResponseWriter) {
+func createFiles(appID string, files []model.File, w http.ResponseWriter) {
 
-	fs, err := getDefaultStorage()
+	fs, err := getDefaultStorage(appID)
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -167,8 +163,8 @@ func createFiles(files []model.File, w http.ResponseWriter) {
 }
 
 //getDefaultStorage recupera storage padrão para arquivos
-func getDefaultStorage() (model.VFStorage, error) {
-	return storage.NewDirStorage(folderStorageLocation)
+func getDefaultStorage(appID string) (model.VFStorage, error) {
+	return storage.NewDirStorage(filepath.Join(folderStorageLocation, appID), false)
 }
 
 //getFilesFromMultipartRequest recupera objetos do tipo File lidos a partir da requisição informada

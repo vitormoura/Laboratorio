@@ -4,6 +4,90 @@
 		"selected_items":
 		[
 			[
+				"con",
+				"ContentLength	int64 ν"
+			],
+			[
+				"f",
+				"Fprintln	n int, err error ƒ"
+			],
+			[
+				"wri",
+				"Write	int, error ƒ"
+			],
+			[
+				"file",
+				"fileName	string ν"
+			],
+			[
+				"statusc",
+				"StatusCreated	 Ɩ"
+			],
+			[
+				"par",
+				"ParseInt	i int64, err error ƒ"
+			],
+			[
+				"fr",
+				"Fprintln	n int, err error ƒ"
+			],
+			[
+				"Statusb",
+				"StatusBadRequest	 Ɩ"
+			],
+			[
+				"w",
+				"WriteHeader	 ƒ"
+			],
+			[
+				"ha",
+				"HandleFunc	*mux.Route ƒ"
+			],
+			[
+				"write",
+				"WriteHeader	 ƒ"
+			],
+			[
+				"fil",
+				"fileName	string ν"
+			],
+			[
+				"is",
+				"IsNotExist	bool ƒ"
+			],
+			[
+				"io",
+				"ioutil	 package ρ"
+			],
+			[
+				"Str",
+				"Stream	io.ReadCloser ν"
+			],
+			[
+				"m",
+				"Methods	*mux.Route ƒ"
+			],
+			[
+				"func",
+				"func main	func main {...} ʂ"
+			],
+			[
+				"Sprin",
+				"Sprintf	string ƒ"
+			],
+			[
+				"prin",
+				"Println	n int, err error ƒ"
+			],
+			[
+				"Confi",
+				"ServerConfig	struct ʈ"
+			],
+			[
+				"read",
+				"ReadFileInto	error ƒ"
+			],
+			[
 				"fpr",
 				"Fprintln	n int, err error ƒ"
 			],
@@ -14,10 +98,6 @@
 			[
 				"st",
 				"Stream	io.ReadCloser ν"
-			],
-			[
-				"read",
-				"ReadFile	[]byte, error ƒ"
 			],
 			[
 				"get",
@@ -36,10 +116,6 @@
 				"NewFile	*os.File ƒ"
 			],
 			[
-				"fr",
-				"Fprintf	n int, err error ƒ"
-			],
-			[
 				"spri",
 				"Sprintf	string ƒ"
 			],
@@ -52,10 +128,6 @@
 				"Fprintf	n int, err error ƒ"
 			],
 			[
-				"f",
-				"Fscanf	n int, err error ƒ"
-			],
-			[
 				"p",
 				"PublishDate	time.Time ν"
 			],
@@ -64,20 +136,12 @@
 				"Fprintln	n int, err error ƒ"
 			],
 			[
-				"w",
-				"Write	int, error ƒ"
-			],
-			[
 				"no",
 				"Now	time.Time ƒ"
 			],
 			[
 				"files",
 				"files	[]model.File ν"
-			],
-			[
-				"file",
-				"fileStream	multipart.File ν"
 			],
 			[
 				"statusbad",
@@ -96,20 +160,12 @@
 				"MultipartForm	*multipart.Form ν"
 			],
 			[
-				"par",
-				"ParseMultipartForm	error ƒ"
-			],
-			[
 				"Fprint",
 				"Fprintln	n int, err error ƒ"
 			],
 			[
 				"Fpri",
 				"Fprintf	n int, err error ƒ"
-			],
-			[
-				"ha",
-				"Handle	*mux.Route ƒ"
 			],
 			[
 				"pr",
@@ -122,10 +178,6 @@
 			[
 				"view",
 				"viewName	string ν"
-			],
-			[
-				"prin",
-				"Printf	 ƒ"
 			],
 			[
 				"template",
@@ -208,6 +260,15 @@
 	},
 	"file_history":
 	[
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/vfolder.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/vfdirstore.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/results.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/README.md",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/config.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/main.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/server.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server.ini",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/server.ini",
 		"/D/Projetos/GO/src/code/google/gcfg/doc.go",
 		"/D/Projetos/GO/src/code/google/gcfg/go1_2.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/model/vfmanager.go",
@@ -335,7 +396,7 @@
 		"cols":
 		[
 			0.0,
-			0.510951403149,
+			0.749280641478,
 			1.0
 		],
 		"rows":

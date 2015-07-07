@@ -10,14 +10,21 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
+	"time"
 )
 
 type vfdirStorage struct {
-	root string
+	root   string
+	config storageConfig
 }
 
 func (dir *vfdirStorage) Add(f *model.File) error {
+
+	if err := dir.verify(f); err != nil {
+		return err
+	}
 
 	id := uuid.New()
 	fileName := dir.getFileName(id)
@@ -44,7 +51,7 @@ func (dir *vfdirStorage) Add(f *model.File) error {
 	if bytesGravados == 0 {
 		f.ID = ""
 		os.Remove(fileName)
-		return errors.New("O arquivo nao possui ")
+		return model.ErrEmptyFile
 	}
 
 	//Agora vamos criar o arquivo de metadados
@@ -69,8 +76,6 @@ func (dir *vfdirStorage) Add(f *model.File) error {
 
 	mdfile.WriteString(string(bytes))
 
-	fmt.Println(f.ID)
-
 	return nil
 }
 
@@ -80,7 +85,7 @@ func (dir *vfdirStorage) Find(id string) (*model.File, error) {
 	fileName := dir.getMetaFileName(id)
 
 	if _, err := os.Stat(fileName); os.IsNotExist(err) {
-		return nil, nil
+		return nil, model.ErrFileNotFound
 	}
 
 	//Recuperamos inicialmente a metadata do arquivo
@@ -136,29 +141,92 @@ func (dir *vfdirStorage) List() ([]model.FileInfo, error) {
 	return result, nil
 }
 
-func (dir *vfdirStorage) getFileName(id string) string {
-	return filepath.Join(dir.root, id+".file")
+//verifyFilters testa se arquivo informado pode ser armazenado com base na configuração de filtros do diretório
+func (dir *vfdirStorage) verify(file *model.File) error {
+
+	if dir.config.Global.Locked {
+		return model.ErrStorageLocked
+	}
+
+	if file.MimeType == "" {
+		return model.ErrFileNotSupported
+	}
+
+	if len(dir.config.Filters.Allow) == 0 {
+		return model.ErrFileNotSupported
+	}
+
+	mimeType := strings.ToLower(file.MimeType)
+
+	if sort.SearchStrings(dir.config.Filters.Allow, mimeType) < len(dir.config.Filters.Allow) {
+		return nil
+	}
+
+	return model.ErrFileNotSupported
 }
 
-func (dir *vfdirStorage) getMetaFileName(id string) string {
-	return dir.getFileName(id) + ".meta"
-}
+//setup executa rotinas de inicializacao e configuração do mecanismo de armazenamento de arquivos locais,
+//como criação do diretório e configuração padrão
+func (dir *vfdirStorage) setup() error {
 
-//NewDirStorage cria um novo VFStorage que armazena arquivos em diretórios do
-//sistema de arquivos a partir do diretório raiz informado
-func NewDirStorage(root string) (model.VFStorage, error) {
-
-	dir := vfdirStorage{root: root}
+	//Vamos verificar se o diretório já existe:
 	fi, err := os.Stat(dir.root)
 
 	if err != nil && os.IsNotExist(err) {
 
-		if err := os.Mkdir(fi.Name(), os.ModeDir); err != nil {
-			return nil, err
+		//Diretórios que não existem precisam ser criados e suas configurações inicializadas
+		if err := os.Mkdir(dir.root, os.ModeDir); err != nil {
+			return err
+		}
+
+		//Inicializando configuração básica
+		dir.config = initConfigurationTo(dir.root)
+
+		if len(dir.config.Filters.Allow) > 0 {
+			sort.Strings(dir.config.Filters.Allow)
 		}
 
 	} else if !fi.IsDir() {
-		return nil, errors.New("Informe o caminho de um diretório válido")
+		return errors.New("Informe o caminho de um diretório válido")
+	} else {
+		dir.config = readConfigurationFrom(dir.root)
+	}
+
+	return nil
+}
+
+//getFileName recupera caminho completo do arquivo armazenado com ID informado
+func (dir *vfdirStorage) getFileName(id string) string {
+	return filepath.Join(dir.root, id+".file")
+}
+
+//getMetaFileName recupera caminho completo do arquivo de metadata do arquivo armazenado identificado pelo ID informado
+func (dir *vfdirStorage) getMetaFileName(id string) string {
+	return dir.getFileName(id) + ".meta"
+}
+
+//handleConfigurationUpdate atualiza configuração periodicamente (a cada minuto)
+func (dir *vfdirStorage) handleConfigurationUpdate() {
+
+	for _ = range time.Tick(1 * time.Minute) {
+		dir.config = readConfigurationFrom(dir.root)
+	}
+}
+
+//NewDirStorage cria um novo VFStorage que armazena arquivos em diretórios do
+//sistema de arquivos a partir do diretório raiz informado. O modo longrunning indica
+//que a nova instância será utilizada por muito tempo
+func NewDirStorage(root string, longRunning bool) (model.VFStorage, error) {
+
+	dir := vfdirStorage{root: root}
+	err := dir.setup()
+
+	if err != nil {
+		return nil, err
+	}
+
+	if longRunning {
+		go dir.handleConfigurationUpdate()
 	}
 
 	return &dir, nil
