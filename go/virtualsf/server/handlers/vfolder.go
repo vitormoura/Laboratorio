@@ -25,7 +25,7 @@ func VFolder(r *mux.Router, sharedFolder string) {
 
 	folderStorageLocation = sharedFolder
 
-	r = r.PathPrefix("/vfolder/{app_id}").Subrouter()
+	r = r.PathPrefix("/vfolder").Subrouter()
 
 	get := r.Methods("GET").Subrouter()
 	post := r.Methods("POST").Subrouter()
@@ -34,13 +34,13 @@ func VFolder(r *mux.Router, sharedFolder string) {
 	post.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 
 		var (
-			vars  map[string]string
 			files []model.File
 			err   error
+			appID string
 		)
 
-		vars = mux.Vars(req)
-		files, err = getFilesFromMultipartRequest(vars["app_id"], req)
+		appID = getAppID(req)
+		files, err = getFilesFromMultipartRequest(appID, req)
 
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
@@ -48,7 +48,7 @@ func VFolder(r *mux.Router, sharedFolder string) {
 			return
 		}
 
-		createFiles(vars["app_id"], files, w)
+		createFiles(appID, files, w)
 	})
 
 	//Action para publicar um novo arquivo com base no corpo da requisição
@@ -67,7 +67,7 @@ func VFolder(r *mux.Router, sharedFolder string) {
 		)
 
 		vars = mux.Vars(req)
-		appID = vars["app_id"]
+		appID = getAppID(req)
 		fileName = vars["file_name"]
 
 		files, err = getFilesFromRESTRequest(appID, fileName, req)
@@ -79,7 +79,6 @@ func VFolder(r *mux.Router, sharedFolder string) {
 		}
 
 		createFiles(appID, files, w)
-
 	})
 
 	//Action para listar em formato JSON uma lista de dados básicos dos arquivos de uma determinada aplicação
@@ -89,11 +88,9 @@ func VFolder(r *mux.Router, sharedFolder string) {
 			err   error
 			files []model.FileInfo
 			fs    model.VFStorage
-			vars  map[string]string
 		)
 
-		vars = mux.Vars(req)
-		fs, _ = getDefaultStorage(vars["app_id"])
+		fs, _ = getDefaultStorage(getAppID(req))
 		files, err = fs.List()
 
 		if err != nil {
@@ -118,7 +115,7 @@ func VFolder(r *mux.Router, sharedFolder string) {
 
 		vars = mux.Vars(req)
 		id = vars["id"]
-		fs, _ = getDefaultStorage(vars["app_id"])
+		fs, _ = getDefaultStorage(getAppID(req))
 
 		file, err = fs.Find(id)
 
@@ -160,6 +157,11 @@ func createFiles(appID string, files []model.File, w http.ResponseWriter) {
 	}
 
 	w.WriteHeader(http.StatusCreated)
+}
+
+//getAppID recupera identificador da aplicação da requisição
+func getAppID(req *http.Request) string {
+	return req.Header["X-Authenticated-Username"][0]
 }
 
 //getDefaultStorage recupera storage padrão para arquivos
