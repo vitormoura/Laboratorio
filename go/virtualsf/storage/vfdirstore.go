@@ -158,7 +158,10 @@ func (dir *vfdirStorage) verify(file *model.File) error {
 
 	mimeType := strings.ToLower(file.MimeType)
 
-	if sort.SearchStrings(dir.config.Filters.Allow, mimeType) < len(dir.config.Filters.Allow) {
+	//fmt.Println(file.MimeType)
+	//fmt.Println(dir.config.Filters.Allow)
+
+	if sort.SearchStrings(dir.config.Filters.Allow, mimeType) <= len(dir.config.Filters.Allow) {
 		return nil
 	}
 

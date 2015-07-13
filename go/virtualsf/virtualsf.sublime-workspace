@@ -4,6 +4,66 @@
 		"selected_items":
 		[
 			[
+				"get",
+				"getAppID	 ƒ"
+			],
+			[
+				"re",
+				"Request	struct ʈ"
+			],
+			[
+				"conte",
+				"context	 package ρ"
+			],
+			[
+				"ma",
+				"MatcherFunc	*mux.Route ƒ"
+			],
+			[
+				"ht",
+				"HtpasswdFile	struct ʈ"
+			],
+			[
+				"han",
+				"HandlerFunc	func(http.ResponseWriter, *http.Request) ʈ"
+			],
+			[
+				"au",
+				"authenticator	*auth.BasicAuth ν"
+			],
+			[
+				"serve",
+				"ServerConfig	struct ʈ"
+			],
+			[
+				"at",
+				"authenticator	*auth.BasicAuth ν"
+			],
+			[
+				"er",
+				"ErrFileNotSupported	error ν"
+			],
+			[
+				"m",
+				"MatchString	matched bool, err error ƒ"
+			],
+			[
+				"fi",
+				"File	struct ʈ"
+			],
+			[
+				"dir",
+				"dirConfigFilename	 Ɩ"
+			],
+			[
+				"config",
+				"configSample	 ν"
+			],
+			[
+				"init",
+				"initConfigurationTo	 ƒ"
+			],
+			[
 				"con",
 				"ContentLength	int64 ν"
 			],
@@ -64,10 +124,6 @@
 				"Stream	io.ReadCloser ν"
 			],
 			[
-				"m",
-				"Methods	*mux.Route ƒ"
-			],
-			[
 				"func",
 				"func main	func main {...} ʂ"
 			],
@@ -100,20 +156,12 @@
 				"Stream	io.ReadCloser ν"
 			],
 			[
-				"get",
-				"getFileName	string ƒ"
-			],
-			[
 				"wr",
 				"WriteString	ret int, err error ƒ"
 			],
 			[
 				"s",
 				"Stream	io.ReadCloser ν"
-			],
-			[
-				"fi",
-				"NewFile	*os.File ƒ"
 			],
 			[
 				"spri",
@@ -196,10 +244,6 @@
 				"PathPrefix	*mux.Route ƒ"
 			],
 			[
-				"han",
-				"HandleFunc	*mux.Route ƒ"
-			],
-			[
 				"rou",
 				"Router	struct ʈ"
 			],
@@ -219,6 +263,36 @@
 	},
 	"buffers":
 	[
+		{
+			"contents": "package server\n\nimport (\n	\"github.com/stretchr/testify/assert\"\n	\"testing\"\n)\n\nfunc testConfig(t *testing.T) {\n	\n}\n",
+			"file": "server/server_test.go",
+			"file_size": 122,
+			"file_write_time": 130809427979756983,
+			"settings":
+			{
+				"buffer_size": 113,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Projetos/TFS/pmn_sentinela_Trunk/3-0_CodigoFonte/02_SPT/views.sql",
+			"settings":
+			{
+				"buffer_size": 2250,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "package server\n\nimport (\n	\"fmt\"\n	auth \"github.com/abbot/go-http-auth\"\n	\"github.com/gorilla/mux\"\n	\"github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers\"\n	\"log\"\n	\"net/http\"\n	\"time\"\n)\n\n//Run inicia execução do serviço de publicação e pesquisa de arquivos\nfunc Run(config ServerConfig) {\n\n	port := config.Main.ServerPort\n	router := mux.NewRouter()\n\n	http.Handle(\"/static/\", http.StripPrefix(\"/static/\", http.FileServer(http.Dir(\"static\"))))\n	http.Handle(\"/\", router)\n\n	handlers.DebugMode = config.Main.DebugMode\n	handlers.VFolder(router, config.Main.SharedFolder)\n	handlers.Playground(router)\n\n	//Servidor vai exigir autenticação do tipo BASIC com base em usuários e senhas do arquivo .htpasswd\n	authenticator := auth.NewBasicAuthenticator(\"myrealm\", auth.HtpasswdFileProvider(\".htpasswd\"))\n\n	srv := &http.Server{\n		Addr:           fmt.Sprintf(\":%d\", port),\n		Handler:        auth.JustCheck(authenticator, router.ServeHTTP),\n		ReadTimeout:    10 * time.Second,\n		WriteTimeout:   10 * time.Second,\n		MaxHeaderBytes: 1 << 20,\n	}\n\n	srv.\n\n	log.Fatal(srv.ListenAndServe())\n}\n",
+			"file": "server/server.go",
+			"file_size": 1115,
+			"file_write_time": 130807627161633266,
+			"settings":
+			{
+				"buffer_size": 1076,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -260,13 +334,46 @@
 	},
 	"file_history":
 	[
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/vfolder.go",
+		"/D/Projetos/TFS/pmn_sentinela_Trunk/3-0_CodigoFonte/02_SPT/consultas/GERACAO_REL_DISPONIBILIDADE_NETCENTER.sql",
+		"/D/Projetos/GO/src/github.com/stretchr/testify/http/test_response_writer.go",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_9.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_8.sql",
+		"/D/Projetos/TFS/pds_bcc_Trunk/3-0_Produto/TemplatesWebAspNet/3-2_Fontes/Infraero.BCC.Templates.AspNet/Infraero.BCC.Templates.Padrao/Infraero.BCC.Templates.Padrao.nuspec",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/Atualizacoes_BD.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_0_0_19.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/02_AtualizacaoVr_1_0_1.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/03_ScriptCargaMigracaoIog.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_0_0_26.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_0_0_30.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_0_0_35.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_0_0_36.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_0_0_39.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_0_0_42.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_0_0.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_0_0_21.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_0_0_20.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_0.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_1.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_2.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_3.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_4.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_6.sql",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/main.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/vfdirstore.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/vfolder.go",
+		"/D/Temp/virtualsf/MY_APP/_dir.config",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/config.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/playground.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/templates/playground/form.html",
+		"/D/Temp/virtualsf/fula/_dir.config",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/config.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/server.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/.htpasswd",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/model/errors.go",
+		"/D/Temp/virtualsf/MY_APP/dir.config",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/dir.config.sample",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/results.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/README.md",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/config.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/main.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/server.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server.ini",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/server.ini",
 		"/D/Projetos/GO/src/code/google/gcfg/doc.go",
@@ -292,10 +399,8 @@
 		"/D/Projetos/Laboratorio/lab_sfml/src/CMakeLists.txt",
 		"/D/Projetos/Laboratorio/lab_sfml/src/COPYING",
 		"/D/Projetos/Laboratorio/lab_sfml/src/config.h.in",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_8.sql",
 		"//10.0.19.209/dsv_wsrh/Web_old.config",
 		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_7.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_6.sql",
 		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/03_Procedimentos/PRC_ATUALIZAR_ESTATISTICAS.sql",
 		"/C/Windows/Microsoft.NET/Framework/v2.0.50727/CONFIG/machine.config",
 		"/D/Projetos/GO/src/labs/weblab/handlers/results.go",
@@ -358,8 +463,90 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "server/server_test.go",
+					"settings":
+					{
+						"buffer_size": 113,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								110,
+								110
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/D/Projetos/TFS/pmn_sentinela_Trunk/3-0_CodigoFonte/02_SPT/views.sql",
+					"settings":
+					{
+						"buffer_size": 2250,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								196,
+								196
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SQL/SQL.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "server/server.go",
+					"settings":
+					{
+						"buffer_size": 1076,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1072,
+								1072
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		},
 		{

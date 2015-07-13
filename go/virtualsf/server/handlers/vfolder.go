@@ -142,6 +142,7 @@ func createFiles(appID string, files []model.File, w http.ResponseWriter) {
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
+		fmt.Fprintln(w, err.Error())
 		return
 	}
 
