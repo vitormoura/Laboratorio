@@ -14,7 +14,7 @@ import (
 const (
 
 	//X_FILE_ID_HEADER é o header HTTP enviado contendo o ID de um arquivo recém criado
-	X_FILE_ID_HEADER string = "X-FILE-ID"
+	X_FILE_ID_HEADER string = "X-File-Id"
 )
 
 var (

@@ -50,7 +50,12 @@ func sendFileToServer(fileName string, fileType string, fileContents io.Reader) 
 		return 0, "", err
 	}
 
-	return resp.StatusCode, resp.Header.Get(handlers.X_FILE_ID_HEADER), nil
+	if fileID, exists := resp.Header[handlers.X_FILE_ID_HEADER]; exists {
+		return resp.StatusCode, fileID[0], nil
+	} else {
+		return resp.StatusCode, "", nil
+	}
+
 }
 
 func TestInitializeServer(t *testing.T) {
@@ -62,8 +67,8 @@ func TestInitializeServer(t *testing.T) {
 }
 
 func TestSendValidSingleSmallFile(t *testing.T) {
-	cmd, _ := initServerDefaultConfiguration()
-	defer cmd.Process.Kill()
+	//cmd, _ := initServerDefaultConfiguration()
+	//defer cmd.Process.Kill()
 
 	statusCode, fileID, err := sendFileToServer("myfile.txt", "text/plain", bytes.NewBufferString("Eu sou um exemplo"))
 
@@ -76,15 +81,15 @@ func TestSendInvalidSingleSmallFile(t *testing.T) {
 	//cmd, _ := initServerDefaultConfiguration()
 	//defer cmd.Process.Kill()
 
-	statusCode, _, err := sendFileToServer("myfile.pdf", "eee/dsdsds", bytes.NewBufferString("Eu definitivamente não sou um arquivo PDF"))
+	statusCode, _, err := sendFileToServer("myfile.pdf", "application/pdf", bytes.NewBufferString("Eu definitivamente não sou um arquivo PDF"))
 
 	assert.Nil(t, err, "Requisição realizada sem erro")
 	assert.Equal(t, 400, statusCode, "Server deve retornar código 400, não enviamos um arquivo com formato válido")
 }
 
 func TestGetFileList(t *testing.T) {
-	cmd, _ := initServerDefaultConfiguration()
-	defer cmd.Process.Kill()
+	//cmd, _ := initServerDefaultConfiguration()
+	//defer cmd.Process.Kill()
 
 	client := &http.Client{}
 
