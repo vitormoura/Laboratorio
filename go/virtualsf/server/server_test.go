@@ -61,7 +61,7 @@ func TestInitializeServer(t *testing.T) {
 	cmd.Process.Kill()
 }
 
-func TestSendSingleSmallFile(t *testing.T) {
+func TestSendValidSingleSmallFile(t *testing.T) {
 	cmd, _ := initServerDefaultConfiguration()
 	defer cmd.Process.Kill()
 
@@ -70,6 +70,16 @@ func TestSendSingleSmallFile(t *testing.T) {
 	assert.Nil(t, err, "Requisição realizada sem erro")
 	assert.Equal(t, 201, statusCode, "Server deve retornar código 201, indicando que um novo arquivo foi criado")
 	assert.NotEqual(t, "", fileID, "O server deve retornar o ID do arquivo gerado através de um header")
+}
+
+func TestSendInvalidSingleSmallFile(t *testing.T) {
+	//cmd, _ := initServerDefaultConfiguration()
+	//defer cmd.Process.Kill()
+
+	statusCode, _, err := sendFileToServer("myfile.pdf", "eee/dsdsds", bytes.NewBufferString("Eu definitivamente não sou um arquivo PDF"))
+
+	assert.Nil(t, err, "Requisição realizada sem erro")
+	assert.Equal(t, 400, statusCode, "Server deve retornar código 400, não enviamos um arquivo com formato válido")
 }
 
 func TestGetFileList(t *testing.T) {

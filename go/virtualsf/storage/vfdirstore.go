@@ -160,8 +160,9 @@ func (dir *vfdirStorage) verify(file *model.File) error {
 
 	//fmt.Println(file.MimeType)
 	//fmt.Println(dir.config.Filters.Allow)
+	//fmt.Println(sort.SearchStrings(dir.config.Filters.Allow, mimeType))
 
-	if sort.SearchStrings(dir.config.Filters.Allow, mimeType) <= len(dir.config.Filters.Allow) {
+	if index := sort.SearchStrings(dir.config.Filters.Allow, mimeType); index < len(dir.config.Filters.Allow) && dir.config.Filters.Allow[index] == mimeType {
 		return nil
 	}
 
@@ -185,14 +186,15 @@ func (dir *vfdirStorage) setup() error {
 		//Inicializando configuração básica
 		dir.config = initConfigurationTo(dir.root)
 
-		if len(dir.config.Filters.Allow) > 0 {
-			sort.Strings(dir.config.Filters.Allow)
-		}
-
 	} else if !fi.IsDir() {
 		return errors.New("Informe o caminho de um diretório válido")
 	} else {
 		dir.config = readConfigurationFrom(dir.root)
+	}
+
+	//ordenando filtros para execução de pesquisas posteriormente
+	if len(dir.config.Filters.Allow) > 0 {
+		sort.Strings(dir.config.Filters.Allow)
 	}
 
 	return nil

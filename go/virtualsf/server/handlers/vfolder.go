@@ -149,7 +149,13 @@ func createFiles(appID string, files []model.File, w http.ResponseWriter) {
 	for _, f := range files {
 
 		if err := fs.Add(&f); err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+
+			if err == model.ErrFileNotSupported {
+				w.WriteHeader(http.StatusBadRequest)
+			} else {
+				w.WriteHeader(http.StatusInternalServerError)
+			}
+
 			fmt.Fprintln(w, err.Error())
 			return
 		}
