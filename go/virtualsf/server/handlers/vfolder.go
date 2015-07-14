@@ -6,6 +6,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/storage"
+	"log"
 	"net/http"
 	"path/filepath"
 	"time"
@@ -33,6 +34,8 @@ func VFolder(r *mux.Router, sharedFolder string) {
 	//Action para publicar um novo arquivo através de um formulário de envio de arquivos tradicional
 	post.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 
+		log.Println("POST", req.URL.RequestURI())
+
 		var (
 			files []model.File
 			err   error
@@ -54,10 +57,7 @@ func VFolder(r *mux.Router, sharedFolder string) {
 	//Action para publicar um novo arquivo com base no corpo da requisição
 	post.HandleFunc("/{file_name}", func(w http.ResponseWriter, req *http.Request) {
 
-		if req.Method != "POST" {
-			w.WriteHeader(http.StatusBadRequest)
-			return
-		}
+		log.Println("POST", req.URL.RequestURI())
 
 		var (
 			vars            map[string]string
@@ -84,6 +84,8 @@ func VFolder(r *mux.Router, sharedFolder string) {
 	//Action para listar em formato JSON uma lista de dados básicos dos arquivos de uma determinada aplicação
 	get.HandleFunc("/files", func(w http.ResponseWriter, req *http.Request) {
 
+		log.Println("GET ", req.URL.RequestURI())
+
 		var (
 			err   error
 			files []model.FileInfo
@@ -104,6 +106,8 @@ func VFolder(r *mux.Router, sharedFolder string) {
 
 	//Action para realizar o download do arquivo identificado pelo ID informado
 	get.HandleFunc("/files/{id}", func(w http.ResponseWriter, req *http.Request) {
+
+		log.Println("GET ", req.URL.RequestURI())
 
 		var (
 			vars map[string]string

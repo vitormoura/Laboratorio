@@ -3,7 +3,7 @@ package storage
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
+	_ "fmt"
 	"github.com/pborman/uuid"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
 	"io"
@@ -117,8 +117,6 @@ func (dir *vfdirStorage) List() ([]model.FileInfo, error) {
 	result := make([]model.FileInfo, 0, 20)
 
 	filepath.Walk(dir.root, func(path string, info os.FileInfo, err error) error {
-
-		fmt.Println(path)
 
 		if info != nil && !info.IsDir() {
 

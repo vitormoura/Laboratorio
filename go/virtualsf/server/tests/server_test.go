@@ -69,3 +69,46 @@ func TestSendLargeFile(t *testing.T) {
 	assert.Equal(t, 201, statusCode, "Server deve retornar código 201, indicando que um novo arquivo foi criado")
 	assert.NotEqual(t, "", fileID, "O server deve retornar o ID do arquivo gerado através de um header")
 }
+
+func TestSendMultipleFiles(t *testing.T) {
+	files := map[string]int{
+		"myfile1.txt":  20,
+		"myfile2.txt":  5,
+		"myfile3.txt":  3,
+		"myfile4.txt":  35,
+		"myfile5.txt":  12,
+		"myfile6.txt":  1,
+		"myfile7.txt":  47,
+		"myfile8.txt":  6,
+		"myfile9.txt":  5,
+		"myfile10.txt": 3,
+		"myfile11.txt": 12,
+		"myfile12.txt": 1,
+		"myfile13.txt": 47,
+	}
+
+	resc := make(chan bool)
+	allSucceed := true
+
+	for k, v := range files {
+
+		go func(fileName string, fileSize int) {
+			fake := NewFakeReader(1024 * 1024 * fileSize) //40MB
+
+			statusCode, fileID, err := sendFileToServer(host, fileName, "text/plain", fake)
+
+			resc <- (err == nil && statusCode == 201 && fileID != "")
+		}(k, v)
+	}
+
+	for i := 0; i < len(files); i++ {
+		select {
+		case res := <-resc:
+			if !res {
+				allSucceed = false
+			}
+		}
+	}
+
+	assert.True(t, allSucceed, "Envio de todos os arquivos retornaram sucesso")
+}
