@@ -4,12 +4,88 @@
 		"selected_items":
 		[
 			[
-				"get",
-				"getAppID	 ƒ"
+				"bytes",
+				"bytesToRead	 ν"
+			],
+			[
+				"in",
+				"Intn	int ƒ"
+			],
+			[
+				"byte",
+				"bytesRemaining	int ν"
+			],
+			[
+				"pri",
+				"Println	n int, err error ƒ"
 			],
 			[
 				"re",
-				"Request	struct ʈ"
+				"ReadString	line string, err error ƒ"
+			],
+			[
+				"rea",
+				"Read	n int, err error ƒ"
+			],
+			[
+				"read",
+				"ReadString	line string, err error ƒ"
+			],
+			[
+				"ba",
+				"StatusBadRequest	 Ɩ"
+			],
+			[
+				"erro",
+				"ErrFileNotSupported	error ν"
+			],
+			[
+				"not",
+				"NotNil	bool ƒ"
+			],
+			[
+				"statu",
+				"StatusCode	int ν"
+			],
+			[
+				"fpr",
+				"Fprintln	n int, err error ƒ"
+			],
+			[
+				"new",
+				"NewScanner	*bufio.Scanner ƒ"
+			],
+			[
+				"file",
+				"fileType	string ν"
+			],
+			[
+				"en",
+				"EncodeToString	string ƒ"
+			],
+			[
+				"e",
+				"StdEncoding	*base64.Encoding ν"
+			],
+			[
+				"no",
+				"NotEqual	bool ƒ"
+			],
+			[
+				"stau",
+				"StatusCode	int ν"
+			],
+			[
+				"post",
+				"Post	resp *http.Response, err error ƒ"
+			],
+			[
+				"init",
+				"initServerDefaultConfiguration	*exec.Command, error ƒ"
+			],
+			[
+				"get",
+				"getAppID	 ƒ"
 			],
 			[
 				"conte",
@@ -60,10 +136,6 @@
 				"configSample	 ν"
 			],
 			[
-				"init",
-				"initConfigurationTo	 ƒ"
-			],
-			[
 				"con",
 				"ContentLength	int64 ν"
 			],
@@ -74,10 +146,6 @@
 			[
 				"wri",
 				"Write	int, error ƒ"
-			],
-			[
-				"file",
-				"fileName	string ν"
 			],
 			[
 				"statusc",
@@ -140,14 +208,6 @@
 				"ServerConfig	struct ʈ"
 			],
 			[
-				"read",
-				"ReadFileInto	error ƒ"
-			],
-			[
-				"fpr",
-				"Fprintln	n int, err error ƒ"
-			],
-			[
 				"h",
 				"HandleFunc	*mux.Route ƒ"
 			],
@@ -182,10 +242,6 @@
 			[
 				"fp",
 				"Fprintln	n int, err error ƒ"
-			],
-			[
-				"no",
-				"Now	time.Time ƒ"
 			],
 			[
 				"files",
@@ -252,10 +308,6 @@
 				"func main	func main {...} ʂ"
 			],
 			[
-				"pri",
-				"Println	n int, err error ƒ"
-			],
-			[
 				"fun",
 				"func main	func main {...} ʂ"
 			]
@@ -264,32 +316,10 @@
 	"buffers":
 	[
 		{
-			"contents": "package server\n\nimport (\n	\"github.com/stretchr/testify/assert\"\n	\"testing\"\n)\n\nfunc testConfig(t *testing.T) {\n	\n}\n",
-			"file": "server/server_test.go",
-			"file_size": 122,
-			"file_write_time": 130809427979756983,
+			"file": "/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.pagina.php",
 			"settings":
 			{
-				"buffer_size": 113,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/D/Projetos/TFS/pmn_sentinela_Trunk/3-0_CodigoFonte/02_SPT/views.sql",
-			"settings":
-			{
-				"buffer_size": 2250,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "package server\n\nimport (\n	\"fmt\"\n	auth \"github.com/abbot/go-http-auth\"\n	\"github.com/gorilla/mux\"\n	\"github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers\"\n	\"log\"\n	\"net/http\"\n	\"time\"\n)\n\n//Run inicia execução do serviço de publicação e pesquisa de arquivos\nfunc Run(config ServerConfig) {\n\n	port := config.Main.ServerPort\n	router := mux.NewRouter()\n\n	http.Handle(\"/static/\", http.StripPrefix(\"/static/\", http.FileServer(http.Dir(\"static\"))))\n	http.Handle(\"/\", router)\n\n	handlers.DebugMode = config.Main.DebugMode\n	handlers.VFolder(router, config.Main.SharedFolder)\n	handlers.Playground(router)\n\n	//Servidor vai exigir autenticação do tipo BASIC com base em usuários e senhas do arquivo .htpasswd\n	authenticator := auth.NewBasicAuthenticator(\"myrealm\", auth.HtpasswdFileProvider(\".htpasswd\"))\n\n	srv := &http.Server{\n		Addr:           fmt.Sprintf(\":%d\", port),\n		Handler:        auth.JustCheck(authenticator, router.ServeHTTP),\n		ReadTimeout:    10 * time.Second,\n		WriteTimeout:   10 * time.Second,\n		MaxHeaderBytes: 1 << 20,\n	}\n\n	srv.\n\n	log.Fatal(srv.ListenAndServe())\n}\n",
-			"file": "server/server.go",
-			"file_size": 1115,
-			"file_write_time": 130807627161633266,
-			"settings":
-			{
-				"buffer_size": 1076,
+				"buffer_size": 66752,
 				"line_ending": "Windows"
 			}
 		}
@@ -317,7 +347,7 @@
 				"Preferences: Browse Packages"
 			]
 		],
-		"width": 400.0
+		"width": 416.0
 	},
 	"console":
 	{
@@ -334,6 +364,126 @@
 	},
 	"file_history":
 	[
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/erro_acesso.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/GraficoChamadoPorEquipePie.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/Item_configuracaoPDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/Relatorios_AtividadePDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/Relatorios_chamadoPesquisaPDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/Relatorios_faturamentoPorPerfilPDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/RelatoriosAtividadePDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/RelatoriosChamadoPesquisaPDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/RelatoriosChamadosAbertosPDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/RelatoriosChamadosAtendidosPDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/RelatoriosChamadosPorAtividadePDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/RelatoriosChamadosPorAvaliacaoPDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/RelatoriosChamadosPorColaboradorPDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/RelatoriosChamadosPorCoordenacaoPDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/RelatoriosChamadosPorSistemaPDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/RelatoriosChamadosPorTempoDeAtribuicaoPDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/RelatoriosChamadosPorTempoDeExecucaoPDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/RelatoriosEstimativaDeDemandaMensalPDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/RelatoriosFaturamentoPorPerfilPDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/RelatoriosOrdensDeServicoAbertasPDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/RelatoriosOrdensDeServicoConcluidosGeralPDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/RelatoriosOrdensDeServicoConcluidosOperacoesPDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/RelatoriosOrdensDeServicoConcluidosTist1PDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/RelatoriosOrdensDeServicoConcluidosTist2PDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/RelatoriosOrdensDeServicoConcluidosTist3PDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/Time_sheetRelHorasTrabalhadasChamadoPDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/Time_sheetRelHorasTrabalhadasPDF.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/Biblioteca/migracao_dados/migracao_uorg2.sql",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/include/PHP/menu.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoAcompanhar.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.pagina.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoAcompanhar.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoAbrir.IDM.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoAbrir.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoAbrir010101.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/index.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/principal.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoAbrir.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoAtribuir.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoEncerramento.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoSuspender.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoTriagem.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/controleDeErros.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/Correcao_time_sheetPesquisa.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/Time_sheetSolicitaAlteracao.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/CAP.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/Biblioteca/SQLQuery2.sql",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/.buildpath",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/AjaxCarregarComboModuloSistema.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoAcompanharAprovacao.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoAnexoCEA.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoAprovar.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoAvaliar.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoConfirmacao.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoDetalhesAprovacaoCEA.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoDetalhesCEA.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoEncerramento.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoPrioridade.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/EmpregadosPesquisaPopupOracle.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/index.IDM.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/index.php.bkp",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/index44.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/logout.IDM.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/logout.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/msgAcesso.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/principal.IDM.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/solicitacaodeservicos.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/sso-index.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/include/PHP/autentica.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoAlterar.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoAnexo.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoAnexoCEA.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoClassificacao.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoDetalhesCEA.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/class.empregados.oracle.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.andamento_projeto.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.anexo_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.aprovacao_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.atividade_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.atribuicao_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.atribuicao_chamado_bkp.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.avaliacao_atendimento.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.banco_de_dados.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.chamado.IDM.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.dependencias.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.destino_triagem.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.edificacao_infraero.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.empregados.oracle.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.empregados.oracle_bkp.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.equipe_ti.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.historico_acesso_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.historico_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.item_configuracao.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.item_configuracao_bkp.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.localizacao_fisica.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.patrimonio_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.patrimonio_ti.ativos.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.perfil_recurso_ti.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.prioridade_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.recurso_ti.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.situacao_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.subtipo_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.tipo_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.tipo_ocorrencia.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/include/JS/sso-config.js",
+		"/D/Users/i1779101/Desktop/SOLIC_PAGAMENTO.txt",
+		"/D/Users/i1779101/Desktop/benner_xml3 (00000003).xml",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/server_test.go",
+		"/D/Temp/virtualsf/fula/f788a486-9367-49d1-a2ff-3c4c91e9dfcb.file.meta",
+		"/D/Temp/virtualsf/fula/1e19981e-80de-4aa4-97fe-ecccd1c41e8c.file",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/vfolder.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/vfdirstore.go",
+		"/D/Temp/virtualsf/fula/_dir.config",
+		"/D/Temp/virtualsf/fula/cdb81ba4-a4f2-494c-bc7f-a794ecc7999d.file.meta",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/server.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/results.go",
+		"/D/Temp/virtualsf/fula/ffa1a4f5-e1f1-45fd-b055-8bea64ac8310.file",
+		"/D/Projetos/TFS/pmn_sentinela_Trunk/3-0_CodigoFonte/02_SPT/views.sql",
+		"/D/Projetos/TFS/pmn_sentinela_Trunk/3-0_CodigoFonte/02_SPT/datawarehouse/dw.sql",
 		"/D/Projetos/TFS/pmn_sentinela_Trunk/3-0_CodigoFonte/02_SPT/consultas/GERACAO_REL_DISPONIBILIDADE_NETCENTER.sql",
 		"/D/Projetos/GO/src/github.com/stretchr/testify/http/test_response_writer.go",
 		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_9.sql",
@@ -341,94 +491,7 @@
 		"/D/Projetos/TFS/pds_bcc_Trunk/3-0_Produto/TemplatesWebAspNet/3-2_Fontes/Infraero.BCC.Templates.AspNet/Infraero.BCC.Templates.Padrao/Infraero.BCC.Templates.Padrao.nuspec",
 		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/Atualizacoes_BD.sql",
 		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_0_0_19.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/02_AtualizacaoVr_1_0_1.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/03_ScriptCargaMigracaoIog.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_0_0_26.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_0_0_30.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_0_0_35.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_0_0_36.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_0_0_39.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_0_0_42.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_0_0.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_0_0_21.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_0_0_20.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_0.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_1.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_2.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_3.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_4.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_6.sql",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/main.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/vfdirstore.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/vfolder.go",
-		"/D/Temp/virtualsf/MY_APP/_dir.config",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/config.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/playground.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/templates/playground/form.html",
-		"/D/Temp/virtualsf/fula/_dir.config",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/config.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/server.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/.htpasswd",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/model/errors.go",
-		"/D/Temp/virtualsf/MY_APP/dir.config",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/dir.config.sample",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/results.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/README.md",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server.ini",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/server.ini",
-		"/D/Projetos/GO/src/code/google/gcfg/doc.go",
-		"/D/Projetos/GO/src/code/google/gcfg/go1_2.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/model/vfmanager.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/model/file.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/model/vfstorage.go",
-		"/D/Projetos/GO/src/infraero/virtualsf/server/main.go",
-		"/D/Projetos/GO/src/infraero/virtualsf/server/handlers/vfolder.go",
-		"/D/Projetos/GO/src/infraero/virtualsf/storage/vfdirstore.go",
-		"/D/Temp/virtualsf/108fd91b-ecbb-4190-b3b8-327e222a52bd.file.meta",
-		"/D/Projetos/GO/src/infraero/virtualsf/server/handlers/tests.go",
-		"/D/Projetos/GO/src/infraero/virtualsf/server/templates/home/hello.html",
-		"/D/Projetos/GO/src/infraero/virtualsf/model/file.go",
-		"/D/Projetos/GO/src/infraero/virtualsf/server/handlers/results.go",
-		"/D/Projetos/GO/src/labs/weblab/main.go",
-		"/D/Projetos/GO/src/infraero/virtualsf/server/vfolder/handler.go",
-		"/D/Projetos/GO/src/labs/weblab/handlers/home.go",
-		"/D/Projetos/GO/src/infraero/virtualsf/server/handlers.go",
-		"/D/Projetos/Laboratorio/lab_sfml/src/Program.cpp",
-		"/D/Ferramentas/CPP/TDM64_GCC_4_9_2/mingwvars.bat",
-		"/D/Projetos/Laboratorio/lab_sfml/src/cmake_modules/FindSFML.cmake",
-		"/D/Projetos/Laboratorio/lab_sfml/src/CMakeLists.txt",
-		"/D/Projetos/Laboratorio/lab_sfml/src/COPYING",
-		"/D/Projetos/Laboratorio/lab_sfml/src/config.h.in",
-		"//10.0.19.209/dsv_wsrh/Web_old.config",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_7.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/03_Procedimentos/PRC_ATUALIZAR_ESTATISTICAS.sql",
-		"/C/Windows/Microsoft.NET/Framework/v2.0.50727/CONFIG/machine.config",
-		"/D/Projetos/GO/src/labs/weblab/handlers/results.go",
-		"/D/Projetos/Laboratorio/lab_aspnet5/bin/output/approot/src/lab_aspnet5/Main.cs",
-		"/D/Projetos/Laboratorio/lab_aspnet5/bin/output/approot/global.json",
-		"/D/Projetos/GO/src/labs/weblab/templates/layout.html",
-		"/D/Ferramentas/Visual Studio/download_aspnet5.cmd",
-		"/D/Ferramentas/Visual Studio/dnvminstall.ps1",
-		"/D/Ferramentas/Visual Studio/download_aspnet5.ps1",
-		"/D/Projetos/GO/src/labs/weblab/teste.txt",
-		"/D/Projetos/GO/src/labs/weblab/static/css/site.css",
-		"/D/Projetos/GO/src/labs/weblab/static/css/layout.css",
-		"/D/Projetos/GO/src/labs/weblab/templates/home/hello.html",
-		"/D/Projetos/GO/src/labs/weblab/handlers/views.go",
-		"/D/Projetos/GO/src/labs/weblab/static/dados.txt",
-		"/D/Projetos/GO/src/github.com/skelterjohn/rerun/rerun.go",
-		"/D/Projetos/GO/src/github.com/gorilla/context/context.go",
-		"/D/Projetos/GO/src/github.com/gorilla/context/doc.go",
-		"/D/Users/i1779101/Downloads/ExtProps.Build.sql",
-		"/D/Users/i1779101/Downloads/ExtProps.Test.sql",
-		"//10.0.17.144/wwwroot/netcenter/Content/Css/site.css",
-		"/D/Projetos/Laboratorio/lab_reportserver/Reports/ProdutosWS.rdl",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Web/Properties/PublishProfiles/DSV_INFRANET.pubxml",
-		"/D/Projetos/Pessoais/WSRH/3-2_Fontes/Infraero.WS.RH/Host/Web.config",
-		"/D/Projetos/GO/src/labs/dmclient/main.go",
-		"/D/Users/i1779101/AppData/Roaming/Sublime Text 2/Packages/GoSublime/CHANGELOG.md",
-		"/D/Users/i1779101/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
-		"/D/Shared/DaoEmpregado.cs"
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/02_AtualizacaoVr_1_0_1.sql"
 	],
 	"find":
 	{
@@ -439,6 +502,7 @@
 		"height": 0.0,
 		"where_history":
 		[
+			"<open folders>"
 		]
 	},
 	"find_state":
@@ -446,13 +510,28 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"SUPERINTENDENCIA DE TECNOLOGIA DA INFORMAÇÃO",
+			"[ AREA NEGOCIO RESPONSAVEL ]",
+			"Superintendência de Tecnologia da Informação",
+			"CAC-COM",
+			"CAC-RH",
+			"../gestaocac/imagens",
+			"../gestaocac/include",
+			"www.infranet.gov.br/cac",
+			"- ",
+			"\");"
 		],
 		"highlight": true,
-		"in_selection": false,
+		"in_selection": true,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
 		[
+			"[ AREA NEGOCIO RESPONSAVEL ]",
+			"CAC-COM",
+			"../gestaocaccom/imagens",
+			"../gestaocaccom/include",
+			""
 		],
 		"reverse": false,
 		"show_context": true,
@@ -463,82 +542,27 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "server/server_test.go",
+					"file": "/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.pagina.php",
 					"settings":
 					{
-						"buffer_size": 113,
+						"buffer_size": 66752,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								110,
-								110
+								7642,
+								7642
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/D/Projetos/TFS/pmn_sentinela_Trunk/3-0_CodigoFonte/02_SPT/views.sql",
-					"settings":
-					{
-						"buffer_size": 2250,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								196,
-								196
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/SQL/SQL.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "server/server.go",
-					"settings":
-					{
-						"buffer_size": 1076,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1072,
-								1072
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"syntax": "Packages/PHP/PHP.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -583,7 +607,7 @@
 		"cols":
 		[
 			0.0,
-			0.749280641478,
+			0.879377679134,
 			1.0
 		],
 		"rows":
@@ -593,13 +617,17 @@
 		]
 	},
 	"menu_visible": true,
+	"output.9o://D:\\Projetos\\GO\\src\\github.com\\vitormoura\\Laboratorio\\go\\virtualsf\\server":
+	{
+		"height": 118.0
+	},
 	"output.9o://D:\\Projetos\\GO\\src\\labs\\dmclient":
 	{
 		"height": 124.0
 	},
 	"replace":
 	{
-		"height": 0.0
+		"height": 62.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -622,6 +650,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 219.0,
+	"side_bar_width": 449.0,
 	"status_bar_visible": true
 }
