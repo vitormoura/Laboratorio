@@ -1,7 +1,7 @@
 package server
 
 import (
-	_ "bufio"
+	"bufio"
 	"bytes"
 	"encoding/base64"
 	"encoding/json"
@@ -9,12 +9,59 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers"
 	"io"
+	_ "io/ioutil"
+	"math/rand"
 	"net/http"
 	"os"
 	"os/exec"
 	_ "strings"
 	"testing"
 )
+
+var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+//FakeFile é uma implementação de io.Reader para permitir a
+//simulação de envio de arquivos com bytes gerados aleatoriamente
+type FakeFile struct {
+	size    int
+	currPos int
+}
+
+func (f *FakeFile) getBytesRemaining() int {
+	return f.size - f.currPos
+}
+
+func (f *FakeFile) Read(p []byte) (n int, err error) {
+
+	bytesRemaining := f.getBytesRemaining()
+	bytesToRead := 0
+
+	//fmt.Println(len(p), bytesRemaining)
+
+	if bytesRemaining <= 0 {
+		return 0, io.EOF
+	}
+
+	if len(p) == 0 {
+		return 0, nil
+	}
+
+	if len(p) > bytesRemaining {
+		bytesToRead = bytesRemaining
+	} else {
+		bytesToRead = len(p)
+	}
+
+	for i := 0; i < bytesToRead; i++ {
+		p[i] = byte(letters[rand.Intn(len(letters))])
+	}
+
+	f.currPos += bytesToRead
+
+	//fmt.Println(len(p), f.getBytesRemaining())
+
+	return bytesToRead, nil
+}
 
 func initServerDefaultConfiguration() (*exec.Cmd, error) {
 	os.Chdir("../")
@@ -44,18 +91,18 @@ func sendFileToServer(fileName string, fileType string, fileContents io.Reader) 
 
 	resp, err := client.Do(req)
 
-	defer resp.Body.Close()
-
 	if err != nil {
 		return 0, "", err
 	}
+
+	//defer resp.Body.Close()
+	//ioutil.ReadAll(resp.Body)
 
 	if fileID, exists := resp.Header[handlers.X_FILE_ID_HEADER]; exists {
 		return resp.StatusCode, fileID[0], nil
 	} else {
 		return resp.StatusCode, "", nil
 	}
-
 }
 
 func TestInitializeServer(t *testing.T) {
@@ -111,4 +158,25 @@ func TestGetFileList(t *testing.T) {
 
 	assert.Nil(t, err, "Conteúdo da resposta é do tipo JSON")
 	assert.NotNil(t, itens, "A resposta possui um objeto JSON válido")
+}
+
+func TestSendLargeFile(t *testing.T) {
+
+	fake := FakeFile{size: 1024 * 1024 * 40, currPos: 0} //40MB
+
+	statusCode, fileID, err := sendFileToServer("myfile.txt", "text/plain", &fake)
+
+	assert.Nil(t, err, "Requisição realizada sem erro")
+	assert.Equal(t, 201, statusCode, "Server deve retornar código 201, indicando que um novo arquivo foi criado")
+	assert.NotEqual(t, "", fileID, "O server deve retornar o ID do arquivo gerado através de um header")
+
+}
+
+func TestFakeFileReaderInterface(t *testing.T) {
+
+	fake := FakeFile{size: 1024, currPos: 0}
+	reader := bufio.NewReader(&fake)
+	content, _ := reader.ReadString(' ')
+
+	assert.Equal(t, 1024, len([]byte(content)), "Conteudo da string precisa ter 32000 caracteres")
 }
