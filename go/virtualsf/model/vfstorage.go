@@ -12,4 +12,7 @@ type VFStorage interface {
 
 	//List recupera relação de arquivos de uma aplicação identificada pelo id informado
 	List() ([]FileInfo, error)
+
+	//Stats recupera estatísticas sobre a situação de armazenamento do storage
+	Stats() (VFStorageStats, error)
 }

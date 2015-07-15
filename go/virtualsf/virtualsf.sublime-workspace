@@ -4,6 +4,42 @@
 		"selected_items":
 		[
 			[
+				"ra",
+				"ReadDir	[]os.FileInfo, error ƒ"
+			],
+			[
+				"re",
+				"ReadDir	[]os.FileInfo, error ƒ"
+			],
+			[
+				"VF",
+				"VFStorageStats	struct ʈ"
+			],
+			[
+				"mi",
+				"Minute	 Ɩ"
+			],
+			[
+				"Ti",
+				"Time	struct ʈ"
+			],
+			[
+				"tim",
+				"Timer	struct ʈ"
+			],
+			[
+				"ti",
+				"Ticker	struct ʈ"
+			],
+			[
+				"pri",
+				"Println	 ƒ"
+			],
+			[
+				"file",
+				"fileSize	int ν"
+			],
+			[
 				"bytes",
 				"bytesToRead	 ν"
 			],
@@ -14,14 +50,6 @@
 			[
 				"byte",
 				"bytesRemaining	int ν"
-			],
-			[
-				"pri",
-				"Println	n int, err error ƒ"
-			],
-			[
-				"re",
-				"ReadString	line string, err error ƒ"
 			],
 			[
 				"rea",
@@ -54,10 +82,6 @@
 			[
 				"new",
 				"NewScanner	*bufio.Scanner ƒ"
-			],
-			[
-				"file",
-				"fileType	string ν"
 			],
 			[
 				"en",
@@ -315,14 +339,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.pagina.php",
-			"settings":
-			{
-				"buffer_size": 66752,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -364,6 +380,61 @@
 	},
 	"file_history":
 	[
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/vfdirstore.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/main.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/stats/agent.go",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_9.sql",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/stats/agent_test.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/model/stats.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/model/vfstorage.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/services/vfstats/stats_agent.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/server.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/logs.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/services/logs/logsrv.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/services/vfstats/agent.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/services/vflog/logsrv.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/tests/functions.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/vfolder.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/tests/server_test.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/tests/fakereader_test.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/tests/fakereader.go",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.pagina.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/index2.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/index.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/.htaccess",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.dependencias.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.destino_triagem.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.edificacao_infraero.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.empregados.oracle_bkp.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.equipe_ti.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.historico_acesso_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.historico_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.item_configuracao.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.item_configuracao_bkp.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.localizacao_fisica.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.patrimonio_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.patrimonio_ti.ativos.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.perfil_recurso_ti.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.prioridade_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.prioridade_chamado_bkp.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.recurso_ti.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.situacao_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.subtipo_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.tipo_ocorrencia.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/class.empregados.oracle.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.andamento_projeto.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.anexo_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.aprovacao_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.atividade_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.atribuicao_chamado.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.atribuicao_chamado_bkp.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.avaliacao_atendimento.php",
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.chamado.IDM.php",
+		"/D/Projetos/TFS/pds_bcc_Trunk/3-0_Produto/InfraeroRH/Infraero.BCC.RH/Infraero.BCC.RH.Gestorh/LocalizadorEmpregados.cs",
+		"/D/Projetos/TFS/RCT_DSV/3-0_CodigoFonte/3-2_SRC/Aplicacao/Infraero.DA.RCT/Infraero.DA.RCT.Dados.Gestorh/ServicosRH.cs",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/tests/requests.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/server_test.go",
 		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/erro_acesso.php",
 		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/GraficoChamadoPorEquipePie.php",
 		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/Item_configuracaoPDF.php",
@@ -394,7 +465,6 @@
 		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/Biblioteca/migracao_dados/migracao_uorg2.sql",
 		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/include/PHP/menu.php",
 		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoAcompanhar.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.pagina.php",
 		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoAcompanhar.php",
 		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoAbrir.IDM.php",
 		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoAbrir.php",
@@ -437,61 +507,7 @@
 		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoAnexo.php",
 		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoAnexoCEA.php",
 		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoClassificacao.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoDetalhesCEA.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/class.empregados.oracle.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.andamento_projeto.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.anexo_chamado.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.aprovacao_chamado.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.atividade_chamado.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.atribuicao_chamado.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.atribuicao_chamado_bkp.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.avaliacao_atendimento.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.banco_de_dados.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.chamado.IDM.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.chamado.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.dependencias.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.destino_triagem.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.edificacao_infraero.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.empregados.oracle.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.empregados.oracle_bkp.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.equipe_ti.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.historico_acesso_chamado.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.historico_chamado.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.item_configuracao.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.item_configuracao_bkp.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.localizacao_fisica.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.patrimonio_chamado.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.patrimonio_ti.ativos.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.perfil_recurso_ti.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.prioridade_chamado.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.recurso_ti.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.situacao_chamado.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.subtipo_chamado.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.tipo_chamado.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.tipo_ocorrencia.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/include/JS/sso-config.js",
-		"/D/Users/i1779101/Desktop/SOLIC_PAGAMENTO.txt",
-		"/D/Users/i1779101/Desktop/benner_xml3 (00000003).xml",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/server_test.go",
-		"/D/Temp/virtualsf/fula/f788a486-9367-49d1-a2ff-3c4c91e9dfcb.file.meta",
-		"/D/Temp/virtualsf/fula/1e19981e-80de-4aa4-97fe-ecccd1c41e8c.file",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/vfolder.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/vfdirstore.go",
-		"/D/Temp/virtualsf/fula/_dir.config",
-		"/D/Temp/virtualsf/fula/cdb81ba4-a4f2-494c-bc7f-a794ecc7999d.file.meta",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/server.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/results.go",
-		"/D/Temp/virtualsf/fula/ffa1a4f5-e1f1-45fd-b055-8bea64ac8310.file",
-		"/D/Projetos/TFS/pmn_sentinela_Trunk/3-0_CodigoFonte/02_SPT/views.sql",
-		"/D/Projetos/TFS/pmn_sentinela_Trunk/3-0_CodigoFonte/02_SPT/datawarehouse/dw.sql",
-		"/D/Projetos/TFS/pmn_sentinela_Trunk/3-0_CodigoFonte/02_SPT/consultas/GERACAO_REL_DISPONIBILIDADE_NETCENTER.sql",
-		"/D/Projetos/GO/src/github.com/stretchr/testify/http/test_response_writer.go",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_9.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_8.sql",
-		"/D/Projetos/TFS/pds_bcc_Trunk/3-0_Produto/TemplatesWebAspNet/3-2_Fontes/Infraero.BCC.Templates.AspNet/Infraero.BCC.Templates.Padrao/Infraero.BCC.Templates.Padrao.nuspec",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/Atualizacoes_BD.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_0_0_19.sql",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/02_AtualizacaoVr_1_0_1.sql"
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoDetalhesCEA.php"
 	],
 	"find":
 	{
@@ -510,6 +526,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"fmt",
+			"strpos($_SERVER[\"SCRIPT_FILENAME\"], \"cac/\")",
+			"www.infra",
+			"row",
+			"rownum",
 			"SUPERINTENDENCIA DE TECNOLOGIA DA INFORMAÇÃO",
 			"[ AREA NEGOCIO RESPONSAVEL ]",
 			"Superintendência de Tecnologia da Informação",
@@ -522,11 +543,12 @@
 			"\");"
 		],
 		"highlight": true,
-		"in_selection": true,
+		"in_selection": false,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
 		[
+			"strpos($_SERVER[\"SCRIPT_FILENAME\"], \"caccom/\")",
 			"[ AREA NEGOCIO RESPONSAVEL ]",
 			"CAC-COM",
 			"../gestaocaccom/imagens",
@@ -541,38 +563,6 @@
 	},
 	"groups":
 	[
-		{
-			"sheets":
-			[
-				{
-					"buffer": 0,
-					"file": "/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/include/PHP/class/class.pagina.php",
-					"settings":
-					{
-						"buffer_size": 66752,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								7642,
-								7642
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
-			]
-		},
 		{
 			"sheets":
 			[
@@ -596,18 +586,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.879377679134,
 			1.0
 		],
 		"rows":
@@ -650,6 +633,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 449.0,
+	"side_bar_width": 350.0,
 	"status_bar_visible": true
 }

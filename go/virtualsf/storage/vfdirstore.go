@@ -139,6 +139,10 @@ func (dir *vfdirStorage) List() ([]model.FileInfo, error) {
 	return result, nil
 }
 
+func (dir *vfdirStorage) Stats() (model.VFStorageStats, error) {
+	return model.VFStorageStats{}, nil
+}
+
 //verifyFilters testa se arquivo informado pode ser armazenado com base na configuração de filtros do diretório
 func (dir *vfdirStorage) verify(file *model.File) error {
 
