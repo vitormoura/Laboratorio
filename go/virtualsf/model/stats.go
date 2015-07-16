@@ -8,6 +8,6 @@ import (
 type VFStorageStats struct {
 	App       string
 	Date      time.Time
-	TotalSize float32
+	TotalSize int64
 	FileCount int
 }

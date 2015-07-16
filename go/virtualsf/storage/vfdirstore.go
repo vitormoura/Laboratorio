@@ -9,10 +9,16 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
+	"path"
 	"path/filepath"
 	"sort"
 	"strings"
 	"time"
+)
+
+const (
+	StatsDir = "Stats"
+	LogsDir  = "Logs"
 )
 
 type vfdirStorage struct {
@@ -120,7 +126,7 @@ func (dir *vfdirStorage) List() ([]model.FileInfo, error) {
 
 		if info != nil && !info.IsDir() {
 
-			if filepath.Ext(info.Name()) == ".meta" {
+			if IsMetaFile(info.Name()) {
 
 				_, fileName := filepath.Split(info.Name())
 
@@ -180,8 +186,24 @@ func (dir *vfdirStorage) setup() error {
 
 	if err != nil && os.IsNotExist(err) {
 
-		//Diretórios que não existem precisam ser criados e suas configurações inicializadas
-		if err := os.Mkdir(dir.root, os.ModeDir); err != nil {
+		//Diretórios que não existem precisam ser criados e suas configurações padrão inicializadas
+
+		//Diretório RAIZ
+		if err := os.Mkdir(dir.root, os.ModeDir); err == nil {
+
+			//Diretório LOGS
+			if err := os.Mkdir(path.Join(dir.root, LogsDir), os.ModeDir); err == nil {
+
+				//Diretório STATS
+				if err := os.Mkdir(path.Join(dir.root, StatsDir), os.ModeDir); err != nil {
+					return err
+				}
+
+			} else {
+				return err
+			}
+
+		} else {
 			return err
 		}
 
@@ -218,6 +240,11 @@ func (dir *vfdirStorage) handleConfigurationUpdate() {
 	for _ = range time.Tick(1 * time.Minute) {
 		dir.config = readConfigurationFrom(dir.root)
 	}
+}
+
+//IsMetaFile verifica se o nome do arquivo informado o qualifica como um arquivo de metadados
+func IsMetaFile(fileName string) bool {
+	return filepath.Ext(fileName) == ".meta"
 }
 
 //NewDirStorage cria um novo VFStorage que armazena arquivos em diretórios do

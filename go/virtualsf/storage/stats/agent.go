@@ -1,11 +1,7 @@
 package stats
 
 import (
-	_ "fmt"
 	_ "github.com/vitormoura/Laboratorio/go/virtualsf/model"
-	_ "io/ioutil"
-	_ "os"
-	_ "path/filepath"
 	"time"
 )
 
@@ -38,22 +34,21 @@ func (d *DirStoreStatsAgent) Stop() {
 
 func (d *DirStoreStatsAgent) update() {
 
-	/*
-		for agora := range d.ticker.C {
+	for agora := range d.ticker.C {
 
-			filepath.Walk(d.root, func(path string, info os.FileInfo, err error) error {
+		stats, err := getStatsFromDirStorage(d.root)
 
-				if info.IsDir() {
-
-					stat := model.VFStorageStats{}
-
-				}
-
-				return nil
-			})
-
+		if err != nil {
+			break
 		}
-	*/
+
+		stats.Date = agora
+		err = saveStatsToDirStorage(d.root, stats)
+
+		if err != nil {
+			break
+		}
+	}
 }
 
 //NewAgent cria um novo agente que realiza atualizacoes a cada quantidade de minutos informados
