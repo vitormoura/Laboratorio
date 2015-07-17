@@ -1,7 +1,7 @@
 package storage
 
 import (
-	_ "fmt"
+	"fmt"
 	"github.com/stretchr/testify/assert"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
 	"testing"
@@ -11,12 +11,18 @@ const testStorageRootDir = "D:\\Temp\\virtualsf-tests\\"
 
 func TestContabilizarDirComArquivos(t *testing.T) {
 
-	resultC, _ := getStatsFromDirStorage(testStorageRootDir)
+	resultC, doneC, _ := calculateStatsFromDirStorageRoot(testStorageRootDir)
 
 	stats := make([]model.VFStorageStats, 0, 10)
 
-	for stat := range resultC {
-		stats = append(stats, stat)
+loop:
+	for {
+		select {
+		case stat := <-resultC:
+			stats = append(stats, stat)
+		case <-doneC:
+			break loop
+		}
 	}
 
 	assert.Equal(t, 2, len(stats), "Quantidade de arquivos deve ser 2")

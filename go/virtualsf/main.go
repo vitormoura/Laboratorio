@@ -6,10 +6,10 @@ import (
 )
 
 func main() {
-	config := server.GetDefaultConfiguration()
+	config := getDefaultConfiguration()
 
-	agent := storage.NewStatsUpdateAgent(config.Main.SharedFolder, 1)
+	agent := storage.NewStatsUpdateAgent(config.Server.SharedFolder, config.Storage.StatsRefresh)
 	agent.Start()
 
-	server.Run(config)
+	server.Run(config.Server)
 }

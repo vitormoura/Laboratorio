@@ -10,19 +10,19 @@ import (
 	"time"
 )
 
-const logName = "[server]"
+const LOG_NAME = "[server]"
 
 //Run inicia execução do serviço de publicação e pesquisa de arquivos
 func Run(config ServerConfig) {
 
-	port := config.Main.ServerPort
+	port := config.ServerPort
 	router := mux.NewRouter()
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.Handle("/", router)
 
-	handlers.DebugMode = config.Main.DebugMode
-	handlers.VFolder(router, config.Main.SharedFolder)
+	handlers.DebugMode = config.DebugMode
+	handlers.VFolder(router, config.SharedFolder)
 	handlers.Playground(router)
 
 	//Servidor vai exigir autenticação do tipo BASIC com base em usuários e senhas do arquivo .htpasswd
@@ -36,6 +36,6 @@ func Run(config ServerConfig) {
 		MaxHeaderBytes: 1 << 20,
 	}
 
-	log.Printf("%s iniciando servidor, escutando porta %d", logName, port)
+	log.Printf("%s iniciando servidor, escutando porta %d", LOG_NAME, port)
 	log.Fatal(srv.ListenAndServe())
 }

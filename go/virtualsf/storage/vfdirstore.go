@@ -18,7 +18,7 @@ import (
 
 type vfdirStorage struct {
 	root   string
-	config storageConfig
+	config localStorageConfig
 }
 
 func (dir *vfdirStorage) Add(f *model.File) error {

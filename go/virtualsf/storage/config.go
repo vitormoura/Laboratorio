@@ -7,8 +7,12 @@ import (
 	"path/filepath"
 )
 
-//storageConfig representa o esquema de configuração de uma pasta de armazenamento de arquivos
-type storageConfig struct {
+type StorageConfig struct {
+	StatsRefresh int
+}
+
+//localStorageConfig representa o esquema de configuração de uma pasta de armazenamento de arquivos
+type localStorageConfig struct {
 	Global struct {
 		Locked bool
 	}
@@ -19,11 +23,11 @@ type storageConfig struct {
 }
 
 //readConfigurationFrom lê arquivo de configuração do diretório e retorna sua representação em memória
-func readConfigurationFrom(dir string) storageConfig {
+func readConfigurationFrom(dir string) localStorageConfig {
 
 	//Carregando configurações
 	var (
-		config storageConfig
+		config localStorageConfig
 		err    error
 	)
 
@@ -38,7 +42,7 @@ func readConfigurationFrom(dir string) storageConfig {
 
 //initConfigurationTo preparar um arquivo de configuração inicial para o diretório informado,
 //retornando sua representação em memória
-func initConfigurationTo(dir string) storageConfig {
+func initConfigurationTo(dir string) localStorageConfig {
 
 	file, err := os.Create(filepath.Join(dir, DIR_CONFIG_FILENAME))
 
@@ -65,7 +69,7 @@ allow="image/bmp"
 
 	file.WriteString(configSample)
 
-	var config storageConfig
+	var config localStorageConfig
 
 	gcfg.ReadStringInto(&config, configSample)
 

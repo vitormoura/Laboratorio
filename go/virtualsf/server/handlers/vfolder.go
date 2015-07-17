@@ -16,8 +16,7 @@ const (
 
 	//X_FILE_ID_HEADER é o header HTTP enviado contendo o ID de um arquivo recém criado
 	X_FILE_ID_HEADER string = "X-File-Id"
-
-	logName = "[server/handlers]"
+	LOG_NAME                = "[server/handlers]"
 )
 
 var (
@@ -36,7 +35,7 @@ func VFolder(r *mux.Router, sharedFolder string) {
 	//Action para publicar um novo arquivo através de um formulário de envio de arquivos tradicional
 	post.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 
-		log.Println(logName, "POST", req.URL.RequestURI())
+		log.Println(LOG_NAME, "POST", req.URL.RequestURI())
 
 		var (
 			files []model.File
@@ -59,7 +58,7 @@ func VFolder(r *mux.Router, sharedFolder string) {
 	//Action para publicar um novo arquivo com base no corpo da requisição
 	post.HandleFunc("/{file_name}", func(w http.ResponseWriter, req *http.Request) {
 
-		log.Println(logName, "POST", req.URL.RequestURI())
+		log.Println(LOG_NAME, "POST", req.URL.RequestURI())
 
 		var (
 			vars            map[string]string
@@ -86,7 +85,7 @@ func VFolder(r *mux.Router, sharedFolder string) {
 	//Action para listar em formato JSON uma lista de dados básicos dos arquivos de uma determinada aplicação
 	get.HandleFunc("/files", func(w http.ResponseWriter, req *http.Request) {
 
-		log.Println(logName, "GET ", req.URL.RequestURI())
+		log.Println(LOG_NAME, "GET ", req.URL.RequestURI())
 
 		var (
 			err   error
@@ -107,7 +106,7 @@ func VFolder(r *mux.Router, sharedFolder string) {
 
 	//Action para realizar o download do arquivo identificado pelo ID informado
 	get.HandleFunc("/files/{id}", func(w http.ResponseWriter, req *http.Request) {
-		log.Println(logName, "GET ", req.URL.RequestURI())
+		log.Println(LOG_NAME, "GET ", req.URL.RequestURI())
 
 		var (
 			vars map[string]string
@@ -138,7 +137,7 @@ func VFolder(r *mux.Router, sharedFolder string) {
 
 	//Action para recuperar situação das estatísticas de armazenamento da aplicação
 	get.HandleFunc("/stats/stats.json", func(w http.ResponseWriter, req *http.Request) {
-		log.Println(logName, "GET ", req.URL.RequestURI())
+		log.Println(LOG_NAME, "GET ", req.URL.RequestURI())
 
 		fs, err := getDefaultStorage(getAppID(req))
 

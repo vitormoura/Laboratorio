@@ -9,12 +9,12 @@ import (
 	"path/filepath"
 )
 
-//IsMetaFile verifica se o nome do arquivo informado o qualifica como um arquivo de metadados
+//isMetaFile verifica se o nome do arquivo informado o qualifica como um arquivo de metadados
 func isMetaFile(fileName string) bool {
 	return filepath.Ext(fileName) == ".meta"
 }
 
-//IsConfigFile verifica se o nome do arquivo informado o qualifica como um arquivo de configuração
+//isConfigFile verifica se o nome do arquivo informado o qualifica como um arquivo de configuração
 func isConfigFile(fileName string) bool {
 	return filepath.Ext(fileName) == ".config"
 }

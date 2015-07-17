@@ -6,7 +6,7 @@ import (
 )
 
 func TestConfiguracaoAgente(t *testing.T) {
-	agent := NewAgent(testStorageRootDir, 1)
+	agent := NewStatsUpdateAgent(testStorageRootDir, 1)
 
 	assert.NotNil(t, agent, "Agente criado com sucesso")
 }
