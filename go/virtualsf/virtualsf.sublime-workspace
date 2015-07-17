@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"prin",
+				"Println	 ƒ"
+			],
+			[
+				"da",
+				"Day	int ƒ"
+			],
+			[
+				"stat",
+				"stats	model.VFStorageStats ν"
+			],
+			[
+				"sta",
+				"stats	model.VFStorageStats ν"
+			],
+			[
+				"stats",
+				"statsFileName	string ν"
+			],
+			[
+				"file",
+				"fileName	string ν"
+			],
+			[
+				"e",
+				"Exactly	bool ƒ"
+			],
+			[
 				"ra",
 				"ReadDir	[]os.FileInfo, error ƒ"
 			],
@@ -34,10 +62,6 @@
 			[
 				"pri",
 				"Println	 ƒ"
-			],
-			[
-				"file",
-				"fileSize	int ν"
 			],
 			[
 				"bytes",
@@ -86,10 +110,6 @@
 			[
 				"en",
 				"EncodeToString	string ƒ"
-			],
-			[
-				"e",
-				"StdEncoding	*base64.Encoding ν"
 			],
 			[
 				"no",
@@ -224,10 +244,6 @@
 				"Sprintf	string ƒ"
 			],
 			[
-				"prin",
-				"Println	n int, err error ƒ"
-			],
-			[
 				"Confi",
 				"ServerConfig	struct ʈ"
 			],
@@ -339,30 +355,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "storage/stats/agent.go",
-			"settings":
-			{
-				"buffer_size": 1207,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "storage/stats/agent_test.go",
-			"settings":
-			{
-				"buffer_size": 243,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "main.go",
-			"settings":
-			{
-				"buffer_size": 359,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -404,15 +396,32 @@
 	},
 	"file_history":
 	[
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/vfdirstore.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/main.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/stats/agent.go",
-		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_9.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Web/App_Start/MiniprofilerConfig.cs",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Notificador/packages.config",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Sql/ScriptCargaCategorias.pd.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Sql/ScriptGrants.pd.sql",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Sql/ScriptCargaTabelasDominio.pd.sql",
+		"/D/Temp/virtualsf/fula/c53969f6-2414-4b74-af82-96513addff80.file.meta",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/server.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/stats/agent_test.go",
+		"/D/Projetos/Laboratorio/lab_savsec/Infraero.DO.BPO.sln",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Web/Global.asax.cs",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Web/Controllers/ScriptsController.cs",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Web/Controllers/AppController.cs",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Domain/packages.config",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Domain/Resources/Emails.resx",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Web/Global.asax",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Web/packages.config",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/stats/agent.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/stats/functions.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/vfdirstore.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/stats/functions_test.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/model/stats.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/main.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/stats/stats_calc.go",
+		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_9.sql",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/model/vfstorage.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/services/vfstats/stats_agent.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/server.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/logs.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/services/logs/logsrv.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/services/vfstats/agent.go",
@@ -514,24 +523,7 @@
 		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoConfirmacao.php",
 		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoDetalhesAprovacaoCEA.php",
 		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoDetalhesCEA.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoEncerramento.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoPrioridade.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/EmpregadosPesquisaPopupOracle.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/index.IDM.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/index.php.bkp",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/index44.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/logout.IDM.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/logout.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/msgAcesso.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/principal.IDM.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/solicitacaodeservicos.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/sso-index.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/include/PHP/autentica.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoAlterar.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoAnexo.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoAnexoCEA.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoClassificacao.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoDetalhesCEA.php"
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoEncerramento.php"
 	],
 	"find":
 	{
@@ -550,6 +542,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"os",
 			"fmt",
 			"strpos($_SERVER[\"SCRIPT_FILENAME\"], \"cac/\")",
 			"www.infra",
@@ -588,93 +581,8 @@
 	"groups":
 	[
 		{
-			"selected": 2,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "storage/stats/agent.go",
-					"settings":
-					{
-						"buffer_size": 1207,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								36,
-								36
-							]
-						],
-						"settings":
-						{
-							"function_name_status_row": 4,
-							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 72.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "storage/stats/agent_test.go",
-					"settings":
-					{
-						"buffer_size": 243,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								139,
-								139
-							]
-						],
-						"settings":
-						{
-							"function_name_status_row": 8,
-							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "main.go",
-					"settings":
-					{
-						"buffer_size": 359,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								246,
-								246
-							]
-						],
-						"settings":
-						{
-							"function_name_status_row": -1,
-							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -711,7 +619,7 @@
 	"menu_visible": true,
 	"output.9o://D:\\Projetos\\GO\\src\\github.com\\vitormoura\\Laboratorio\\go\\virtualsf\\server":
 	{
-		"height": 118.0
+		"height": 289.0
 	},
 	"output.9o://D:\\Projetos\\GO\\src\\labs\\dmclient":
 	{

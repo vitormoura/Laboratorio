@@ -1,22 +1,29 @@
 package stats
 
 import (
+	_ "fmt"
 	"github.com/stretchr/testify/assert"
+	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
 	"testing"
 )
 
-func TestContabilizarTamanhoDiretorioVazioRetornaZero(t *testing.T) {
-	s, err := getStatsFromDirStorage("D:\\Temp\\virtualsf\\Vazia")
-
-	assert.Nil(t, err, "Execução sem erros")
-	assert.Equal(t, int64(0), s.TotalSize, "Tamanho computado deve ser ZERO")
-	assert.Equal(t, 0, s.FileCount, "Quantidade de arquivos deve ser ZERO")
-}
+const testStorageRootDir = "D:\\Temp\\virtualsf-tests\\"
 
 func TestContabilizarDirComArquivos(t *testing.T) {
-	s, err := getStatsFromDirStorage("D:\\Temp\\virtualsf\\Temp")
 
-	assert.Nil(t, err, "Execução sem erros")
-	//assert.Equal(t, int64(0), s.TotalSize, "Tamanho computado deve ser ZERO")
-	assert.Equal(t, 2, s.FileCount, "Quantidade de arquivos deve ser 2")
+	resultC, _ := getStatsFromDirStorage(testStorageRootDir)
+
+	stats := make([]model.VFStorageStats, 0, 10)
+
+	for stat := range resultC {
+		stats = append(stats, stat)
+	}
+
+	assert.Equal(t, 2, len(stats), "Quantidade de arquivos deve ser 2")
+	assert.Equal(t, "SYS-A", stats[0].App, "Primeiro sistema e SYS-A")
+	assert.Equal(t, "SYS-V", stats[1].App, "Segundo sistema e SYS-V")
+
+	assert.Equal(t, 2, stats[0].FileCount, "SYS-A deve possuir dois arquivos")
+	assert.Equal(t, 0, stats[1].FileCount, "SYS-V nao deve possuir arquivos")
+
 }

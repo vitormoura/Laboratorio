@@ -1,9 +1,12 @@
 package stats
 
 import (
-	_ "github.com/vitormoura/Laboratorio/go/virtualsf/model"
+	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
+	"log"
 	"time"
 )
+
+const logName = "[storage/stats]"
 
 //DirStoreStatsAgent é um contínuo que atualiza estatísticas de utilização
 //periodicamente
@@ -36,17 +39,34 @@ func (d *DirStoreStatsAgent) update() {
 
 	for agora := range d.ticker.C {
 
-		stats, err := getStatsFromDirStorage(d.root)
+		log.Println(logName, "iniciando atualizacao de estatisticas")
 
-		if err != nil {
-			break
-		}
+		var (
+			stats model.VFStorageStats
+			err   error
+		)
 
-		stats.Date = agora
-		err = saveStatsToDirStorage(d.root, stats)
+		resultC, doneC, errorC := calculateStatsFromDirStorageRoot(d.root)
 
-		if err != nil {
-			break
+	STATS_CALC_LOOP:
+		for {
+			select {
+			case stats = <-resultC:
+
+				stats.Date = agora
+				err = saveStatsToDirStorage(stats)
+
+				if err != nil {
+					break
+				}
+
+			case err = <-errorC:
+				log.Println(logName, err.Error())
+
+			case <-doneC:
+				log.Println(logName, "estatisticas atualizadas")
+				break STATS_CALC_LOOP
+			}
 		}
 	}
 }

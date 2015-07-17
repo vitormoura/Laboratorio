@@ -5,45 +5,74 @@ import (
 	"fmt"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/storage"
-	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
 )
 
-//GetStatsFromDirStorage preparar detalhes sobre o armazenamento de um storage com base em configurações padrão
-func getStatsFromDirStorage(dir string) (stat model.VFStorageStats, err error) {
+//calculateStatsFromDirStorageRoot preparar detalhes sobre o armazenamento de um storage com base em configurações padrão
+func calculateStatsFromDirStorageRoot(dir string) (<-chan model.VFStorageStats, <-chan int, <-chan error) {
 
-	err = filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+	resultC := make(chan model.VFStorageStats)
+	errorC := make(chan error)
+	doneC := make(chan int)
 
-		if info.IsDir() {
+	go func() {
 
-			files, err := ioutil.ReadDir(path)
+		err := filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
 
-			if err != nil {
-				return err
-			}
+			//Somente diretórios diferentes da raiz informada
+			if info.IsDir() && path != dir {
 
-			for _, f := range files {
+				stat := model.VFStorageStats{App: info.Name(), Location: path}
 
-				//Arquivo não pode ser um diretório nem um META-FILE
-				if !f.IsDir() && !storage.IsMetaFile(f.Name()) {
-					stat.TotalSize += f.Size()
-					stat.FileCount++
+				innerErr := filepath.Walk(path, func(innerPath string, innerInfo os.FileInfo, err error) error {
+
+					if innerPath != path {
+
+						if innerInfo.IsDir() {
+							return filepath.SkipDir
+						}
+
+						if !storage.IsMetaFile(innerInfo.Name()) {
+							stat.TotalSize += innerInfo.Size()
+							stat.FileCount++
+						}
+					}
+
+					return nil
+				})
+
+				if innerErr != nil {
+					return innerErr
 				}
+
+				resultC <- stat
+
+				//O conteúdo do diretório já foi avaliado internamente
+				return filepath.SkipDir
 			}
 
-			return filepath.SkipDir
+			return nil
+		})
+
+		if err != nil {
+			errorC <- err
 		}
 
-		return nil
-	})
+		doneC <- 0
 
-	return
+		close(resultC)
+		close(errorC)
+		close(doneC)
+
+	}()
+
+	return resultC, doneC, errorC
 }
 
 //saveStatsToDirStorage grava as estatísticas informadas no diretório padrão da pasta informada
-func saveStatsToDirStorage(dir string, stats model.VFStorageStats) error {
+func saveStatsToDirStorage(stats model.VFStorageStats) error {
 
 	bytes, err := json.Marshal(stats)
 
@@ -52,7 +81,7 @@ func saveStatsToDirStorage(dir string, stats model.VFStorageStats) error {
 	}
 
 	statsFileName := fmt.Sprintf("stats-%d-%d-%d.json", stats.Date.Year(), stats.Date.Month(), stats.Date.Day())
-	statsFile, err := os.Create(path.Join(dir, storage.StatsDir, statsFileName))
+	statsFile, err := os.Create(path.Join(stats.Location, storage.StatsDir, statsFileName))
 
 	defer statsFile.Close()
 

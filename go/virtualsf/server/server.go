@@ -10,6 +10,8 @@ import (
 	"time"
 )
 
+const logName = "[server]"
+
 //Run inicia execução do serviço de publicação e pesquisa de arquivos
 func Run(config ServerConfig) {
 
@@ -34,5 +36,6 @@ func Run(config ServerConfig) {
 		MaxHeaderBytes: 1 << 20,
 	}
 
+	log.Printf("%s iniciando servidor, escutando porta %d", logName, port)
 	log.Fatal(srv.ListenAndServe())
 }
