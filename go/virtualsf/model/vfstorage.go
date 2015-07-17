@@ -14,5 +14,5 @@ type VFStorage interface {
 	List() ([]FileInfo, error)
 
 	//Stats recupera estatísticas sobre a situação de armazenamento do storage
-	Stats() (VFStorageStats, error)
+	Stats() (*VFStorageStats, error)
 }

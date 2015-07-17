@@ -1,14 +1,23 @@
-package stats
+package storage
 
 import (
 	"encoding/json"
 	"fmt"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
-	"github.com/vitormoura/Laboratorio/go/virtualsf/storage"
 	"os"
 	"path"
 	"path/filepath"
 )
+
+//IsMetaFile verifica se o nome do arquivo informado o qualifica como um arquivo de metadados
+func isMetaFile(fileName string) bool {
+	return filepath.Ext(fileName) == ".meta"
+}
+
+//IsConfigFile verifica se o nome do arquivo informado o qualifica como um arquivo de configuração
+func isConfigFile(fileName string) bool {
+	return filepath.Ext(fileName) == ".config"
+}
 
 //calculateStatsFromDirStorageRoot preparar detalhes sobre o armazenamento de um storage com base em configurações padrão
 func calculateStatsFromDirStorageRoot(dir string) (<-chan model.VFStorageStats, <-chan int, <-chan error) {
@@ -34,7 +43,7 @@ func calculateStatsFromDirStorageRoot(dir string) (<-chan model.VFStorageStats, 
 							return filepath.SkipDir
 						}
 
-						if !storage.IsMetaFile(innerInfo.Name()) {
+						if !isMetaFile(innerInfo.Name()) && !isConfigFile(innerInfo.Name()) {
 							stat.TotalSize += innerInfo.Size()
 							stat.FileCount++
 						}
@@ -80,8 +89,9 @@ func saveStatsToDirStorage(stats model.VFStorageStats) error {
 		return err
 	}
 
+	//Arquivo diário
 	statsFileName := fmt.Sprintf("stats-%d-%d-%d.json", stats.Date.Year(), stats.Date.Month(), stats.Date.Day())
-	statsFile, err := os.Create(path.Join(stats.Location, storage.StatsDir, statsFileName))
+	statsFile, err := os.Create(path.Join(stats.Location, DIR_STATS_LOCATION, statsFileName))
 
 	defer statsFile.Close()
 
@@ -90,6 +100,17 @@ func saveStatsToDirStorage(stats model.VFStorageStats) error {
 	}
 
 	statsFile.WriteString(string(bytes))
+
+	//Arquivo mais atual
+	currentStatsFile, err := os.Create(path.Join(stats.Location, DIR_STATS_LOCATION, DIR_CURR_STATUS_FILENAME))
+
+	defer currentStatsFile.Close()
+
+	if err != nil {
+		return err
+	}
+
+	currentStatsFile.WriteString(string(bytes))
 
 	return nil
 }

@@ -1,4 +1,4 @@
-package stats
+package storage
 
 import (
 	_ "fmt"

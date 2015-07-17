@@ -39,12 +39,7 @@ func renderView(viewName string, model interface{}, w http.ResponseWriter) {
 		t, err = template.ParseFiles(mainLayoutFile, filepath.Join(templateDir, viewName+".html"))
 
 		if err != nil {
-			internalError(w)
-
-			if DebugMode {
-				fmt.Fprintln(w, err.Error())
-			}
-
+			internalError(err, w)
 			return
 		}
 
@@ -60,8 +55,7 @@ func renderView(viewName string, model interface{}, w http.ResponseWriter) {
 	err = t.Execute(w, model)
 
 	if err != nil {
-		log.Println("Erro ao processar template ", viewName)
-		internalError(w)
+		internalError(err, w)
 	}
 }
 
@@ -72,8 +66,12 @@ func content(msg string, w http.ResponseWriter) {
 }
 
 //internalError retorna uma resposta do tipo erro ao cliente
-func internalError(w http.ResponseWriter) {
+func internalError(err error, w http.ResponseWriter) {
 	w.WriteHeader(http.StatusInternalServerError)
+
+	if DebugMode {
+		fmt.Fprintln(w, err.Error())
+	}
 }
 
 //notFound retorna um status do tipo 404, indicando que o recurso solicitado não foi encontrado
@@ -97,7 +95,7 @@ func writeFile(reader io.Reader, mimeType string, w http.ResponseWriter) {
 	for qtdBytesLidos, err = reader.Read(buffer); qtdBytesLidos > 0; qtdBytesLidos, err = reader.Read(buffer) {
 
 		if err != nil && err != io.EOF {
-			internalError(w)
+			internalError(err, w)
 			break
 		}
 
@@ -112,7 +110,7 @@ func jsonr(model interface{}, w http.ResponseWriter) {
 	bytes, err := json.Marshal(model)
 
 	if err != nil {
-		internalError(w)
+		internalError(err, w)
 		return
 	}
 

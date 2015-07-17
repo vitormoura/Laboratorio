@@ -16,11 +16,6 @@ import (
 	"time"
 )
 
-const (
-	StatsDir = "Stats"
-	LogsDir  = "Logs"
-)
-
 type vfdirStorage struct {
 	root   string
 	config storageConfig
@@ -126,7 +121,7 @@ func (dir *vfdirStorage) List() ([]model.FileInfo, error) {
 
 		if info != nil && !info.IsDir() {
 
-			if IsMetaFile(info.Name()) {
+			if isMetaFile(info.Name()) {
 
 				_, fileName := filepath.Split(info.Name())
 
@@ -145,8 +140,25 @@ func (dir *vfdirStorage) List() ([]model.FileInfo, error) {
 	return result, nil
 }
 
-func (dir *vfdirStorage) Stats() (model.VFStorageStats, error) {
-	return model.VFStorageStats{}, nil
+//Stats recupera estatisticas de armazenamento do storage
+func (dir *vfdirStorage) Stats() (*model.VFStorageStats, error) {
+
+	//Recuperamos inicialmente a metadata do arquivo
+	statsFileBytes, err := ioutil.ReadFile(dir.getCurrentStatsFileName())
+
+	if err != nil {
+		return nil, err
+	}
+
+	var stats model.VFStorageStats
+
+	err = json.Unmarshal(statsFileBytes, &stats)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &stats, nil
 }
 
 //verifyFilters testa se arquivo informado pode ser armazenado com base na configuração de filtros do diretório
@@ -192,10 +204,10 @@ func (dir *vfdirStorage) setup() error {
 		if err := os.Mkdir(dir.root, os.ModeDir); err == nil {
 
 			//Diretório LOGS
-			if err := os.Mkdir(path.Join(dir.root, LogsDir), os.ModeDir); err == nil {
+			if err := os.Mkdir(path.Join(dir.root, DIR_LOGS_LOCATION), os.ModeDir); err == nil {
 
 				//Diretório STATS
-				if err := os.Mkdir(path.Join(dir.root, StatsDir), os.ModeDir); err != nil {
+				if err := os.Mkdir(path.Join(dir.root, DIR_STATS_LOCATION), os.ModeDir); err != nil {
 					return err
 				}
 
@@ -234,17 +246,17 @@ func (dir *vfdirStorage) getMetaFileName(id string) string {
 	return dir.getFileName(id) + ".meta"
 }
 
+//getMetaFileName recupera caminho completo do arquivo de metadata do arquivo armazenado identificado pelo ID informado
+func (dir *vfdirStorage) getCurrentStatsFileName() string {
+	return filepath.Join(dir.root, DIR_STATS_LOCATION, DIR_CURR_STATUS_FILENAME)
+}
+
 //handleConfigurationUpdate atualiza configuração periodicamente (a cada minuto)
 func (dir *vfdirStorage) handleConfigurationUpdate() {
 
 	for _ = range time.Tick(1 * time.Minute) {
 		dir.config = readConfigurationFrom(dir.root)
 	}
-}
-
-//IsMetaFile verifica se o nome do arquivo informado o qualifica como um arquivo de metadados
-func IsMetaFile(fileName string) bool {
-	return filepath.Ext(fileName) == ".meta"
 }
 
 //NewDirStorage cria um novo VFStorage que armazena arquivos em diretórios do

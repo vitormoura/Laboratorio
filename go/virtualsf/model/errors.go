@@ -11,4 +11,5 @@ var (
 	ErrStorageInvalidConfig = errors.New("virtualfs: Storage invalid configuration")
 	ErrEmptyFile            = errors.New("virtualfs: File is empty")
 	ErrStorageLocked        = errors.New("virtualfs: Storage locked")
+	ErrStorageStatsNotFound = errors.New("virutalfs: Storage stats not found")
 )

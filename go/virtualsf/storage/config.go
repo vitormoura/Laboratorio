@@ -7,8 +7,6 @@ import (
 	"path/filepath"
 )
 
-const dirConfigFilename = "_dir.config"
-
 //storageConfig representa o esquema de configuração de uma pasta de armazenamento de arquivos
 type storageConfig struct {
 	Global struct {
@@ -29,7 +27,7 @@ func readConfigurationFrom(dir string) storageConfig {
 		err    error
 	)
 
-	err = gcfg.ReadFileInto(&config, filepath.Join(dir, dirConfigFilename))
+	err = gcfg.ReadFileInto(&config, filepath.Join(dir, DIR_CONFIG_FILENAME))
 
 	if err != nil {
 		log.Fatal("Configurações inválidas, não é possível ler configurações do diretório : ", err.Error())
@@ -42,7 +40,7 @@ func readConfigurationFrom(dir string) storageConfig {
 //retornando sua representação em memória
 func initConfigurationTo(dir string) storageConfig {
 
-	file, err := os.Create(filepath.Join(dir, dirConfigFilename))
+	file, err := os.Create(filepath.Join(dir, DIR_CONFIG_FILENAME))
 
 	defer func() {
 		file.Close()
