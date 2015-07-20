@@ -2,10 +2,9 @@
 	"folders":
 	[
 		{
-			"path": "/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf"
-		},
-		{
-			"path": "/D/Projetos/GO-PROJ/hellogb"
+			"path": "/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf",
+			"folder_exclude_patterns": ["_builds"],
+			"file_exclude_patterns": ["*.sublime-*"]
 		}
 	]
 }
