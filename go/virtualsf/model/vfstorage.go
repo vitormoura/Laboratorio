@@ -10,6 +10,9 @@ type VFStorage interface {
 	//Find localiza o arquivo identificado pelo identificador informado
 	Find(id string) (*File, error)
 
+	//Remove exclui arquivo identificado pelo id informado
+	Remove(id string) error
+
 	//List recupera relação de arquivos de uma aplicação identificada pelo id informado
 	List() ([]FileInfo, error)
 

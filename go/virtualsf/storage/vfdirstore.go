@@ -80,6 +80,25 @@ func (dir *vfdirStorage) Add(f *model.File) error {
 	return nil
 }
 
+func (dir *vfdirStorage) Remove(id string) error {
+
+	fileName := dir.getFileName(id)
+
+	if _, err := os.Stat(fileName); os.IsNotExist(err) {
+		return model.ErrFileNotFound
+	}
+
+	if err := os.Remove(fileName); err != nil {
+		return err
+	}
+
+	metaFileName := dir.getMetaFileName(id)
+
+	os.Remove(metaFileName)
+
+	return nil
+}
+
 func (dir *vfdirStorage) Find(id string) (*model.File, error) {
 	//uniqID := uuid.Parse(id)
 

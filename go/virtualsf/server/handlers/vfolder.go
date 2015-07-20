@@ -105,6 +105,36 @@ func VFolder(r *mux.Router, sharedFolder string) {
 		jsonr(files, w)
 	})
 
+	//Action para remover um arquivo
+	r.Methods("DELETE").Subrouter().HandleFunc("/files/{id}", func(w http.ResponseWriter, req *http.Request) {
+
+		var (
+			vars map[string]string
+			id   string
+			err  error
+			fs   model.VFStorage
+		)
+
+		vars = mux.Vars(req)
+		id = vars["id"]
+		fs, _ = getDefaultStorage(getAppID(req))
+
+		err = fs.Remove(id)
+
+		if err != nil {
+
+			if err == model.ErrFileNotFound {
+				w.WriteHeader(http.StatusNotFound)
+			} else {
+				internalError(err, w)
+			}
+
+			return
+		}
+
+		w.WriteHeader(http.StatusNoContent)
+	})
+
 	//Action para realizar o download do arquivo identificado pelo ID informado
 	get.HandleFunc("/files/{id}", func(w http.ResponseWriter, req *http.Request) {
 		log.Println(LOG_NAME, "GET ", req.URL.RequestURI())
