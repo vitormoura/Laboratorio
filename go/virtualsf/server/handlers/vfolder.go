@@ -15,8 +15,9 @@ import (
 const (
 
 	//X_FILE_ID_HEADER é o header HTTP enviado contendo o ID de um arquivo recém criado
-	X_FILE_ID_HEADER string = "X-File-Id"
-	LOG_NAME                = "[server/handlers]"
+	X_FILE_ID_HEADER   string = "X-File-Id"
+	X_FILE_NAME_HEADER string = "X-File-Name"
+	LOG_NAME                  = "[server/handlers]"
 )
 
 var (
@@ -131,6 +132,10 @@ func VFolder(r *mux.Router, sharedFolder string) {
 			w.WriteHeader(http.StatusNotFound)
 			return
 		}
+
+		//Inclui headers com detalhes sobre o arquivo
+		w.Header().Add(X_FILE_ID_HEADER, file.ID)
+		w.Header().Add(X_FILE_NAME_HEADER, file.Name)
 
 		writeFile(file.Stream, file.MimeType, w)
 	})

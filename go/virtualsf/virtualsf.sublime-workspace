@@ -4,6 +4,62 @@
 		"selected_items":
 		[
 			[
+				"s",
+				"Storage	storage.StorageConfig ν"
+			],
+			[
+				"CUR",
+				"DIR_CURR_STATUS_FILENAME	 Ɩ"
+			],
+			[
+				"DIR_",
+				"DIR_STATS_LOCATION	 Ɩ"
+			],
+			[
+				"DIR",
+				"DIR_STATS_LOCATION	 Ɩ"
+			],
+			[
+				"inn",
+				"innerInfo	os.FileInfo ν"
+			],
+			[
+				"erro",
+				"internalError	 ƒ"
+			],
+			[
+				"Han",
+				"HandleFunc	*mux.Route ƒ"
+			],
+			[
+				"log",
+				"logName	 Ɩ"
+			],
+			[
+				"Print",
+				"Printf	 ƒ"
+			],
+			[
+				"pri",
+				"Println	n int, err error ƒ"
+			],
+			[
+				"pr",
+				"Println	n int, err error ƒ"
+			],
+			[
+				"test",
+				"testStorageRootDir	 Ɩ"
+			],
+			[
+				"noe",
+				"NotEmpty	bool ƒ"
+			],
+			[
+				"v",
+				"VFStorageStats	struct ʈ"
+			],
+			[
 				"prin",
 				"Println	 ƒ"
 			],
@@ -60,10 +116,6 @@
 				"Ticker	struct ʈ"
 			],
 			[
-				"pri",
-				"Println	 ƒ"
-			],
-			[
 				"bytes",
 				"bytesToRead	 ν"
 			],
@@ -86,10 +138,6 @@
 			[
 				"ba",
 				"StatusBadRequest	 Ɩ"
-			],
-			[
-				"erro",
-				"ErrFileNotSupported	error ν"
 			],
 			[
 				"not",
@@ -260,10 +308,6 @@
 				"WriteString	ret int, err error ƒ"
 			],
 			[
-				"s",
-				"Stream	io.ReadCloser ν"
-			],
-			[
 				"spri",
 				"Sprintf	string ƒ"
 			],
@@ -310,10 +354,6 @@
 			[
 				"Fpri",
 				"Fprintf	n int, err error ƒ"
-			],
-			[
-				"pr",
-				"Println	 ƒ"
 			],
 			[
 				"Write",
@@ -396,14 +436,41 @@
 	},
 	"file_history":
 	[
+		"/D/Projetos/TFS/pds_bcc_Trunk/3-0_Produto/InfraeroVirtualFolder/3-2_Fontes/Infraero.VirtualFolder/VFClient/VFClient.nuspec",
+		"/D/Projetos/TFS/pmn_sentinela_Trunk/3-0_CodigoFonte/04_SRC/Netcenter/Netcenter.Domain/Classes/Verificadores/VerificadorWebSite.cs",
+		"/D/Projetos/TFS/pds_bcc_Trunk/3-0_Produto/Nuget.Config",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/vfolder.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/virtualsf.ini",
+		"/D/Temp/virtualsf/fula/Stats/stats.json",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/config.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/server.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/functions.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/statsagent_test.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/functions_test.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/config.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/main.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/config.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/vfdirstore.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server.ini",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/statsagent.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/constants.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/stats/constants.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/results.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/stats/functions.go",
+		"/D/Temp/virtualsf/fula/_dir.config",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/model/errors.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/model/vfstorage.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/stats/agent.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/stats/functions_test.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/stats/agent_test.go",
+		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/model/stats.go",
+		"/D/Temp/virtualsf-tests/SYS-A/Stats/stats-2015-7-17.json",
 		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Web/App_Start/MiniprofilerConfig.cs",
 		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Notificador/packages.config",
 		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Sql/ScriptCargaCategorias.pd.sql",
 		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Sql/ScriptGrants.pd.sql",
 		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Sql/ScriptCargaTabelasDominio.pd.sql",
 		"/D/Temp/virtualsf/fula/c53969f6-2414-4b74-af82-96513addff80.file.meta",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/server.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/stats/agent_test.go",
 		"/D/Projetos/Laboratorio/lab_savsec/Infraero.DO.BPO.sln",
 		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Web/Global.asax.cs",
 		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Web/Controllers/ScriptsController.cs",
@@ -412,22 +479,14 @@
 		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Domain/Resources/Emails.resx",
 		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Web/Global.asax",
 		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/Infraero.DO.BPO.Web/packages.config",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/stats/agent.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/stats/functions.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/vfdirstore.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/stats/functions_test.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/model/stats.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/main.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/storage/stats/stats_calc.go",
 		"/D/Projetos/TFS/pds_bpoWeb_DSV/3-0_Produto/3-2_Fontes/02_Roteiros/00_ModificaBase/AtualizacaoVr_1_1_9.sql",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/model/vfstorage.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/services/vfstats/stats_agent.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/logs.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/services/logs/logsrv.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/services/vfstats/agent.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/services/vflog/logsrv.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/tests/functions.go",
-		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/vfolder.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/tests/server_test.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/tests/fakereader_test.go",
 		"/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf/server/tests/fakereader.go",
@@ -504,26 +563,7 @@
 		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoAbrir010101.php",
 		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/index.php",
 		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/principal.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoAbrir.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoAtribuir.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoEncerramento.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoSuspender.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoTriagem.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/controleDeErros.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/Correcao_time_sheetPesquisa.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/Time_sheetSolicitaAlteracao.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/CAP.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/Biblioteca/SQLQuery2.sql",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/.buildpath",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/AjaxCarregarComboModuloSistema.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoAcompanharAprovacao.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoAnexoCEA.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoAprovar.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoAvaliar.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoConfirmacao.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoDetalhesAprovacaoCEA.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoDetalhesCEA.php",
-		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/caccom/ChamadoEncerramento.php"
+		"/D/Projetos/TFS/pds_cacCom_DSV/3-0_Produto/3-2_Fontes/gestaocaccom/ChamadoAbrir.php"
 	],
 	"find":
 	{
@@ -542,6 +582,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"storageConfig",
+			"storage",
 			"os",
 			"fmt",
 			"strpos($_SERVER[\"SCRIPT_FILENAME\"], \"cac/\")",
@@ -565,6 +607,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"localStorageConfig",
 			"strpos($_SERVER[\"SCRIPT_FILENAME\"], \"caccom/\")",
 			"[ AREA NEGOCIO RESPONSAVEL ]",
 			"CAC-COM",
