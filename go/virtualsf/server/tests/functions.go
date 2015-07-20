@@ -13,7 +13,7 @@ import (
 func initServerDefaultConfiguration() (*exec.Cmd, error) {
 	os.Chdir("../../")
 
-	cmd := exec.Command("go", "run", "main.go")
+	cmd := exec.Command("go", "run", "main.go config.go")
 	err := cmd.Start()
 
 	return cmd, err

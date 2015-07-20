@@ -18,12 +18,17 @@ func Run(config ServerConfig) {
 	port := config.ServerPort
 	router := mux.NewRouter()
 
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	//Configurações do handlers
+	handlers.DebugMode = config.DebugMode
+
 	http.Handle("/", router)
 
-	handlers.DebugMode = config.DebugMode
 	handlers.VFolder(router, config.SharedFolder)
 	handlers.Playground(router)
+	handlers.ControlPanel(router)
+
+	//Configuração do handler para servir conteúdo estático
+	router.PathPrefix("/static").Handler(http.StripPrefix("/static", http.FileServer(http.Dir("./server/static"))))
 
 	//Servidor vai exigir autenticação do tipo BASIC com base em usuários e senhas do arquivo .htpasswd
 	authenticator := auth.NewBasicAuthenticator("myrealm", auth.HtpasswdFileProvider(".htpasswd"))
