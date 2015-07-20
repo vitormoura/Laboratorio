@@ -3,14 +3,11 @@ Virtual Shared Folder
 
 Web api to store and retrive files. Just a sample web project using GOLang.
 
+
 Installing as a Windows Service
 -------------------------------
 
-1. Build your project to get the executable
-
-```Bash
-go build
-```
+1. Install and Build your project following the instructions of GOXC in https://github.com/laher/goxc
 
 2. Download the NSSM on http://nssm.cc/
 

@@ -1,0 +1,20 @@
+{
+	"Arch": "amd64",
+    "Os": "windows",
+	"PackageVersion": "0.0.1",
+	"PrereleaseInfo": "snapshot",
+	"ConfigVersion": "0.9",
+
+	"TasksExclude": [
+        "go-test",
+        "downloads-page"
+    ],
+    
+    "ArtifactsDest": "./_builds/",
+	"OutPath": "./_builds/temp/{{.AppName}}_{{.Version}}_{{.Os}}_{{.Arch}}{{.Ext}}",
+
+    "Resources": {
+        "Include": "server/static/*,server/templates/*,README*,LICENSE*,virtualsf.ini,.htpasswd",
+        "Exclude": "*.go,builds/*"
+    }
+}
