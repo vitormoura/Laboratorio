@@ -6,8 +6,6 @@ import (
 
 //VFStorageStats apresenta informações sobre estatísticas de armazenamento de arquivos
 type VFStorageStats struct {
-	App       string
-	Location  string
 	Date      time.Time
 	TotalSize int64
 	FileCount int

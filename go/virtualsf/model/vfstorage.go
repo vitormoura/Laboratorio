@@ -18,4 +18,7 @@ type VFStorage interface {
 
 	//Stats recupera estatísticas sobre a situação de armazenamento do storage
 	Stats() (*VFStorageStats, error)
+
+	//Refresh dispara rotinas de internas para redefinir estado do storage (Quando aplicável)
+	Refresh() error
 }

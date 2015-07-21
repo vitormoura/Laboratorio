@@ -190,9 +190,6 @@ func handleVFolder(r *mux.Router) {
 			return
 		}
 
-		//O usuário não deve ver a localização física
-		stats.Location = req.URL.RequestURI()
-
 		jsonr(stats, w)
 	})
 }

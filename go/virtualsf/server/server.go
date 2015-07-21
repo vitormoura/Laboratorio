@@ -4,6 +4,7 @@ import (
 	"fmt"
 	auth "github.com/abbot/go-http-auth"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers"
+	"github.com/vitormoura/Laboratorio/go/virtualsf/services/refresher"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/storage"
 	"log"
 	"net/http"
@@ -30,7 +31,7 @@ func Run(config ServerConfig) {
 	}
 
 	//Agente que atualiza estatísticas do storage
-	agent := storage.NewStatsUpdateAgent(config.SharedFolder, 2)
+	agent := refresher.New(storageFactory, 1)
 	agent.Start()
 
 	log.Printf("%s iniciando servidor, escutando porta %d", LOG_NAME, config.ServerPort)

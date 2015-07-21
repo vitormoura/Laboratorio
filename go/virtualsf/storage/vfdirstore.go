@@ -3,7 +3,7 @@ package storage
 import (
 	"encoding/json"
 	"errors"
-	_ "fmt"
+	"fmt"
 	"github.com/pborman/uuid"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
 	"io"
@@ -180,6 +180,18 @@ func (dir *vfdirStorage) Stats() (*model.VFStorageStats, error) {
 	return &stats, nil
 }
 
+//Refresh realiza rotinas de atualização do estado corrente do storage
+func (dir *vfdirStorage) Refresh() error {
+
+	stats, err := calcCurrentStats(dir.root)
+
+	if err != nil {
+		return err
+	}
+
+	return saveStatsToDirStorage(dir.root, stats)
+}
+
 //verifyFilters testa se arquivo informado pode ser armazenado com base na configuração de filtros do diretório
 func (dir *vfdirStorage) verify(file *model.File) error {
 
@@ -276,6 +288,78 @@ func (dir *vfdirStorage) handleConfigurationUpdate() {
 	for _ = range time.Tick(1 * time.Minute) {
 		dir.config = readConfigurationFrom(dir.root)
 	}
+}
+
+//isMetaFile verifica se o nome do arquivo informado o qualifica como um arquivo de metadados
+func isMetaFile(fileName string) bool {
+	return filepath.Ext(fileName) == ".meta"
+}
+
+//isConfigFile verifica se o nome do arquivo informado o qualifica como um arquivo de configuração
+func isConfigFile(fileName string) bool {
+	return filepath.Ext(fileName) == ".config"
+}
+
+func calcCurrentStats(dir string) (model.VFStorageStats, error) {
+
+	stats := model.VFStorageStats{Date: time.Now()}
+
+	innerErr := filepath.Walk(dir, func(innerPath string, innerInfo os.FileInfo, err error) error {
+
+		if innerPath != dir {
+
+			if innerInfo.IsDir() {
+				return filepath.SkipDir
+			}
+
+			if !isMetaFile(innerInfo.Name()) && !isConfigFile(innerInfo.Name()) {
+				stats.TotalSize += innerInfo.Size()
+				stats.FileCount++
+			}
+		}
+
+		return nil
+	})
+
+	if innerErr != nil {
+		return stats, innerErr
+	}
+
+	return stats, nil
+}
+
+func saveStatsToDirStorage(dir string, stats model.VFStorageStats) error {
+
+	bytes, err := json.Marshal(stats)
+
+	if err != nil {
+		return err
+	}
+
+	//Arquivo diário
+	statsFileName := fmt.Sprintf("stats-%d-%d-%d.json", stats.Date.Year(), stats.Date.Month(), stats.Date.Day())
+	statsFile, err := os.Create(path.Join(dir, DIR_STATS_LOCATION, statsFileName))
+
+	defer statsFile.Close()
+
+	if err != nil {
+		return err
+	}
+
+	statsFile.WriteString(string(bytes))
+
+	//Arquivo mais atual
+	currentStatsFile, err := os.Create(path.Join(dir, DIR_STATS_LOCATION, DIR_CURR_STATUS_FILENAME))
+
+	defer currentStatsFile.Close()
+
+	if err != nil {
+		return err
+	}
+
+	currentStatsFile.WriteString(string(bytes))
+
+	return nil
 }
 
 //NewDirStorage cria um novo VFStorage que armazena arquivos em diretórios do
