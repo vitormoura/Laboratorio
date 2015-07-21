@@ -13,7 +13,7 @@ type VFStorage interface {
 	//Remove exclui arquivo identificado pelo id informado
 	Remove(id string) error
 
-	//List recupera relação de arquivos de uma aplicação identificada pelo id informado
+	//List recupera relação de arquivos do storage
 	List() ([]FileInfo, error)
 
 	//Stats recupera estatísticas sobre a situação de armazenamento do storage

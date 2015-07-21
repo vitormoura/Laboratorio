@@ -5,10 +5,8 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
-	"github.com/vitormoura/Laboratorio/go/virtualsf/storage"
 	"log"
 	"net/http"
-	"path/filepath"
 	"time"
 )
 
@@ -20,18 +18,15 @@ const (
 	LOG_NAME                  = "[server/handlers]"
 )
 
-var (
-	folderStorageLocation string
-)
-
-func VFolder(r *mux.Router, sharedFolder string) {
-
-	folderStorageLocation = sharedFolder
+func handleVFolder(r *mux.Router) {
 
 	r = r.PathPrefix("/vfolder").Subrouter()
 
 	get := r.Methods("GET").Subrouter()
 	post := r.Methods("POST").Subrouter()
+
+	//Todas as actions vão exigir que o usuário seja o ADMIN
+	r = r.PathPrefix("/ctrlpanel").MatcherFunc(onlyAdmin).Subrouter()
 
 	//Action para publicar um novo arquivo através de um formulário de envio de arquivos tradicional
 	post.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
@@ -107,6 +102,8 @@ func VFolder(r *mux.Router, sharedFolder string) {
 
 	//Action para remover um arquivo
 	r.Methods("DELETE").Subrouter().HandleFunc("/files/{id}", func(w http.ResponseWriter, req *http.Request) {
+
+		log.Println(LOG_NAME, "DELETE ", req.URL.RequestURI())
 
 		var (
 			vars map[string]string
@@ -230,14 +227,9 @@ func createFiles(appID string, files []model.File, w http.ResponseWriter) {
 	w.WriteHeader(http.StatusCreated)
 }
 
-//getAppID recupera identificador da aplicação da requisição
-func getAppID(req *http.Request) string {
-	return req.Header["X-Authenticated-Username"][0]
-}
-
 //getDefaultStorage recupera storage padrão para arquivos
 func getDefaultStorage(appID string) (model.VFStorage, error) {
-	return storage.NewDirStorage(filepath.Join(folderStorageLocation, appID), false)
+	return defaultStorageFactory.Create(appID)
 }
 
 //getFilesFromMultipartRequest recupera objetos do tipo File lidos a partir da requisição informada

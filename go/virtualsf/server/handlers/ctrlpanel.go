@@ -5,10 +5,13 @@ import (
 	"net/http"
 )
 
-func ControlPanel(r *mux.Router) {
-	r = r.PathPrefix("/ctrlpanel").Subrouter()
+func handleCtrlPanel(r *mux.Router) {
+
+	//Todas as actions vão exigir que o usuário seja o ADMIN
+	r = r.PathPrefix("/ctrlpanel").MatcherFunc(onlyAdmin).Subrouter()
 
 	r.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+
 		renderView("ctrlpanel/index", nil, w)
 	})
 }

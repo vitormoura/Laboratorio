@@ -3,7 +3,7 @@
 	[
 		{
 			"path": "/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf",
-			"folder_exclude_patterns": ["_builds"],
+			"folder_exclude_patterns": ["_builds","debian"],
 			"file_exclude_patterns": ["*.sublime-*"]
 		}
 	]
