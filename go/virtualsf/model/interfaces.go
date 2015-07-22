@@ -22,3 +22,13 @@ type VFStorage interface {
 	//Refresh dispara rotinas de internas para redefinir estado do storage (Quando aplicável)
 	Refresh() error
 }
+
+//VFStorageGroup representa um agrupamento de storage comuns
+type VFStorageGroup interface {
+
+	//List recupera relação dos identificadores dos storages disponíveis nesse grupo
+	List() ([]string, error)
+
+	//Get recupera storage adequado para aplicação identificada pelo ID informado
+	Get(appID string) (VFStorage, error)
+}

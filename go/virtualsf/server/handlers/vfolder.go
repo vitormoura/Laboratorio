@@ -226,7 +226,7 @@ func createFiles(appID string, files []model.File, w http.ResponseWriter) {
 
 //getDefaultStorage recupera storage padrão para arquivos
 func getDefaultStorage(appID string) (model.VFStorage, error) {
-	return defaultStorageFactory.Create(appID)
+	return defaultStorageFactory.Get(appID)
 }
 
 //getFilesFromMultipartRequest recupera objetos do tipo File lidos a partir da requisição informada

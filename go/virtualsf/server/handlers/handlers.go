@@ -8,11 +8,11 @@ import (
 
 var (
 	debugMode             bool
-	defaultStorageFactory model.VFStorageFactory
+	defaultStorageFactory model.VFStorageGroup
 	defaultRouter         *mux.Router
 )
 
-func New(debugMode bool, storageFactory model.VFStorageFactory) http.Handler {
+func New(debugMode bool, storageFactory model.VFStorageGroup) http.Handler {
 
 	if defaultRouter != nil {
 		return defaultRouter

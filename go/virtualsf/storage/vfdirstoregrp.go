@@ -6,15 +6,15 @@ import (
 	"path/filepath"
 )
 
-type vfdirStorageFactory struct {
+type vfdirStorageGroup struct {
 	root string
 }
 
-func (fac *vfdirStorageFactory) Create(appID string) (model.VFStorage, error) {
+func (fac *vfdirStorageGroup) Get(appID string) (model.VFStorage, error) {
 	return NewDirStorage(filepath.Join(fac.root, appID), false)
 }
 
-func (fac *vfdirStorageFactory) GetAvaiableStorages() ([]string, error) {
+func (fac *vfdirStorageGroup) List() ([]string, error) {
 
 	result := make([]string, 0)
 
@@ -34,6 +34,6 @@ func (fac *vfdirStorageFactory) GetAvaiableStorages() ([]string, error) {
 	return result, nil
 }
 
-func NewStorageFactory(rootDir string) model.VFStorageFactory {
-	return &vfdirStorageFactory{rootDir}
+func NewStorageFactory(rootDir string) model.VFStorageGroup {
+	return &vfdirStorageGroup{rootDir}
 }

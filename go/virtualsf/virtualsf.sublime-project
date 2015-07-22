@@ -2,9 +2,16 @@
 	"folders":
 	[
 		{
-			"path": "/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf",
-			"folder_exclude_patterns": ["_builds","debian"],
-			"file_exclude_patterns": ["*.sublime-*"]
+			"file_exclude_patterns":
+			[
+				"*.sublime-*"
+			],
+			"folder_exclude_patterns":
+			[
+				"_builds",
+				"debian"
+			],
+			"path": "/D/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf"
 		}
 	]
 }

@@ -11,7 +11,7 @@ const LOG_NAME = "[services/refresher]"
 //VFStorageRefresher é um agente contínuo que dispara a rotina de refresh dos storages registrados
 //continuamente
 type VFStorageRefresher struct {
-	factory       model.VFStorageFactory
+	group         model.VFStorageGroup
 	periodicidade time.Duration
 	ticker        *time.Ticker
 }
@@ -41,14 +41,14 @@ func (d *VFStorageRefresher) update() {
 
 		log.Println(LOG_NAME, "efetuando refresh dos storages registrados", agora)
 
-		storagesToRefresh, err := d.factory.GetAvaiableStorages()
+		storagesToRefresh, err := d.group.List()
 
 		if err != nil {
 			break
 		}
 
 		for _, appID := range storagesToRefresh {
-			storage, err := d.factory.Create(appID)
+			storage, err := d.group.Get(appID)
 
 			if err != nil {
 				continue
@@ -62,6 +62,6 @@ func (d *VFStorageRefresher) update() {
 }
 
 //New cria um novo agente que realiza atualizacoes a cada quantidade de minutos informados
-func New(storageFactory model.VFStorageFactory, minutes int) *VFStorageRefresher {
-	return &VFStorageRefresher{factory: storageFactory, periodicidade: time.Duration(minutes) * time.Minute}
+func New(storageGroup model.VFStorageGroup, minutes int) *VFStorageRefresher {
+	return &VFStorageRefresher{group: storageGroup, periodicidade: time.Duration(minutes) * time.Minute}
 }
