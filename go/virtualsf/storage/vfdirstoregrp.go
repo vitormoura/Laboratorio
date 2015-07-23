@@ -2,6 +2,7 @@ package storage
 
 import (
 	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
+	"io"
 	"os"
 	"path/filepath"
 )
@@ -16,20 +17,17 @@ func (fac *vfdirStorageGroup) Get(appID string) (model.VFStorage, error) {
 
 func (fac *vfdirStorageGroup) List() ([]string, error) {
 
-	result := make([]string, 0)
+	dir, err := os.Open(fac.root)
 
-	filepath.Walk(fac.root, func(path string, info os.FileInfo, err error) error {
+	if err != nil {
+		return nil, err
+	}
 
-		//Somente diretórios diferentes da raiz informada
-		if info.IsDir() && path != fac.root {
+	result, err := dir.Readdirnames(0)
 
-			result = append(result, info.Name())
-
-			return filepath.SkipDir
-		}
-
-		return nil
-	})
+	if err != nil && err != io.EOF {
+		return nil, err
+	}
 
 	return result, nil
 }

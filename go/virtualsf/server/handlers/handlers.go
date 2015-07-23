@@ -3,16 +3,16 @@ package handlers
 import (
 	"github.com/gorilla/mux"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
+	"github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/results"
 	"net/http"
 )
 
 var (
-	debugMode             bool
 	defaultStorageFactory model.VFStorageGroup
 	defaultRouter         *mux.Router
 )
 
-func New(debugMode bool, storageFactory model.VFStorageGroup) http.Handler {
+func New(runInDebugMode bool, storageFactory model.VFStorageGroup) http.Handler {
 
 	if defaultRouter != nil {
 		return defaultRouter
@@ -20,6 +20,7 @@ func New(debugMode bool, storageFactory model.VFStorageGroup) http.Handler {
 
 	defaultRouter := mux.NewRouter()
 	defaultStorageFactory = storageFactory
+	results.DebugMode = runInDebugMode
 
 	handleVFolder(defaultRouter)
 	handlePlayground(defaultRouter)

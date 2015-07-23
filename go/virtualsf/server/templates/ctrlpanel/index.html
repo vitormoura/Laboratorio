@@ -1,5 +1,20 @@
 {{define "MAIN"}}
 
-<p>STATS HOME PAGE</p>
+<h1>Estatísticas de Armazenamento</h1>
+
+<table>
+	<tr>
+		<th>APP</th>
+		<th>QTDE. ARQUIVOS</th>
+		<th>TAMANHO</th>
+	</tr>
+	{{range $key, $value := .}}
+	<tr>
+		<td>{{ $key }}</td>
+		<td>{{ $value.FileCount }}</td>
+		<td>{{fmtFileSize .TotalSize}}</td>
+	</tr>
+	{{end}}
+</table>
 
 {{end}}

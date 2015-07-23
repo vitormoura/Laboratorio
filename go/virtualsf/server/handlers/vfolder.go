@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
+	"github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/results"
 	"log"
 	"net/http"
 	"time"
@@ -93,11 +94,11 @@ func handleVFolder(r *mux.Router) {
 		files, err = fs.List()
 
 		if err != nil {
-			internalError(err, w)
+			results.InternalError(err, w)
 			return
 		}
 
-		jsonr(files, w)
+		results.Json(files, w)
 	})
 
 	//Action para remover um arquivo
@@ -123,7 +124,7 @@ func handleVFolder(r *mux.Router) {
 			if err == model.ErrFileNotFound {
 				w.WriteHeader(http.StatusNotFound)
 			} else {
-				internalError(err, w)
+				results.InternalError(err, w)
 			}
 
 			return
@@ -151,7 +152,7 @@ func handleVFolder(r *mux.Router) {
 		file, err = fs.Find(id)
 
 		if err != nil {
-			internalError(err, w)
+			results.InternalError(err, w)
 			return
 		}
 
@@ -164,7 +165,7 @@ func handleVFolder(r *mux.Router) {
 		w.Header().Add(X_FILE_ID_HEADER, file.ID)
 		w.Header().Add(X_FILE_NAME_HEADER, file.Name)
 
-		writeFile(file.Stream, file.MimeType, w)
+		results.File(file.Stream, file.MimeType, w)
 	})
 
 	//Action para recuperar situação das estatísticas de armazenamento da aplicação
@@ -174,14 +175,14 @@ func handleVFolder(r *mux.Router) {
 		fs, err := getDefaultStorage(getAppID(req))
 
 		if err != nil {
-			internalError(err, w)
+			results.InternalError(err, w)
 			return
 		}
 
 		stats, err := fs.Stats()
 
 		if err != nil {
-			internalError(err, w)
+			results.InternalError(err, w)
 			return
 		}
 
@@ -190,7 +191,7 @@ func handleVFolder(r *mux.Router) {
 			return
 		}
 
-		jsonr(stats, w)
+		results.Json(stats, w)
 	})
 }
 
@@ -200,7 +201,7 @@ func createFiles(appID string, files []model.File, w http.ResponseWriter) {
 	fs, err := getDefaultStorage(appID)
 
 	if err != nil {
-		internalError(err, w)
+		results.InternalError(err, w)
 		return
 	}
 

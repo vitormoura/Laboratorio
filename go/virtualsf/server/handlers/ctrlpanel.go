@@ -2,6 +2,9 @@ package handlers
 
 import (
 	"github.com/gorilla/mux"
+	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
+	"github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/results"
+	"log"
 	"net/http"
 )
 
@@ -12,6 +15,36 @@ func handleCtrlPanel(r *mux.Router) {
 
 	r.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 
-		renderView("ctrlpanel/index", nil, w)
+		log.Println(LOG_NAME, "GET", req.URL.RequestURI())
+
+		var (
+			stats    map[string]*model.VFStorageStats
+			appIDs   []string
+			err      error
+			currStat *model.VFStorageStats
+		)
+
+		stats = make(map[string]*model.VFStorageStats)
+		appIDs, err = defaultStorageFactory.List()
+
+		if err != nil {
+			results.InternalError(err, w)
+			return
+		}
+
+		for _, appID := range appIDs {
+			grp, err := defaultStorageFactory.Get(appID)
+
+			if err == nil {
+
+				currStat, err = grp.Stats()
+
+				if err == nil {
+					stats[appID] = currStat
+				}
+			}
+		}
+
+		results.View("ctrlpanel/index", stats, w)
 	})
 }
