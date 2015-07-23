@@ -11,7 +11,11 @@ import (
 	"time"
 )
 
-const LOG_NAME = "[server]"
+const (
+	LOG_NAME                = "[server]"
+	DEFAULT_STORAGE_REFRESH = 60
+	DEFAULT_REQUEST_TIMEOUT = 10
+)
 
 //Run inicia execução do serviço de publicação e pesquisa de arquivos
 func Run(config ServerConfig) {
@@ -25,13 +29,13 @@ func Run(config ServerConfig) {
 	srv := &http.Server{
 		Addr:           fmt.Sprintf(":%d", config.ServerPort),
 		Handler:        auth.JustCheck(authenticator, handler.ServeHTTP),
-		ReadTimeout:    10 * time.Second,
-		WriteTimeout:   10 * time.Second,
+		ReadTimeout:    DEFAULT_REQUEST_TIMEOUT * time.Second,
+		WriteTimeout:   DEFAULT_REQUEST_TIMEOUT * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	}
 
 	//Agente que atualiza estatísticas do storage
-	agent := refresher.New(storageFactory, 1)
+	agent := refresher.New(storageFactory, DEFAULT_STORAGE_REFRESH/60)
 	agent.Start()
 
 	log.Printf("%s iniciando servidor, escutando porta %d", LOG_NAME, config.ServerPort)

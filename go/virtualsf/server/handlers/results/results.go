@@ -22,21 +22,23 @@ var (
 	templateCache = make(map[string]*template.Template)
 )
 
+//View interpreta o template identificado pelo nome informado considerando o arquivo de layout padrão
 func View(viewName string, model interface{}, w http.ResponseWriter) {
 	renderTemplate(viewName, model, w, false)
 }
 
+//Partial interpreta o template identificado pelo nome informado sem considerar o arquivo de layout padrão
 func Partial(viewName string, model interface{}, w http.ResponseWriter) {
 	renderTemplate(viewName, model, w, true)
 }
 
-//content escreve o texto informado na saída enviada ao cliente
+//Content escreve o texto informado na saída enviada ao cliente
 func Content(msg string, w http.ResponseWriter) {
 	w.Header().Set("Content-Type", "text/plain")
 	fmt.Fprint(w, msg)
 }
 
-//internalError retorna uma resposta do tipo erro ao cliente
+//InternalError retorna uma resposta do tipo erro ao cliente
 func InternalError(err error, w http.ResponseWriter) {
 	w.WriteHeader(http.StatusInternalServerError)
 
@@ -45,12 +47,12 @@ func InternalError(err error, w http.ResponseWriter) {
 	}
 }
 
-//notFound retorna um status do tipo 404, indicando que o recurso solicitado não foi encontrado
+//NotFound retorna um status do tipo 404, indicando que o recurso solicitado não foi encontrado
 func NotFound(w http.ResponseWriter) {
 	w.WriteHeader(http.StatusNotFound)
 }
 
-//writeFile escreve conteúdo binário do arquivo na saída http
+//File escreve conteúdo binário do arquivo na saída http
 func File(reader io.Reader, mimeType string, w http.ResponseWriter) {
 
 	var (
@@ -118,7 +120,7 @@ func renderTemplate(viewName string, model interface{}, w http.ResponseWriter, i
 	w.Header().Set("Content-Type", "text/html")
 
 	if !isPartial {
-		err = t.ExecuteTemplate(w, "PAGE", model)
+		err = t.ExecuteTemplate(w, "LAYOUT", model)
 	} else {
 		err = t.ExecuteTemplate(w, "MAIN", model)
 	}
