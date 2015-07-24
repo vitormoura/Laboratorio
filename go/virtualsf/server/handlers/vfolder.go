@@ -50,6 +50,8 @@ func handleVFolder(r *mux.Router) {
 		}
 
 		createFiles(appID, files, w)
+
+		serverlog.Info(appID, LOG_NAME, "NOVO ARQUIVO")
 	})
 
 	//Action para publicar um novo arquivo com base no corpo da requisição
@@ -166,6 +168,8 @@ func handleVFolder(r *mux.Router) {
 		w.Header().Add(X_FILE_NAME_HEADER, file.Name)
 
 		results.File(file.Stream, file.MimeType, w)
+
+		serverlog.Info(file.App, LOG_NAME, "GET_FILE")
 	})
 
 	//Action para recuperar situação das estatísticas de armazenamento da aplicação

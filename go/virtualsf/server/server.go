@@ -4,6 +4,7 @@ import (
 	"fmt"
 	auth "github.com/abbot/go-http-auth"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers"
+	"github.com/vitormoura/Laboratorio/go/virtualsf/server/logs"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/services/refresher"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/storage"
 	"log"
@@ -20,8 +21,14 @@ const (
 //Run inicia execução do serviço de publicação e pesquisa de arquivos
 func Run(config ServerConfig) {
 
+	logger, err := logs.New(config.SharedFolder)
+
+	if err != nil {
+		log.Panic(err.Error())
+	}
+
 	storageFactory := storage.NewStorageFactory(config.SharedFolder)
-	handler := handlers.New(config.DebugMode, storageFactory)
+	handler := handlers.New(config.DebugMode, storageFactory, logger)
 
 	//Servidor vai exigir autenticação do tipo BASIC com base em usuários e senhas do arquivo .htpasswd
 	authenticator := auth.NewBasicAuthenticator("myrealm", auth.HtpasswdFileProvider(".htpasswd"))
