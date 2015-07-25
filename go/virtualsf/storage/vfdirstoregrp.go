@@ -12,7 +12,7 @@ type vfdirStorageGroup struct {
 }
 
 func (fac *vfdirStorageGroup) Get(appID string) (model.VFStorage, error) {
-	return NewDirStorage(filepath.Join(fac.root, appID), false)
+	return NewDirStorage(filepath.Join(fac.root, appID))
 }
 
 func (fac *vfdirStorageGroup) List() ([]string, error) {

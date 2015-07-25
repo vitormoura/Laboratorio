@@ -45,7 +45,7 @@ func (s *ServerLog) Info(appID string, logName string, msg string) {
 func New(dir string) (*ServerLog, error) {
 
 	location := filepath.Join(dir, "vfolder.log")
-	file, err := os.OpenFile(location, os.O_WRONLY, os.ModeAppend)
+	file, err := os.OpenFile(location, os.O_WRONLY|os.O_CREATE, os.ModeAppend)
 
 	if err != nil {
 		return nil, err

@@ -23,7 +23,7 @@ type localStorageConfig struct {
 }
 
 //readConfigurationFrom lê arquivo de configuração do diretório e retorna sua representação em memória
-func readConfigurationFrom(dir string) localStorageConfig {
+func readConfigurationFrom(dir string) (localStorageConfig, error) {
 
 	//Carregando configurações
 	var (
@@ -34,13 +34,13 @@ func readConfigurationFrom(dir string) localStorageConfig {
 	err = gcfg.ReadFileInto(&config, filepath.Join(dir, DIR_CONFIG_FILENAME))
 
 	if err != nil {
-		log.Fatal("Configurações inválidas, não é possível ler configurações do diretório : ", err.Error())
+		return config, err
 	}
 
-	return config
+	return config, nil
 }
 
-//initConfigurationTo preparar um arquivo de configuração inicial para o diretório informado,
+//initConfigurationTo prepara um arquivo de configuração inicial para o diretório informado,
 //retornando sua representação em memória
 func initConfigurationTo(dir string) localStorageConfig {
 

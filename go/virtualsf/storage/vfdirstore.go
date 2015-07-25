@@ -256,7 +256,11 @@ func (dir *vfdirStorage) setup() error {
 	} else if !fi.IsDir() {
 		return errors.New("Informe o caminho de um diretório válido")
 	} else {
-		dir.config = readConfigurationFrom(dir.root)
+		dir.config, err = readConfigurationFrom(dir.root)
+
+		if err != nil {
+			return err
+		}
 	}
 
 	//ordenando filtros para execução de pesquisas posteriormente
@@ -280,14 +284,6 @@ func (dir *vfdirStorage) getMetaFileName(id string) string {
 //getMetaFileName recupera caminho completo do arquivo de metadata do arquivo armazenado identificado pelo ID informado
 func (dir *vfdirStorage) getCurrentStatsFileName() string {
 	return filepath.Join(dir.root, DIR_STATS_LOCATION, DIR_CURR_STATUS_FILENAME)
-}
-
-//handleConfigurationUpdate atualiza configuração periodicamente (a cada minuto)
-func (dir *vfdirStorage) handleConfigurationUpdate() {
-
-	for _ = range time.Tick(1 * time.Minute) {
-		dir.config = readConfigurationFrom(dir.root)
-	}
 }
 
 //isMetaFile verifica se o nome do arquivo informado o qualifica como um arquivo de metadados
@@ -365,17 +361,13 @@ func saveStatsToDirStorage(dir string, stats model.VFStorageStats) error {
 //NewDirStorage cria um novo VFStorage que armazena arquivos em diretórios do
 //sistema de arquivos a partir do diretório raiz informado. O modo longrunning indica
 //que a nova instância será utilizada por muito tempo
-func NewDirStorage(root string, longRunning bool) (model.VFStorage, error) {
+func NewDirStorage(root string) (model.VFStorage, error) {
 
 	dir := vfdirStorage{root: root}
 	err := dir.setup()
 
 	if err != nil {
 		return nil, err
-	}
-
-	if longRunning {
-		go dir.handleConfigurationUpdate()
 	}
 
 	return &dir, nil
