@@ -25,7 +25,7 @@ type ServerLog struct {
 func (s *ServerLog) listen() {
 	go func() {
 		for l := range s.writerC {
-			s.logger.Println("\t", l.appID, "\t", l.logName, "\t", l.msg)
+			s.logger.Printf("%s\t%s\t%s\n", l.appID, l.logName, l.msg)
 		}
 	}()
 }
@@ -45,7 +45,7 @@ func (s *ServerLog) Info(appID string, logName string, msg string) {
 func New(dir string) (*ServerLog, error) {
 
 	location := filepath.Join(dir, "vfolder.log")
-	file, err := os.OpenFile(location, os.O_WRONLY|os.O_CREATE, os.ModeAppend)
+	file, err := os.OpenFile(location, os.O_WRONLY|os.O_CREATE|os.O_APPEND, os.ModeAppend)
 
 	if err != nil {
 		return nil, err
