@@ -12,7 +12,7 @@ import (
 
 const (
 	templateDir    = "./server/templates"
-	mainLayoutFile = templateDir + "/layout.html"
+	mainLayoutFile = templateDir + "/layout.thtml"
 )
 
 var (
@@ -103,7 +103,7 @@ func renderTemplate(viewName string, model interface{}, w http.ResponseWriter, i
 	if t, exists = templateCache[viewName]; !exists || DebugMode {
 
 		t = template.New("").Funcs(helpersFuncs)
-		t, err = t.ParseFiles(mainLayoutFile, filepath.Join(templateDir, viewName+".html"))
+		t, err = t.ParseFiles(mainLayoutFile, filepath.Join(templateDir, viewName+".thtml"))
 
 		if err != nil {
 			InternalError(err, w)
