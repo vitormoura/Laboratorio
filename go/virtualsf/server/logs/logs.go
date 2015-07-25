@@ -25,7 +25,7 @@ type ServerLog struct {
 func (s *ServerLog) listen() {
 	go func() {
 		for l := range s.writerC {
-			s.logger.Println(l.appID, l.logName, l.msg, "\n")
+			s.logger.Println("\t", l.appID, "\t", l.logName, "\t", l.msg)
 		}
 	}()
 }
