@@ -1,19 +1,26 @@
 {{define "MAIN"}}
 
-<h1>Publicação de Arquivo via Formulário</h1>
+	<header class="page-header">
+	    <h1>Publicação de Arquivos</h1>
+	</header>
+	      
+	<p class="lead">Utilize o formulário abaixo para publicar um novo arquivo na pasta virtual do seu usuário</p>
+	
+	<form action="/vfolder/" method="POST" enctype="multipart/form-data">
+		
+		<p>
+			<label>arquivo para publicação:</label>
+			<input type="file" name="meu_arquivo" class="form-control" />
+		</p>
 
-<form action="/vfolder/" method="POST" enctype="multipart/form-data">
-	<p>
-		<label>Info:</label>
-		<input type="text" name="info" value="Dado qualquer" />
-	<p>
-	<p>
-		<label>Arquivo:</label>
-		<input type="file" name="meu_arquivo" />
-	</p>
-	<p>
-		<input type="Submit" value="Enviar" />
-	</p>
-</form>
+		<p class="form-group">
+			<label>informações sobre o arquivo</label>
+			<input type="text" name="info" value="" class="form-control" maxlength="120" placeholder="detalhes em geral" />
+		<p>
+		
+		<p>
+			<input type="Submit" value="Enviar" class="btn btn-primary" />
+		</p>
+	</form>
 
 {{end}}

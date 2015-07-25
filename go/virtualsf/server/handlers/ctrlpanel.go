@@ -13,6 +13,7 @@ func handleCtrlPanel(r *mux.Router) {
 	//Todas as actions vão exigir que o usuário seja o ADMIN
 	r = r.PathPrefix("/ctrlpanel").MatcherFunc(onlyAdmin).Subrouter()
 
+	//Action que exibe o painel de controle padrão
 	r.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 
 		log.Println(LOG_NAME, "GET", req.URL.RequestURI())

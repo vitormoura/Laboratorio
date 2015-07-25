@@ -1,8 +1,13 @@
 {{define "MAIN"}}
 
-<h1>Estatísticas de Armazenamento</h1>
+<header class="page-header">
+    <h1>Estatísticas de Armazenamento</h1>
+</header>
 
-<table>
+<p>A relação abaixo mostra todas as pastas virtuais do storage, a quantidade e espaço 
+de armazenamento acumulado de cada uma</p>
+
+<table class="table">
 	<tr>
 		<th>APP</th>
 		<th>QTDE. ARQUIVOS</th>

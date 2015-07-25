@@ -1,0 +1,29 @@
+{{define "MAIN"}}
+
+	<header class="page-header">
+	    <h1>Arquivo criado com sucesso !</h1>
+	</header>
+	      
+	<p class="lead">O arquivo foi publicado na pasta virtual do seu usuário. Utilize as informações abaixo para acessar identificar e/ou o registro do seu arquivo.</p>
+
+	<table class="table">
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Download</th>
+		</tr>
+
+		{{range $file := .}}
+		<tr>
+			<td>{{$file.ID}}</td>
+			<td>{{$file.Name}}</td>
+			<td>
+				<a href="/vfolder/files/{{$file.ID}}">
+					<span class="glyphicon glyphicon-floppy-save"></span>
+				</a>
+			</td>
+		</tr>
+		{{end}}
+	</table>
+
+{{end}}

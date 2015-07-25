@@ -23,6 +23,6 @@ func fmtFileSize(size int64) string {
 	} else if size > 1048576 {
 		return fmt.Sprintf("%.2f MB", float32(size)/1048576.0)
 	} else {
-		return fmt.Sprintf("%.2f KB", size/1024.0)
+		return fmt.Sprintf("%.2f KB", float64(size)/1024.0)
 	}
 }

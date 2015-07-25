@@ -8,6 +8,7 @@ import (
 	"github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/results"
 	"log"
 	"net/http"
+	"path/filepath"
 	"time"
 )
 
@@ -32,7 +33,7 @@ func handleVFolder(r *mux.Router) {
 		log.Println(LOG_NAME, "POST", req.URL.RequestURI())
 
 		var (
-			files []model.File
+			files []*model.File
 			err   error
 			appID string
 		)
@@ -48,6 +49,8 @@ func handleVFolder(r *mux.Router) {
 
 		createFiles(appID, files, w)
 
+		results.View("vfolder/created", files, w)
+
 		serverlog.Info(appID, LOG_NAME, "NEW FILE")
 	})
 
@@ -58,7 +61,7 @@ func handleVFolder(r *mux.Router) {
 
 		var (
 			vars            map[string]string
-			files           []model.File
+			files           []*model.File
 			err             error
 			appID, fileName string
 		)
@@ -210,7 +213,7 @@ func handleVFolder(r *mux.Router) {
 }
 
 //createFiles grava arquivos junto ao sistema de armazenamento e formata resposta para os clientes
-func createFiles(appID string, files []model.File, w http.ResponseWriter) {
+func createFiles(appID string, files []*model.File, w http.ResponseWriter) {
 
 	fs, err := getDefaultStorage(appID)
 
@@ -221,7 +224,7 @@ func createFiles(appID string, files []model.File, w http.ResponseWriter) {
 
 	for _, f := range files {
 
-		if err := fs.Add(&f); err != nil {
+		if err := fs.Add(f); err != nil {
 
 			if err == model.ErrFileNotSupported {
 				w.WriteHeader(http.StatusBadRequest)
@@ -245,7 +248,7 @@ func getDefaultStorage(appID string) (model.VFStorage, error) {
 }
 
 //getFilesFromMultipartRequest recupera objetos do tipo File lidos a partir da requisição informada
-func getFilesFromMultipartRequest(appID string, req *http.Request) ([]model.File, error) {
+func getFilesFromMultipartRequest(appID string, req *http.Request) ([]*model.File, error) {
 
 	req.ParseMultipartForm(10240)
 
@@ -264,7 +267,7 @@ func getFilesFromMultipartRequest(appID string, req *http.Request) ([]model.File
 		properties[k] = v[0]
 	}
 
-	files := make([]model.File, len(req.MultipartForm.File))
+	files := make([]*model.File, len(req.MultipartForm.File))
 	pos := 0
 
 	for _, f := range req.MultipartForm.File {
@@ -272,8 +275,10 @@ func getFilesFromMultipartRequest(appID string, req *http.Request) ([]model.File
 		for i := 0; i < len(f); i++ {
 
 			//Preenchendo dados básicos do arquivo
-			files[pos] = model.File{}
-			files[pos].Name = f[i].Filename
+			_, fileName := filepath.Split(f[i].Filename)
+
+			files[pos] = new(model.File)
+			files[pos].Name = fileName
 			files[pos].PublishDate = time.Now()
 			files[pos].App = appID
 			files[pos].MimeType = f[i].Header["Content-Type"][0]
@@ -297,13 +302,13 @@ func getFilesFromMultipartRequest(appID string, req *http.Request) ([]model.File
 }
 
 //getFilesFromMultipartRequest recupera objetos do tipo File lidos a partir do corpo da requisiçao
-func getFilesFromRESTRequest(appID string, fileName string, req *http.Request) ([]model.File, error) {
+func getFilesFromRESTRequest(appID string, fileName string, req *http.Request) ([]*model.File, error) {
 
-	files := make([]model.File, 1)
+	files := make([]*model.File, 1)
 	pos := 0
 
 	//Preenchendo dados básicos do arquivo
-	files[pos] = model.File{}
+	files[pos] = new(model.File)
 	files[pos].Name = fileName
 	files[pos].PublishDate = time.Now()
 	files[pos].App = appID
