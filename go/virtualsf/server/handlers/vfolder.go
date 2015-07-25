@@ -26,9 +26,6 @@ func handleVFolder(r *mux.Router) {
 	get := r.Methods("GET").Subrouter()
 	post := r.Methods("POST").Subrouter()
 
-	//Todas as actions vão exigir que o usuário seja o ADMIN
-	r = r.PathPrefix("/ctrlpanel").MatcherFunc(onlyAdmin).Subrouter()
-
 	//Action para publicar um novo arquivo através de um formulário de envio de arquivos tradicional
 	post.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 
@@ -51,7 +48,7 @@ func handleVFolder(r *mux.Router) {
 
 		createFiles(appID, files, w)
 
-		serverlog.Info(appID, LOG_NAME, "NOVO ARQUIVO")
+		serverlog.Info(appID, LOG_NAME, "NEW FILE")
 	})
 
 	//Action para publicar um novo arquivo com base no corpo da requisição
@@ -79,6 +76,8 @@ func handleVFolder(r *mux.Router) {
 		}
 
 		createFiles(appID, files, w)
+
+		serverlog.Info(appID, LOG_NAME, "NEW FILE")
 	})
 
 	//Action para listar em formato JSON uma lista de dados básicos dos arquivos de uma determinada aplicação
@@ -90,9 +89,11 @@ func handleVFolder(r *mux.Router) {
 			err   error
 			files []model.FileInfo
 			fs    model.VFStorage
+			appID string
 		)
 
-		fs, _ = getDefaultStorage(getAppID(req))
+		appID = getAppID(req)
+		fs, _ = getDefaultStorage(appID)
 		files, err = fs.List()
 
 		if err != nil {
@@ -101,6 +102,8 @@ func handleVFolder(r *mux.Router) {
 		}
 
 		results.Json(files, w)
+
+		serverlog.Info(appID, LOG_NAME, "GET FILE LIST")
 	})
 
 	//Action para remover um arquivo
@@ -109,15 +112,17 @@ func handleVFolder(r *mux.Router) {
 		log.Println(LOG_NAME, "DELETE ", req.URL.RequestURI())
 
 		var (
-			vars map[string]string
-			id   string
-			err  error
-			fs   model.VFStorage
+			vars  map[string]string
+			id    string
+			err   error
+			fs    model.VFStorage
+			appID string
 		)
 
 		vars = mux.Vars(req)
 		id = vars["id"]
-		fs, _ = getDefaultStorage(getAppID(req))
+		appID = getAppID(req)
+		fs, _ = getDefaultStorage(appID)
 
 		err = fs.Remove(id)
 
@@ -133,6 +138,8 @@ func handleVFolder(r *mux.Router) {
 		}
 
 		w.WriteHeader(http.StatusNoContent)
+
+		serverlog.Info(appID, LOG_NAME, "REMOVE FILE")
 	})
 
 	//Action para realizar o download do arquivo identificado pelo ID informado
@@ -169,14 +176,15 @@ func handleVFolder(r *mux.Router) {
 
 		results.File(file.Stream, file.MimeType, w)
 
-		serverlog.Info(file.App, LOG_NAME, "GET_FILE")
+		serverlog.Info(file.App, LOG_NAME, "GET FILE")
 	})
 
 	//Action para recuperar situação das estatísticas de armazenamento da aplicação
 	get.HandleFunc("/stats/stats.json", func(w http.ResponseWriter, req *http.Request) {
 		log.Println(LOG_NAME, "GET ", req.URL.RequestURI())
 
-		fs, err := getDefaultStorage(getAppID(req))
+		appID := getAppID(req)
+		fs, err := getDefaultStorage(appID)
 
 		if err != nil {
 			results.InternalError(err, w)
@@ -196,6 +204,8 @@ func handleVFolder(r *mux.Router) {
 		}
 
 		results.Json(stats, w)
+
+		serverlog.Info(appID, LOG_NAME, "GET JSON STATS")
 	})
 }
 
