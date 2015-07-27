@@ -13,7 +13,7 @@ de armazenamento acumulado de cada uma</p>
 		<th>QTDE. ARQUIVOS</th>
 		<th>TAMANHO</th>
 	</tr>
-	{{range $key, $value := .}}
+	{{range $key, $value := .Model}}
 	<tr>
 		<td>{{ $key }}</td>
 		<td>{{ $value.FileCount }}</td>

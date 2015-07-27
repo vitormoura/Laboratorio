@@ -13,7 +13,7 @@
 			<th>Download</th>
 		</tr>
 
-		{{range $file := .}}
+		{{range $file := .Model}}
 		<tr>
 			<td>{{$file.ID}}</td>
 			<td>{{$file.Name}}</td>

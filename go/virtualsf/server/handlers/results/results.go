@@ -22,6 +22,10 @@ var (
 	templateCache = make(map[string]*template.Template)
 )
 
+type viewContext struct {
+	Model interface{}
+}
+
 //View interpreta o template identificado pelo nome informado considerando o arquivo de layout padrão
 func View(viewName string, model interface{}, w http.ResponseWriter) {
 	renderTemplate(viewName, model, w, false)
@@ -120,9 +124,9 @@ func renderTemplate(viewName string, model interface{}, w http.ResponseWriter, i
 	w.Header().Set("Content-Type", "text/html")
 
 	if !isPartial {
-		err = t.ExecuteTemplate(w, "LAYOUT", model)
+		err = t.ExecuteTemplate(w, "LAYOUT", viewContext{model})
 	} else {
-		err = t.ExecuteTemplate(w, "MAIN", model)
+		err = t.ExecuteTemplate(w, "MAIN", viewContext{model})
 	}
 
 	if err != nil {
