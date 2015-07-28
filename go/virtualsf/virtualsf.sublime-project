@@ -2,7 +2,9 @@
 	"folders":
 	[
 		{
-			"path": "/F/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf"
+			"path": "/F/Projetos/GO/src/github.com/vitormoura/Laboratorio/go/virtualsf",
+			"folder_exclude_patterns": ["_builds"],
+			"file_exclude_patterns": ["*.pyc", "*.pyo", "*sublime-workspace"]
 		}
 	]
 }
