@@ -7,9 +7,11 @@ import (
 
 //ServerConfig
 type ServerConfig struct {
-	ServerPort   int
-	DebugMode    bool
-	SharedFolder string
+	ServerPort          int
+	DebugMode           bool
+	ServerUsersLocation string
+	SharedFolder        string
+	TemplatesLocation   string
 }
 
 //GenerateSha1Password gera um password usando o algoritmo SHA-1 para ser utilizado na autenticação de usuários

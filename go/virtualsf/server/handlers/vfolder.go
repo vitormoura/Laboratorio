@@ -164,12 +164,14 @@ func handleVFolder(r *mux.Router) {
 		file, err = fs.Find(id)
 
 		if err != nil {
-			results.InternalError(err, w)
-			return
-		}
 
-		if file == nil {
-			w.WriteHeader(http.StatusNotFound)
+			//O erro retornado pode apontar que o arquivo não existe para o usuário
+			if err == model.ErrFileNotFound {
+				results.NotFound(w)
+				return
+			}
+
+			results.InternalError(err, w)
 			return
 		}
 
@@ -228,6 +230,8 @@ func createFiles(appID string, files []*model.File, w http.ResponseWriter) {
 
 			if err == model.ErrFileNotSupported {
 				w.WriteHeader(http.StatusBadRequest)
+			} else if err == model.ErrStorageLocked {
+				w.WriteHeader(http.StatusForbidden)
 			} else {
 				w.WriteHeader(http.StatusInternalServerError)
 			}

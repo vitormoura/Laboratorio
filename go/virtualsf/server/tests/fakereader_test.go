@@ -2,15 +2,22 @@ package tests
 
 import (
 	"bufio"
-	"github.com/stretchr/testify/assert"
+	. "github.com/smartystreets/goconvey/convey"
 	"testing"
 )
 
 func TestFakeFileReaderInterface(t *testing.T) {
 
-	fake := NewFakeReader(1024)
-	reader := bufio.NewReader(fake)
-	content, _ := reader.ReadString(' ')
+	Convey("FAKE FILE", t, func() {
 
-	assert.Equal(t, 1024, len([]byte(content)), "Conteudo da string precisa ter 32000 caracteres")
+		Convey("gera conteúdo do tamanho desejado", func() {
+			fake := NewFakeReader(1024)
+			reader := bufio.NewReader(fake)
+			content, _ := reader.ReadString(' ')
+
+			So(len(content), ShouldEqual, 1024)
+		})
+
+	})
+
 }

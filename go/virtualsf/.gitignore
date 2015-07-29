@@ -7,6 +7,7 @@
 _obj
 _test
 _builds
+debian
 
 #Sublime
 *.sublime-workspace
@@ -26,3 +27,6 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+#arquivos temporários do sistema
+*.log

@@ -28,10 +28,10 @@ func Run(config ServerConfig) {
 	}
 
 	storageFactory := storage.NewStorageFactory(config.SharedFolder)
-	handler := handlers.New(config.DebugMode, storageFactory, logger)
+	handler := handlers.New(config.DebugMode, config.TemplatesLocation, storageFactory, logger)
 
 	//Servidor vai exigir autenticação do tipo BASIC com base em usuários e senhas do arquivo .htpasswd
-	authenticator := auth.NewBasicAuthenticator("myrealm", auth.HtpasswdFileProvider(".htpasswd"))
+	authenticator := auth.NewBasicAuthenticator("myrealm", auth.HtpasswdFileProvider(config.ServerUsersLocation))
 
 	srv := &http.Server{
 		Addr:           fmt.Sprintf(":%d", config.ServerPort),
@@ -46,5 +46,6 @@ func Run(config ServerConfig) {
 	agent.Start()
 
 	log.Printf("%s iniciando servidor, escutando porta %d", LOG_NAME, config.ServerPort)
-	log.Fatal(srv.ListenAndServe())
+
+	go srv.ListenAndServe()
 }

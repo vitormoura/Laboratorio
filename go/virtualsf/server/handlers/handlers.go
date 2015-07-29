@@ -14,7 +14,7 @@ var (
 	serverlog             *logs.ServerLog
 )
 
-func New(runInDebugMode bool, storageFactory model.VFStorageGroup, srvlog *logs.ServerLog) http.Handler {
+func New(runInDebugMode bool, templatesLocation string, storageFactory model.VFStorageGroup, srvlog *logs.ServerLog) http.Handler {
 
 	if defaultRouter != nil {
 		return defaultRouter
@@ -23,6 +23,7 @@ func New(runInDebugMode bool, storageFactory model.VFStorageGroup, srvlog *logs.
 	serverlog = srvlog
 	defaultRouter := mux.NewRouter()
 	defaultStorageFactory = storageFactory
+	results.TemplatesDir = templatesLocation
 	results.DebugMode = runInDebugMode
 
 	handleVFolder(defaultRouter)

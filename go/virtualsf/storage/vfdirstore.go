@@ -8,6 +8,7 @@ import (
 	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
 	"io"
 	"io/ioutil"
+	_ "log"
 	"os"
 	"path"
 	"path/filepath"

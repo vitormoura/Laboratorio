@@ -5,37 +5,34 @@ import (
 	"fmt"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers"
 	"io"
+	_ "log"
 	"net/http"
-	"os"
-	"os/exec"
 )
 
-func initServerDefaultConfiguration() (*exec.Cmd, error) {
-	os.Chdir("../../")
+func formatUserPassword(userName string, userPassword string) string {
 
-	cmd := exec.Command("go", "run", "main.go config.go")
-	err := cmd.Start()
-
-	return cmd, err
-}
-
-func getTestUserPassword() string {
-
-	usrPlusPassword := fmt.Sprintf("%s:%s", "fula", "segredo")
+	usrPlusPassword := fmt.Sprintf("%s:%s", userName, userPassword)
 	usrPlusPassword = base64.StdEncoding.EncodeToString([]byte(usrPlusPassword))
 
 	return usrPlusPassword
 }
 
-func sendFileToServer(host string, fileName string, fileType string, fileContents io.Reader) (int, string, error) {
+func configRequestAuth(req *http.Request, userName string, userPassword string) {
+	authorization := "Basic " + formatUserPassword(userName, userPassword)
+	req.Header.Add("Authorization", authorization)
+}
+
+func sendFileToServer(host string, userName string, userPassword string, fileName string, fileType string, fileContents io.Reader) (int, string, error) {
 
 	client := &http.Client{}
 
 	req, err := http.NewRequest("POST", host+fileName, fileContents)
 
-	req.Header.Add("Authorization", "Basic "+getTestUserPassword())
 	req.Header.Add("Content-Type", fileType)
 
+	configRequestAuth(req, userName, userPassword)
+
+	//log.Println("[POST]", host+fileName, authorization)
 	resp, err := client.Do(req)
 
 	if err != nil {
