@@ -140,7 +140,7 @@ func handleVFolder(r *mux.Router) {
 			return
 		}
 
-		w.WriteHeader(http.StatusNoContent)
+		w.WriteHeader(http.StatusOK)
 
 		serverlog.Info(appID, LOG_NAME, "REMOVE FILE")
 	})

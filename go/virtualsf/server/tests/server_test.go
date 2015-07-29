@@ -69,6 +69,40 @@ func TestServer(t *testing.T) {
 				So(fileID, ShouldBeEmpty)
 			})
 
+			Convey("Exclusao arquivo publicado retorna sucesso", func() {
+
+				//Publicamos um arquivo
+				statusCode, fileID, err := sendFileToServer(defaultVFolderHost, defaultUserName, defaultUserPassword, "myfile.txt", "text/plain", bytes.NewBufferString("DUMMY DATA"))
+
+				So(err, ShouldBeNil)
+				So(statusCode, ShouldEqual, 201)
+				So(fileID, ShouldNotBeEmpty)
+
+				//Em seguida o excluímos
+				client := &http.Client{}
+
+				req, err := http.NewRequest("DELETE", defaultVFolderHost+"files/"+fileID, nil)
+				configRequestAuth(req, defaultUserName, defaultUserPassword)
+
+				resp, err := client.Do(req)
+
+				So(err, ShouldBeNil)
+				So(resp.StatusCode, ShouldEqual, 200)
+			})
+
+			Convey("Exclusao arquivo não existente retorna falha", func() {
+
+				client := &http.Client{}
+
+				req, err := http.NewRequest("DELETE", defaultVFolderHost+"files/7931cd97-6611-4e69-b3d4-dcbac4dba3c6", nil)
+				configRequestAuth(req, defaultUserName, defaultUserPassword)
+
+				resp, err := client.Do(req)
+
+				So(err, ShouldBeNil)
+				So(resp.StatusCode, ShouldEqual, 404)
+			})
+
 			Convey("Arquivo Grande Formato Permitido retorna sucesso", func() {
 
 				fakeFile := NewFakeReader(1024 * 1024 * 40) //40MB
@@ -89,9 +123,32 @@ func TestServer(t *testing.T) {
 
 			})
 
+			Convey("recuperar lista de arquivos recupera coleção json", func() {
+
+				client := &http.Client{}
+
+				req, err := http.NewRequest("GET", defaultVFolderHost+"files", nil)
+				configRequestAuth(req, "APP_2", defaultUserPassword)
+
+				resp, err := client.Do(req)
+
+				defer resp.Body.Close()
+
+				So(resp.StatusCode, ShouldEqual, 200)
+				So(resp, ShouldNotBeNil)
+				So(err, ShouldBeNil)
+
+				var result []model.FileInfo
+
+				json.NewDecoder(resp.Body).Decode(&result)
+
+				So(len(result), ShouldEqual, 3)
+
+			})
+
 		})
 
-		SkipConvey("Múltiplos Arquivos", func() {
+		Convey("Múltiplos Arquivos", func() {
 
 			Convey("Envio Arquivos Concorrentemente grava todos corretamente", func() {
 
