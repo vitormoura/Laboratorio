@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/pborman/uuid"
-	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
 	"io"
 	"io/ioutil"
 	_ "log"
@@ -15,6 +13,9 @@ import (
 	"sort"
 	"strings"
 	"time"
+
+	"github.com/pborman/uuid"
+	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
 )
 
 type vfdirStorage struct {
@@ -145,7 +146,7 @@ func (dir *vfdirStorage) List() ([]model.FileInfo, error) {
 
 				_, fileName := filepath.Split(info.Name())
 
-				result = append(result, model.FileInfo{strings.Replace(fileName, ".file.meta", "", 1), ""})
+				result = append(result, model.FileInfo{ID: strings.Replace(fileName, ".file.meta", "", 1), Name: ""})
 			}
 
 		} else if path != dir.root {

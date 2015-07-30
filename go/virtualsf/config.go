@@ -1,10 +1,11 @@
 package main
 
 import (
+	"log"
+
 	"code.google.com/p/gcfg"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/server"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/storage"
-	"log"
 )
 
 type GlobalConfig struct {
