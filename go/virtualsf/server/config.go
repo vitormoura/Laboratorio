@@ -17,6 +17,10 @@ type ServerConfig struct {
 //GenerateSha1Password gera um password usando o algoritmo SHA-1 para ser utilizado na autenticação de usuários
 func GenerateSha1Password(password string) string {
 
+	if password == "" {
+		return password
+	}
+
 	data := []byte(password)
 	d := sha1.New()
 	d.Write(data)

@@ -1,12 +1,14 @@
-package tests
+package server
 
 import (
 	"bytes"
+	"encoding/base64"
 	"encoding/json"
+	"fmt"
 	. "github.com/smartystreets/goconvey/convey"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
-	"github.com/vitormoura/Laboratorio/go/virtualsf/server"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers"
+	"io"
 	_ "log"
 	"net/http"
 	"os"
@@ -20,20 +22,6 @@ const (
 	defaultServerPort   = 4045
 	defaultUserPassword = "segredo"
 )
-
-func startServer() {
-	config := server.ServerConfig{
-		ServerPort:          defaultServerPort,
-		DebugMode:           true,
-		SharedFolder:        "./testdata/mystorage",
-		TemplatesLocation:   "../templates",
-		ServerUsersLocation: "./testdata/test.htpasswd"}
-	server.Run(config)
-}
-
-func clearTempFiles() {
-	os.RemoveAll("./testdata/mystorage/temp/")
-}
 
 func TestServer(t *testing.T) {
 
@@ -148,7 +136,7 @@ func TestServer(t *testing.T) {
 
 		})
 
-		Convey("Múltiplos Arquivos", func() {
+		SkipConvey("Múltiplos Arquivos", func() {
 
 			Convey("Envio Arquivos Concorrentemente grava todos corretamente", func() {
 
@@ -198,6 +186,26 @@ func TestServer(t *testing.T) {
 		})
 
 		clearTempFiles()
+	})
+
+	Convey("GERAÇÃO DE SENHAS (SHA)", t, func() {
+
+		Convey("função de geração de senhas retorna sempre mesmo valor para as mesmas entradas", func() {
+			senha := "segredo"
+
+			senhaGerada1 := GenerateSha1Password(senha)
+			senhaGerada2 := GenerateSha1Password(senha)
+			senhaGerada3 := GenerateSha1Password(senha)
+
+			So(senhaGerada1, ShouldEqual, senhaGerada2)
+			So(senhaGerada2, ShouldEqual, senhaGerada3)
+		})
+
+		Convey("resultado para uma senha vazia retorna vazio", func() {
+			senhaGerada := GenerateSha1Password("")
+
+			So(senhaGerada, ShouldBeEmpty)
+		})
 	})
 
 	Convey("DOWNLOAD DE ARQUIVOS", t, func() {
@@ -292,4 +300,62 @@ func TestServer(t *testing.T) {
 
 		})
 	})
+}
+
+//
+// Funções utilitárias
+//
+
+func startServer() {
+	config := ServerConfig{
+		ServerPort:          defaultServerPort,
+		DebugMode:           true,
+		SharedFolder:        "./testdata/mystorage",
+		TemplatesLocation:   "./templates",
+		ServerUsersLocation: "./testdata/test.htpasswd"}
+	Run(config)
+}
+
+func formatUserPassword(userName string, userPassword string) string {
+
+	usrPlusPassword := fmt.Sprintf("%s:%s", userName, userPassword)
+	usrPlusPassword = base64.StdEncoding.EncodeToString([]byte(usrPlusPassword))
+
+	return usrPlusPassword
+}
+
+func configRequestAuth(req *http.Request, userName string, userPassword string) {
+	authorization := "Basic " + formatUserPassword(userName, userPassword)
+	req.Header.Add("Authorization", authorization)
+}
+
+func sendFileToServer(host string, userName string, userPassword string, fileName string, fileType string, fileContents io.Reader) (int, string, error) {
+
+	client := &http.Client{}
+
+	req, err := http.NewRequest("POST", host+fileName, fileContents)
+
+	req.Header.Add("Content-Type", fileType)
+
+	configRequestAuth(req, userName, userPassword)
+
+	//log.Println("[POST]", host+fileName, authorization)
+	resp, err := client.Do(req)
+
+	if err != nil {
+		return 0, "", err
+	}
+
+	//defer resp.Body.Close()
+	//ioutil.ReadAll(resp.Body)
+
+	if fileID, exists := resp.Header[handlers.X_FILE_ID_HEADER]; exists {
+		return resp.StatusCode, fileID[0], nil
+	} else {
+		return resp.StatusCode, "", nil
+	}
+}
+
+func clearTempFiles() {
+	os.RemoveAll("./testdata/mystorage/temp/")
 }
