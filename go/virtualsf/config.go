@@ -23,7 +23,7 @@ func getDefaultConfiguration() GlobalConfig {
 	)
 
 	err = gcfg.ReadFileInto(&config, "virtualsf.ini")
-
+	
 	if err != nil {
 		log.Fatal("Configurações inválidas, não é possível iniciar o serviço : ", err.Error())
 	}

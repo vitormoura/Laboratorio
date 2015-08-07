@@ -1,17 +1,18 @@
 package handlers
 
 import (
+	"log"
+	"net/http"
+
 	"github.com/gorilla/mux"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/results"
-	"log"
-	"net/http"
 )
 
 func handleCtrlPanel(r *mux.Router) {
 
 	//Todas as actions vão exigir que o usuário seja o ADMIN
-	r = r.PathPrefix("/ctrlpanel").MatcherFunc(onlyAdmin).Subrouter()
+	r = r.PathPrefix("/admin/ctrlpanel").Subrouter()
 
 	//Action que exibe o painel de controle padrão
 	r.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {

@@ -12,4 +12,5 @@ var (
 	ErrEmptyFile            = errors.New("virtualfs: File is empty")
 	ErrStorageLocked        = errors.New("virtualfs: Storage locked")
 	ErrStorageStatsNotFound = errors.New("virutalfs: Storage stats not found")
+	ErrStorageNotFound		= errors.New("virtualfs: Storage not found")
 )

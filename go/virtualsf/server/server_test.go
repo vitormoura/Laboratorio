@@ -5,19 +5,20 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	. "github.com/smartystreets/goconvey/convey"
-	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
-	"github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers"
 	"io"
 	_ "log"
 	"net/http"
 	"os"
 	"testing"
+
+	. "github.com/smartystreets/goconvey/convey"
+	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
+	"github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers"
 )
 
 const (
 	defaultHost         = "http://localhost:4045"
-	defaultVFolderHost  = defaultHost + "/vfolder/"
+	defaultVFolderHost  = defaultHost + "/api/vfolder/"
 	defaultUserName     = "temp"
 	defaultServerPort   = 4045
 	defaultUserPassword = "segredo"
@@ -25,7 +26,7 @@ const (
 
 func TestServer(t *testing.T) {
 
-	startServer()
+	startServer() //
 
 	Convey("PUBLICAÇÃO DE ARQUIVOS", t, func() {
 
@@ -276,18 +277,18 @@ func TestServer(t *testing.T) {
 		Convey("página de painel de controle só é acessível ao admin", func() {
 			client := &http.Client{}
 
-			req1, err := http.NewRequest("GET", defaultHost+"/ctrlpanel/", nil)
+			req1, err := http.NewRequest("GET", defaultHost+"/admin/ctrlpanel/", nil)
 			configRequestAuth(req1, "APP_1", defaultUserPassword)
 
 			resp1, err := client.Do(req1)
 
 			defer resp1.Body.Close()
 
-			So(resp1.StatusCode, ShouldEqual, 404)
+			So(resp1.StatusCode, ShouldEqual, 403)
 			So(resp1, ShouldNotBeNil)
 			So(err, ShouldBeNil)
 
-			req2, err := http.NewRequest("GET", defaultHost+"/ctrlpanel/", nil)
+			req2, err := http.NewRequest("GET", defaultHost+"/admin/ctrlpanel/", nil)
 			configRequestAuth(req2, "admin", defaultUserPassword)
 
 			resp2, err := client.Do(req2)

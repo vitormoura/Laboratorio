@@ -2,14 +2,14 @@ package server
 
 import (
 	"fmt"
-	auth "github.com/abbot/go-http-auth"
+	"log"
+	"net/http"
+	"time"
+
 	"github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/server/logs"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/services/refresher"
 	"github.com/vitormoura/Laboratorio/go/virtualsf/storage"
-	"log"
-	"net/http"
-	"time"
 )
 
 const (
@@ -28,14 +28,11 @@ func Run(config ServerConfig) {
 	}
 
 	storageFactory := storage.NewStorageFactory(config.SharedFolder)
-	handler := handlers.New(config.DebugMode, config.TemplatesLocation, storageFactory, logger)
-
-	//Servidor vai exigir autenticação do tipo BASIC com base em usuários e senhas do arquivo .htpasswd
-	authenticator := auth.NewBasicAuthenticator("myrealm", auth.HtpasswdFileProvider(config.ServerUsersLocation))
+	handler := handlers.New(config.DebugMode, config.TemplatesLocation, config.ServerUsersLocation, storageFactory, logger)
 
 	srv := &http.Server{
 		Addr:           fmt.Sprintf(":%d", config.ServerPort),
-		Handler:        auth.JustCheck(authenticator, handler.ServeHTTP),
+		Handler:        handler,
 		ReadTimeout:    DEFAULT_REQUEST_TIMEOUT * time.Second,
 		WriteTimeout:   DEFAULT_REQUEST_TIMEOUT * time.Second,
 		MaxHeaderBytes: 1 << 20,

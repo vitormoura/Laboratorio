@@ -3,13 +3,14 @@ package handlers
 import (
 	"errors"
 	"fmt"
-	"github.com/gorilla/mux"
-	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
-	"github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/results"
 	"log"
 	"net/http"
 	"path/filepath"
 	"time"
+
+	"github.com/gorilla/mux"
+	"github.com/vitormoura/Laboratorio/go/virtualsf/model"
+	"github.com/vitormoura/Laboratorio/go/virtualsf/server/handlers/results"
 )
 
 const (
@@ -22,7 +23,7 @@ const (
 
 func handleVFolder(r *mux.Router) {
 
-	r = r.PathPrefix("/vfolder").Subrouter()
+	r = r.PathPrefix("/api/vfolder").Subrouter()
 
 	get := r.Methods("GET").Subrouter()
 	post := r.Methods("POST").Subrouter()
@@ -96,7 +97,13 @@ func handleVFolder(r *mux.Router) {
 		)
 
 		appID = getAppID(req)
-		fs, _ = getDefaultStorage(appID)
+		fs, err = getDefaultStorage(appID)
+
+		if err != nil {
+			results.InternalError(err, w)
+			return
+		}
+
 		files, err = fs.List()
 
 		if err != nil {
@@ -125,7 +132,12 @@ func handleVFolder(r *mux.Router) {
 		vars = mux.Vars(req)
 		id = vars["id"]
 		appID = getAppID(req)
-		fs, _ = getDefaultStorage(appID)
+		fs, err = getDefaultStorage(appID)
+
+		if err != nil {
+			results.InternalError(err, w)
+			return
+		}
 
 		err = fs.Remove(id)
 
@@ -159,7 +171,12 @@ func handleVFolder(r *mux.Router) {
 
 		vars = mux.Vars(req)
 		id = vars["id"]
-		fs, _ = getDefaultStorage(getAppID(req))
+		fs, err = getDefaultStorage(getAppID(req))
+
+		if err != nil {
+			results.InternalError(err, w)
+			return
+		}
 
 		file, err = fs.Find(id)
 
@@ -241,6 +258,7 @@ func createFiles(appID string, files []*model.File, w http.ResponseWriter) {
 		}
 
 		w.Header().Add(X_FILE_ID_HEADER, f.ID)
+		w.Header().Add("Location", "/vfolder/files/"+f.ID)
 	}
 
 	w.WriteHeader(http.StatusCreated)

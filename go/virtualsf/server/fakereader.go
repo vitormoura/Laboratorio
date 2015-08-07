@@ -1,6 +1,7 @@
 package server
 
 import (
+	_ "fmt"
 	"io"
 	"math/rand"
 )

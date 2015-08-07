@@ -261,7 +261,7 @@ func (dir *vfdirStorage) setup() error {
 		dir.config, err = readConfigurationFrom(dir.root)
 
 		if err != nil {
-			return err
+			return model.ErrStorageNotFound
 		}
 	}
 
